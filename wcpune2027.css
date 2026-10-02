@@ -3,106 +3,164 @@
  * Loaded via Appearance → Remote CSS (mode: "Add on to existing CSS").
  * Theme: Twenty Twenty-Five (block theme).
  *
- * To change a colour, edit section 1 only. Everything else uses the tokens.
- * Palette roles and allowed text pairings: see README.md.
+ * IMPORTANT: WordCamp's CSS sanitiser strips CSS custom properties
+ * (`--anything: value;`), so this file uses plain hex values only.
+ * Using var(--wp--preset--…) values is fine; declaring variables is not.
+ *
+ * PALETTE — to change a colour, find & replace its hex in this file.
+ *   Heritage Maroon    #8E1616   logo, footer bg, dividers, link text
+ *   Marigold Saffron   #F5A623   buttons, underlines, hover accents
+ *   Midnight Charcoal  #1A202C   all text
+ *   Crisp White        #FFFFFF   page + header background
+ *   Warm Sand          #F7F5F0   inputs, cards, light backgrounds
+ *   Sand edge          #D6D5D3   borders on sand (sand 85% + charcoal 15%)
+ *
+ * Text pairings: never saffron text on white/sand (2:1). Saffron buttons
+ * always use charcoal text. White or saffron text is fine on maroon.
  */
 
 
-/* ==== 1. Brand tokens (single source of truth) ======================== */
-
-body {
-	--wcp-maroon:   #8E1616; /* logo, footer, dividers, link text   */
-	--wcp-saffron:  #F5A623; /* buttons, underlines, hover accents   */
-	--wcp-charcoal: #1A202C; /* all text                             */
-	--wcp-white:    #FFFFFF; /* page + header background             */
-	--wcp-sand:     #F7F5F0; /* inputs, cards, light borders         */
-	--wcp-sand-edge: color-mix(in srgb, var(--wcp-sand) 85%, var(--wcp-charcoal));
-
-
-/* ==== 2. Remap theme presets → brand tokens =========================== */
+/* ==== 1. Theme palette classes → brand colours ======================== */
 /*
- * Defined on body (not :root) so these win over global-styles regardless
- * of stylesheet order: descendants read the nearest definition.
- * Every block already using these slugs picks up the new colours.
+ * The block editor adds classes like .has-custom-brick-red-color. Core
+ * declares them with !important, so overriding needs !important too.
+ * (Also update Site Editor → Styles → Colours so the picker matches.)
  */
 
-	--wp--preset--color--base:                      var(--wcp-white);
-	--wp--preset--color--contrast:                  var(--wcp-charcoal);
-	--wp--preset--color--accent-1:                  var(--wcp-maroon);
-	--wp--preset--color--accent-5:                  var(--wcp-sand);
-	--wp--preset--color--custom-brick-red:          var(--wcp-maroon);
-	--wp--preset--color--custom-dark-wooden-1:      var(--wcp-maroon);
-	--wp--preset--color--custom-dark-wooden-2:      var(--wcp-maroon);
-	--wp--preset--color--custom-dark-wooden-3:      var(--wcp-maroon);
-	--wp--preset--color--custom-light-yellow:       var(--wcp-saffron);
-	--wp--preset--color--custom-timber-pirate-gold: var(--wcp-saffron);
-	--wp--preset--color--custom-stone-dark-grey:    var(--wcp-charcoal);
-	--wp--preset--color--black:                     var(--wcp-charcoal);
+/* Maroon */
+.has-accent-1-color,
+.has-custom-brick-red-color,
+.has-custom-dark-wooden-1-color,
+.has-custom-dark-wooden-2-color,
+.has-custom-dark-wooden-3-color {
+	color: #8E1616 !important;
+}
+
+.has-accent-1-background-color,
+.has-custom-brick-red-background-color,
+.has-custom-dark-wooden-1-background-color,
+.has-custom-dark-wooden-2-background-color,
+.has-custom-dark-wooden-3-background-color {
+	background-color: #8E1616 !important;
+}
+
+.has-accent-1-border-color,
+.has-custom-brick-red-border-color,
+.has-custom-dark-wooden-1-border-color,
+.has-custom-dark-wooden-2-border-color,
+.has-custom-dark-wooden-3-border-color {
+	border-color: #8E1616 !important;
+}
+
+/* Saffron (background/border only — never as text on light backgrounds) */
+.has-custom-light-yellow-background-color,
+.has-custom-timber-pirate-gold-background-color {
+	background-color: #F5A623 !important;
+}
+
+.has-custom-light-yellow-border-color,
+.has-custom-timber-pirate-gold-border-color {
+	border-color: #F5A623 !important;
+}
+
+/* Charcoal */
+.has-contrast-color,
+.has-black-color,
+.has-custom-stone-dark-grey-color {
+	color: #1A202C !important;
+}
+
+.has-contrast-background-color,
+.has-black-background-color,
+.has-custom-stone-dark-grey-background-color {
+	background-color: #1A202C !important;
+}
+
+/* White */
+.has-base-color {
+	color: #FFFFFF !important;
+}
+
+.has-base-background-color {
+	background-color: #FFFFFF !important;
+}
+
+/* Sand */
+.has-accent-5-color {
+	color: #F7F5F0 !important;
+}
+
+.has-accent-5-background-color {
+	background-color: #F7F5F0 !important;
+}
+
+.has-accent-5-border-color {
+	border-color: #D6D5D3 !important;
 }
 
 
-/* ==== 3. Base: body, text, headings =================================== */
+/* ==== 2. Base: body, text, headings =================================== */
 
 body {
-	background-color: var(--wcp-white);
-	color: var(--wcp-charcoal);
+	background-color: #FFFFFF;
+	color: #1A202C;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: var(--wcp-charcoal);
+	color: #1A202C;
 }
 
 
-/* ==== 4. Header (white) =============================================== */
+/* ==== 3. Header (white) =============================================== */
 
-/* The header group has an inline background (#e1a48e) set in the block,
-   so !important is needed to override it. */
+/* The header group has an inline background (#e1a48e) set in the block.
+   Remove this rule once it's changed to White in the Site Editor. */
 header.wp-block-template-part .has-background[style*="#e1a48e"] {
-	background-color: var(--wcp-white) !important;
+	background-color: #FFFFFF !important;
 }
 
-/* Dotted border around the header row: soften to sand */
+/* Dotted border around the header row: soften to sand edge */
 header.wp-block-template-part .has-custom-brick-red-border-color {
-	border-color: var(--wcp-sand-edge) !important;
+	border-color: #D6D5D3 !important;
 }
 
 
-/* ==== 5. Links ======================================================== */
+/* ==== 4. Links ======================================================== */
 /*
  * Saffron on white is ~2:1 (fails WCAG AA), so link TEXT is maroon (~9:1)
  * and saffron is used for the underline / hover accent only.
  */
 
 a:where(:not(.wp-element-button)) {
-	text-decoration-color: var(--wcp-saffron);
+	color: #8E1616;
+	text-decoration-color: #F5A623;
 	text-decoration-thickness: 2px;
 	text-underline-offset: 0.2em;
 }
 
 a:where(:not(.wp-element-button)):hover {
-	text-decoration-color: var(--wcp-maroon);
+	text-decoration-color: #8E1616;
 }
 
 a:focus-visible {
-	outline: 2px solid var(--wcp-maroon);
+	outline: 2px solid #8E1616;
 	outline-offset: 2px;
 }
 
 
-/* ==== 6. Buttons (saffron) ============================================ */
+/* ==== 5. Buttons (saffron) ============================================ */
 /*
- * Charcoal text on saffron (~9:1); white on saffron would fail.
- * !important beats the has-*-background-color / has-*-color preset
- * classes that the block editor adds (those are !important too).
+ * Charcoal text on saffron (~8:1); white on saffron would fail.
+ * !important beats the has-*-background-color / has-*-color classes.
  */
 
 .wp-block-button__link,
 .wp-element-button,
 .wp-block-jetpack-subscriptions__button,
 .wp-block-search__button {
-	background-color: var(--wcp-saffron) !important;
-	color: var(--wcp-charcoal) !important;
-	border-color: var(--wcp-saffron) !important;
+	background-color: #F5A623 !important;
+	color: #1A202C !important;
+	border-color: #F5A623 !important;
 	transition: background-color .15s ease, color .15s ease;
 }
 
@@ -110,66 +168,60 @@ a:focus-visible {
 .wp-element-button:hover,
 .wp-block-jetpack-subscriptions__button:hover,
 .wp-block-search__button:hover {
-	background-color: var(--wcp-maroon) !important;
-	color: var(--wcp-white) !important;
-	border-color: var(--wcp-maroon) !important;
+	background-color: #8E1616 !important;
+	color: #FFFFFF !important;
+	border-color: #8E1616 !important;
 }
 
 .wp-block-button__link:focus-visible,
 .wp-element-button:focus-visible,
 .wp-block-jetpack-subscriptions__button:focus-visible,
 .wp-block-search__button:focus-visible {
-	outline: 3px solid var(--wcp-charcoal);
+	outline: 3px solid #1A202C;
 	outline-offset: 2px;
 }
 
 
-/* ==== 7. Footer (solid maroon, white text) ============================ */
-/*
- * The footer group is built with has-accent-5-background-color +
- * has-custom-brick-red-color. Re-scoping those two variables inside the
- * footer flips it to maroon background / white text without !important.
- */
+/* ==== 6. Footer (solid maroon, white text) ============================ */
 
-footer.wp-block-template-part {
-	--wp--preset--color--accent-5:         var(--wcp-maroon);
-	--wp--preset--color--custom-brick-red: var(--wcp-white);
-	--wp--preset--color--contrast:         var(--wcp-white);
-	background-color: var(--wcp-maroon);
-	color: var(--wcp-white);
+footer.wp-block-template-part,
+footer.wp-block-template-part > .wp-block-group.has-background {
+	background-color: #8E1616 !important;
+	color: #FFFFFF;
 }
 
-footer.wp-block-template-part a:where(:not(.wp-element-button)) {
-	color: var(--wcp-white);
-	text-decoration-color: var(--wcp-saffron);
-}
-
-/* Saffron text is fine on maroon (dark background) */
-footer.wp-block-template-part a:where(:not(.wp-element-button)):hover {
-	color: var(--wcp-saffron);
-}
-
-footer.wp-block-template-part a:focus-visible {
-	outline-color: var(--wcp-saffron);
-}
-
+footer.wp-block-template-part .has-text-color:not(.wp-element-button):not(.wp-block-button__link),
 footer.wp-block-template-part h1,
 footer.wp-block-template-part h2,
 footer.wp-block-template-part h3,
 footer.wp-block-template-part h4,
 footer.wp-block-template-part h5,
 footer.wp-block-template-part h6 {
-	color: var(--wcp-white);
+	color: #FFFFFF !important;
+}
+
+footer.wp-block-template-part a:where(:not(.wp-element-button)) {
+	color: #FFFFFF;
+	text-decoration-color: #F5A623;
+}
+
+/* Saffron text is fine on maroon (4.6:1) */
+footer.wp-block-template-part a:where(:not(.wp-element-button)):hover {
+	color: #F5A623;
+}
+
+footer.wp-block-template-part a:focus-visible {
+	outline-color: #F5A623;
 }
 
 /* The logo is a maroon disc; a white ring separates it from the footer */
 footer.wp-block-template-part .wp-block-site-logo img {
 	border-radius: 50%;
-	box-shadow: 0 0 0 3px var(--wcp-white);
+	box-shadow: 0 0 0 3px #FFFFFF;
 }
 
 
-/* ==== 8. Secondary UI: inputs, cards, borders (sand) ================== */
+/* ==== 7. Secondary UI: inputs, cards, borders (sand) ================== */
 
 .wp-block-search__input,
 .wp-block-jetpack-subscriptions input[type="email"],
@@ -178,9 +230,9 @@ input[type="text"],
 input[type="email"],
 input[type="search"],
 textarea {
-	background-color: var(--wcp-sand);
-	border: 1px solid var(--wcp-sand-edge);
-	color: var(--wcp-charcoal);
+	background-color: #F7F5F0;
+	border: 1px solid #D6D5D3;
+	color: #1A202C;
 }
 
 .wp-block-search__input:focus,
@@ -189,26 +241,26 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-	outline: 2px solid var(--wcp-maroon);
+	outline: 2px solid #8E1616;
 	outline-offset: 1px;
 }
 
 
-/* ==== 9. Section dividers (maroon) ==================================== */
+/* ==== 8. Section dividers (maroon) ==================================== */
 
 .wp-block-separator {
-	color: var(--wcp-maroon);
-	border-color: var(--wcp-maroon);
-	background-color: var(--wcp-maroon);
+	color: #8E1616;
+	border-color: #8E1616;
+	background-color: #8E1616;
 	opacity: 1;
 }
 
 
-/* ==== 10. Components (moved from Additional CSS) ====================== */
+/* ==== 9. Components (moved from Additional CSS) ======================= */
 
 /* Was beige #f3eee2 with a paper texture; now warm sand, texture lighter */
 .paper {
-	background-color: var(--wcp-sand);
+	background-color: #F7F5F0;
 	background-image:
 		radial-gradient(rgba(26, 32, 44, 0.04) 1px, transparent 1px),
 		linear-gradient(110deg,
@@ -218,10 +270,9 @@ textarea:focus {
 }
 
 /* Homepage hero: block has inline background #e1a48e.
-   Preferred fix: set the group's background to Warm Sand/White in the
-   editor, then this rule can go. */
+   Remove this rule once it's changed to Warm Sand in the editor. */
 .wc-hero[style*="#e1a48e"] {
-	background-color: var(--wcp-sand) !important;
+	background-color: #F7F5F0 !important;
 }
 
 .wc-hero {
@@ -242,7 +293,7 @@ textarea:focus {
 }
 
 .wc-hero__eyebrow {
-	color: var(--wcp-maroon);
+	color: #8E1616;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	font-weight: 700;
@@ -259,8 +310,8 @@ textarea:focus {
 
 .wc-hero__panel {
 	flex: 0 1 340px;
-	background-color: var(--wcp-maroon);
-	color: var(--wcp-white);
+	background-color: #8E1616;
+	color: #FFFFFF;
 	clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
 	padding: 2.5rem clamp(1.75rem, 4vw, 2.5rem);
 }
@@ -280,7 +331,7 @@ textarea:focus {
 	letter-spacing: 1.5px;
 	font-weight: 700;
 	font-size: var(--wp--preset--font-size--small);
-	color: var(--wcp-saffron);
+	color: #F5A623;
 	display: block;
 	margin-bottom: .35rem;
 }
@@ -303,7 +354,7 @@ textarea:focus {
 }
 
 
-/* ==== 11. Page-specific =============================================== */
+/* ==== 10. Page-specific =============================================== */
 
 /* Code of Conduct: spacing above section headings */
 .page-slug-code-of-conduct .wp-block-heading {

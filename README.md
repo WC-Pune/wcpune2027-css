@@ -11,23 +11,32 @@ It is loaded by **Appearance → Remote CSS**; Appearance → Additional CSS sho
 
 ## Palette
 
-| Token | Hex | Use for | Text on it |
+| Colour | Hex | Use for | Text on it |
 |---|---|---|---|
-| `--wcp-maroon` | `#8E1616` | Logo, footer background, section dividers, **link text**, button hover | White (9.2:1), Saffron (4.6:1) |
-| `--wcp-saffron` | `#F5A623` | Buttons, link underlines, hover accents | **Charcoal only** (8.1:1) — never white (2.0:1) |
-| `--wcp-charcoal` | `#1A202C` | All headings and body text | — |
-| `--wcp-white` | `#FFFFFF` | Page and header background | Charcoal, Maroon |
-| `--wcp-sand` | `#F7F5F0` | Inputs, search/subscribe fields, cards, light borders | Charcoal (15:1), Maroon (8.5:1) |
+| Heritage Maroon | `#8E1616` | Logo, footer background, section dividers, **link text**, button hover | White (9.2:1), Saffron (4.6:1) |
+| Marigold Saffron | `#F5A623` | Buttons, link underlines, hover accents | **Charcoal only** (8.1:1) — never white (2.0:1) |
+| Midnight Charcoal | `#1A202C` | All headings and body text | — |
+| Crisp White | `#FFFFFF` | Page and header background | Charcoal, Maroon |
+| Warm Sand | `#F7F5F0` | Inputs, search/subscribe fields, cards, light backgrounds | Charcoal (15:1), Maroon (8.5:1) |
+
+Borders on sand use `#D6D5D3`.
 
 **Rule of thumb:** saffron is never used for text on a light background.
 
-To change a colour, edit **section 1** of `wcpune2027.css` only.
+To change a colour, **find & replace its hex** across `wcpune2027.css`.
+
+## ⚠️ Don't use CSS variables
+Remote CSS runs the file through WordCamp's sanitiser, which **deletes every CSS custom
+property declaration** (`--anything: value;`). It works in local preview but silently
+disappears on the live site. Write colours as plain hex values.
+Reading WordPress's own variables, like `var(--wp--preset--font-size--small)`, is fine.
+Only declaring new ones is stripped. `@import` is stripped too. Use the WordCamp Fonts tool for fonts.
 
 ## How it works
-Section 2 remaps the theme's colour presets (`--wp--preset--color--base`, `contrast`,
-`accent-1`, `custom-brick-red`, …) to the brand tokens, so every existing block picks up
-the new palette without editing content. `!important` is used only where the block editor
-writes inline colours or `!important` preset classes (header/hero background, buttons).
+Section 1 overrides the theme's colour classes (`.has-custom-brick-red-color`,
+`.has-accent-5-background-color`, …) with the new palette, so existing blocks pick up the
+new colours without editing content. These classes use `!important` in WordPress itself,
+so our overrides need it too.
 
 ## Local development (live site + local CSS)
 1. `cd remote-css && python3 -m http.server 8027`
@@ -45,8 +54,8 @@ No-install alternative: paste the body of `dev-inject.user.js` into the DevTools
    choose **Add on to the existing CSS**, click **Update**.
 3. Copy the webhook URL shown on that screen into GitHub → repo Settings → Webhooks,
    so every `git push` re-syncs the site.
-4. Check the live page source: the Remote CSS stylesheet should be listed, and
-   the `--wcp-*` variables should still be in it (Remote CSS sanitises the file).
+4. Check that it's live. View the page source and search for `wordcamp_remote_css`.
+   If it's missing, the save on the Remote CSS screen failed: look for a red error message there.
 5. Once confirmed, empty **Appearance → Additional CSS** (backup is in `legacy-additional-css.css`).
 6. In the editor, change the homepage hero group and header group backgrounds from the
    custom `#e1a48e` to a palette colour; the `[style*="#e1a48e"]` overrides can then be removed.
