@@ -31,7 +31,9 @@ writes inline colours or `!important` preset classes (header/hero background, bu
 
 ## Local development (live site + local CSS)
 1. `cd remote-css && python3 -m http.server 8027`
-2. Install the Tampermonkey extension in Chrome, then add `dev-inject.user.js` as a new script.
+2. Install the [Tampermonkey extension for Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en),
+   then add `dev-inject.user.js` as a new script.
+   (In `chrome://extensions` → Tampermonkey → Details, turn on **Allow User Scripts**.)
 3. Open https://pune.wordcamp.org/2027/ — edit the CSS, save, reload.
    Toggle the userscript off to compare with the current live site.
 
