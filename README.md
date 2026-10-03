@@ -42,7 +42,7 @@ WordCamp's sanitiser **deletes every CSS custom property declaration** (`--anyth
 and `@import`. Reading WordPress's own variables, like `var(--wp--preset--color--contrast)`,
 is fine, and that is how this file gets every colour.
 
-The homepage hero styles apply only to `.wc-hero.alignfull` (the hero group). The Day 1 / Day 2 group has the class `hero-days`, and the Past WordCamps menu in the footer has `past-wc-nav`.
+The homepage hero styles apply to `.hero-wrap` (the hero group). The Day 1 / Day 2 group has the class `hero-days`, and the Past WordCamps menu in the footer has `past-wc-nav`.
 
 ## Local development (live site + local CSS)
 1. `cd remote-css && python3 -m http.server 8027`

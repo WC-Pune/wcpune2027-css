@@ -62,8 +62,10 @@ body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-quer
 
 /* Homepage: sections that aren't full width (e.g. "Learn Beyond
    Sessions") had no side padding and ran to the window edges. Give them
-   the theme's side padding and wide width, like the header and footer. */
-body.home .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull) {
+   the theme's side padding and wide width, like the header and footer.
+   Groups are left alone: they manage their own padding, and one may wrap
+   the full-width hero. */
+body.home .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull):not(.wp-block-group) {
 	box-sizing: border-box;
 	max-width: var(--wp--style--global--wide-size);
 	margin-left: auto !important;
@@ -584,16 +586,16 @@ body .has-accent-5-border-color {
 
 
 /* ==== B6. Homepage hero =============================================== */
-/* The homepage hero group has the class wc-hero; .alignfull keeps these
-   rules off any smaller block that gets the class by mistake. */
+/* The homepage hero group has the class hero-wrap
+   (Advanced → Additional CSS class). */
 
-.wc-hero.alignfull {
+.hero-wrap {
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
 
 /* Eyebrow: the first line above the title, as small maroon capitals. */
-.wc-hero.alignfull .wp-block-column:first-child > p:first-child {
+.hero-wrap .wp-block-column:first-child > p:first-child {
 	margin-bottom: 0.25rem !important;
 	color: var(--wp--preset--color--accent-1);
 	font-size: var(--wp--preset--font-size--medium) !important;
@@ -604,7 +606,7 @@ body .has-accent-5-border-color {
 
 /* Day 1 / Day 2: soft chips. Give their group the class hero-days
    so they wrap on phones instead of squeezing. */
-.wc-hero.alignfull .is-style-text-annotation {
+.hero-wrap .is-style-text-annotation {
 	padding: 0.35em 0.9em;
 	border: 1px solid var(--wp--preset--color--accent-4);
 	border-radius: 999px;
@@ -616,41 +618,41 @@ body .has-accent-5-border-color {
 	white-space: nowrap;
 }
 
-.wc-hero.alignfull .hero-days {
+.hero-wrap .hero-days {
 	flex-wrap: wrap !important;
 	gap: 0.5rem;
 }
 
 /* Same, without the class (browsers with :has). Kept as its own rule so
    a browser or sanitiser that rejects :has only drops this one. */
-.wc-hero.alignfull .wp-block-group:has(> .is-style-text-annotation) {
+.hero-wrap .wp-block-group:has(> .is-style-text-annotation) {
 	flex-wrap: wrap !important;
 	gap: 0.5rem;
 }
 
 /* Date and venue icons in maroon. */
-.wc-hero.alignfull .wp-block-icon {
+.hero-wrap .wp-block-icon {
 	color: var(--wp--preset--color--accent-1);
 }
 
-.wc-hero.alignfull .wp-block-icon svg {
+.hero-wrap .wp-block-icon svg {
 	fill: currentColor;
 }
 
 /* Buttons sit left, side by side; full width and stacked on phones. */
-.wc-hero.alignfull .wp-block-buttons {
+.hero-wrap .wp-block-buttons {
 	justify-content: flex-start;
 	gap: 0.75rem;
 }
 
 /* Photo: rounded, soft shadow, caption in a small dark box. */
-.wc-hero.alignfull .wp-block-cover {
+.hero-wrap .wp-block-cover {
 	overflow: hidden;
 	border-radius: 16px !important;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
 }
 
-.wc-hero.alignfull .wp-block-cover__inner-container p {
+.hero-wrap .wp-block-cover__inner-container p {
 	display: inline-block;
 	padding: 0.3em 0.9em;
 	border-radius: 12px;
@@ -660,57 +662,57 @@ body .has-accent-5-border-color {
 
 /* Hover for everyone: deeper shadow, and the light grey veil over the
    photo fades out so it brightens. */
-.wc-hero.alignfull .wp-block-cover {
+.hero-wrap .wp-block-cover {
 	transition: transform .35s ease, box-shadow .35s ease;
 }
 
-.wc-hero.alignfull .wp-block-cover__background {
+.hero-wrap .wp-block-cover__background {
 	transition: opacity .35s ease;
 }
 
-.wc-hero.alignfull .wp-block-cover:hover {
+.hero-wrap .wp-block-cover:hover {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 26px 50px rgba(0, 0, 0, 0.18);
 }
 
-.wc-hero.alignfull .wp-block-cover:hover .wp-block-cover__background {
+.hero-wrap .wp-block-cover:hover .wp-block-cover__background {
 	opacity: 0 !important;
 }
 
 /* Movement only when the visitor hasn't asked for reduced motion
    (macOS: System Settings → Accessibility → Display → Reduce motion). */
 @media (prefers-reduced-motion: no-preference) {
-	.wc-hero.alignfull .wp-block-cover__image-background {
+	.hero-wrap .wp-block-cover__image-background {
 		transition: transform .8s ease;
 	}
 
-	.wc-hero.alignfull .wp-block-cover:hover {
+	.hero-wrap .wp-block-cover:hover {
 		transform: translateY(-4px);
 	}
 
-	.wc-hero.alignfull .wp-block-cover:hover .wp-block-cover__image-background {
+	.hero-wrap .wp-block-cover:hover .wp-block-cover__image-background {
 		transform: scale(1.06);
 	}
 }
 
 @media (max-width: 781px) {
-	.wc-hero.alignfull {
+	.hero-wrap {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
 	}
 
 	/* 4:3 photo instead of 496px tall. */
-	.wc-hero.alignfull .wp-block-cover {
+	.hero-wrap .wp-block-cover {
 		min-height: 0 !important;
 		aspect-ratio: 4 / 3 !important;
 	}
 }
 
 @media (max-width: 480px) {
-	.wc-hero.alignfull .wp-block-buttons,
-	.wc-hero.alignfull .wp-block-button {
+	.hero-wrap .wp-block-buttons,
+	.hero-wrap .wp-block-button {
 		width: 100%;
 	}
 
-	.wc-hero.alignfull .wp-block-button__link {
+	.hero-wrap .wp-block-button__link {
 		display: block;
 		text-align: center;
 	}
