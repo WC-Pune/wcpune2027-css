@@ -1,0 +1,17 @@
+/*
+ * DEV ONLY — never paste into WordPress (the sanitiser strips these anyway).
+ *
+ * The switch-day Theme palette. dev-inject.user.js layers this on the live
+ * site so you can preview the brand look. On switch day, copy each hex into
+ * Site Editor → Styles → Colours → Palette.
+ */
+:root {
+	--wp--preset--color--base: #FFFFFF;
+	--wp--preset--color--contrast: #1A202C;
+	--wp--preset--color--accent-1: #8E1616;
+	--wp--preset--color--accent-2: #F5A623;
+	--wp--preset--color--accent-3: #F7F5F0;
+	--wp--preset--color--accent-4: #D6D5D3;
+	--wp--preset--color--accent-5: #F7F5F0;
+	--wp--preset--color--custom-brick-red: #8E1616;
+}
