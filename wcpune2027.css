@@ -153,13 +153,55 @@ header.wp-block-template-part .current-menu-item > .wp-block-navigation-item__co
 /* Phones: smaller logo so the title fits; bigger links in the menu overlay. */
 @media (max-width: 600px) {
 	header.wp-block-template-part .wp-block-site-logo img {
-		width: 52px !important;
+		width: 52px;
 		height: auto;
 	}
 }
 
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content {
 	font-size: 1.5rem;
+}
+
+/* On scroll: over the first 120px the header gets shorter, the logo
+   smaller, and a soft shadow fades in. Uses scroll-driven animations
+   (Chrome, Edge, Safari 26+); other browsers keep the full header. */
+@keyframes wc-header-lift {
+	to {
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+	}
+}
+
+@keyframes wc-header-tighten {
+	to {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+}
+
+@keyframes wc-logo-shrink {
+	to {
+		width: 44px;
+	}
+}
+
+@supports (animation-timeline: scroll()) {
+	header.wp-block-template-part {
+		animation: wc-header-lift linear both;
+		animation-timeline: scroll();
+		animation-range: 0 120px;
+	}
+
+	header.wp-block-template-part .wp-block-group.alignwide {
+		animation: wc-header-tighten linear both;
+		animation-timeline: scroll();
+		animation-range: 0 120px;
+	}
+
+	header.wp-block-template-part .wp-block-site-logo img {
+		animation: wc-logo-shrink linear both;
+		animation-timeline: scroll();
+		animation-range: 0 120px;
+	}
 }
 
 
