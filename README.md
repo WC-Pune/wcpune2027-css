@@ -1,7 +1,7 @@
 # WordCamp Pune 2027 — Remote CSS
 
-`wcpune2027.css` is the **only** stylesheet for pune.wordcamp.org/2027 (theme: Twenty Twenty-Five).
-It is loaded by **Appearance → Remote CSS**; Appearance → Additional CSS should stay empty.
+`wcpune2027.css` is the custom stylesheet for pune.wordcamp.org/2027 (theme: Twenty Twenty-Five).
+It is loaded by **Appearance → Remote CSS**, in **Add on to existing CSS** mode, on top of the theme. Appearance → Additional CSS should stay empty.
 
 | File | Purpose |
 |---|---|
@@ -13,9 +13,9 @@ It is loaded by **Appearance → Remote CSS**; Appearance → Additional CSS sho
 
 | Colour | Hex | Use for | Text on it |
 |---|---|---|---|
-| Heritage Maroon | `#8E1616` | Logo, footer background, section dividers, **link text**, button hover | White (9.2:1), Saffron (4.6:1) |
+| Heritage Maroon | `#8E1616` | Logo, footer background, section dividers, **content links**, button hover, header border | White (9.2:1), Saffron (4.6:1) |
 | Marigold Saffron | `#F5A623` | Buttons, link underlines, hover accents | **Charcoal only** (8.1:1) — never white (2.0:1) |
-| Midnight Charcoal | `#1A202C` | All headings and body text | — |
+| Midnight Charcoal | `#1A202C` | Headings, body text, header menu, site title | — |
 | Crisp White | `#FFFFFF` | Page and header background | Charcoal, Maroon |
 | Warm Sand | `#F7F5F0` | Inputs, search/subscribe fields, cards, light backgrounds | Charcoal (15:1), Maroon (8.5:1) |
 
@@ -37,6 +37,8 @@ Section 1 overrides the theme's colour classes (`.has-custom-brick-red-color`,
 `.has-accent-5-background-color`, …) with the new palette, so existing blocks pick up the
 new colours without editing content. These classes use `!important` in WordPress itself,
 so our overrides need it too.
+
+The homepage hero styles apply only to `.wc-hero.alignfull`. The Contact Us button group also has the class `wc-hero`; remove that class in the editor when you can. Header menu and site title stay charcoal. Filled buttons are saffron; Outline buttons stay a maroon border. `.paper`, `.fixed-width`, and the old `.wc-hero__panel` rules were removed because the current pages do not use them. `.fixed-width` still narrows the photo grid until Additional CSS is emptied.
 
 ## Local development (live site + local CSS)
 1. `cd remote-css && python3 -m http.server 8027`

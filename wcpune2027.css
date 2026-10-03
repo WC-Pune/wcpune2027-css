@@ -8,11 +8,11 @@
  * Using var(--wp--preset--…) values is fine; declaring variables is not.
  *
  * PALETTE — to change a colour, find & replace its hex in this file.
- *   Heritage Maroon    #8E1616   logo, footer bg, dividers, link text
- *   Marigold Saffron   #F5A623   buttons, underlines, hover accents
- *   Midnight Charcoal  #1A202C   all text
+ *   Heritage Maroon    #8E1616   logo, footer bg, dividers, content links
+ *   Marigold Saffron   #F5A623   buttons, content-link underlines, hover
+ *   Midnight Charcoal  #1A202C   text, header menu, site title
  *   Crisp White        #FFFFFF   page + header background
- *   Warm Sand          #F7F5F0   inputs, cards, light backgrounds
+ *   Warm Sand          #F7F5F0   hero band, inputs, light backgrounds
  *   Sand edge          #D6D5D3   borders on sand (sand 85% + charcoal 15%)
  *
  * Text pairings: never saffron text on white/sand (2:1). Saffron buttons
@@ -119,18 +119,19 @@ header.wp-block-template-part .has-background[style*="#e1a48e"] {
 	background-color: #FFFFFF !important;
 }
 
-/* Dotted border around the header row: soften to sand edge */
-header.wp-block-template-part .has-custom-brick-red-border-color {
-	border-color: #D6D5D3 !important;
-}
+/* The dotted header border uses the brick-red class, so section 1
+   already turns it maroon. Leave it; sand (#D6D5D3) disappeared on white. */
 
 
 /* ==== 4. Links ======================================================== */
 /*
  * Saffron on white is ~2:1 (fails WCAG AA), so link TEXT is maroon (~9:1)
- * and saffron is used for the underline / hover accent only.
+ * and saffron is the underline only.
+ * The menu and site title stay charcoal: they sit beside the maroon logo,
+ * and the theme's header rules are stronger than a plain `a` selector.
  */
 
+.entry-content a:where(:not(.wp-element-button)),
 a:where(:not(.wp-element-button)) {
 	color: #8E1616;
 	text-decoration-color: #F5A623;
@@ -138,8 +139,15 @@ a:where(:not(.wp-element-button)) {
 	text-underline-offset: 0.2em;
 }
 
+.entry-content a:where(:not(.wp-element-button)):hover,
 a:where(:not(.wp-element-button)):hover {
 	text-decoration-color: #8E1616;
+}
+
+header.wp-block-template-part .wp-block-site-title a,
+header.wp-block-template-part .wp-block-navigation a {
+	color: #1A202C;
+	text-decoration-color: #1A202C;
 }
 
 a:focus-visible {
@@ -181,6 +189,31 @@ a:focus-visible {
 	outline-offset: 2px;
 }
 
+/* Outline stays available in the editor: maroon border, clear fill. */
+.wp-block-button.is-style-outline > .wp-block-button__link {
+	background-color: transparent !important;
+	color: #8E1616 !important;
+	border-color: #8E1616 !important;
+}
+
+.wp-block-button.is-style-outline > .wp-block-button__link:hover {
+	background-color: #8E1616 !important;
+	color: #FFFFFF !important;
+	border-color: #8E1616 !important;
+}
+
+footer.wp-block-template-part .wp-block-button.is-style-outline > .wp-block-button__link {
+	background-color: transparent !important;
+	color: #FFFFFF !important;
+	border-color: #FFFFFF !important;
+}
+
+footer.wp-block-template-part .wp-block-button.is-style-outline > .wp-block-button__link:hover {
+	background-color: #FFFFFF !important;
+	color: #8E1616 !important;
+	border-color: #FFFFFF !important;
+}
+
 
 /* ==== 6. Footer (solid maroon, white text) ============================ */
 
@@ -214,10 +247,10 @@ footer.wp-block-template-part a:focus-visible {
 	outline-color: #F5A623;
 }
 
-/* The logo is a maroon disc; a white ring separates it from the footer */
+/* The logo file already includes its cream ring. Radius only clips
+   the transparent corners of the slightly rectangular PNG. */
 footer.wp-block-template-part .wp-block-site-logo img {
 	border-radius: 50%;
-	box-shadow: 0 0 0 3px #FFFFFF;
 }
 
 
@@ -256,107 +289,45 @@ textarea:focus {
 }
 
 
-/* ==== 9. Components (moved from Additional CSS) ======================= */
+/* ==== 9. Homepage hero ================================================ */
+/*
+ * Only the full-width hero. A second .wc-hero wraps the Contact Us button;
+ * these rules must not clip that button.
+ * Inline background is still #e1a48e. Remove the attribute rule once the
+ * hero background is Warm Sand in the editor.
+ */
 
-/* Was beige #f3eee2 with a paper texture; now warm sand, texture lighter */
-.paper {
-	background-color: #F7F5F0;
-	background-image:
-		radial-gradient(rgba(26, 32, 44, 0.04) 1px, transparent 1px),
-		linear-gradient(110deg,
-			rgba(255, 255, 255, 0.12),
-			rgba(142, 22, 22, 0.02));
-	background-size: 4px 4px, 100% 100%;
-}
-
-/* Homepage hero: block has inline background #e1a48e.
-   Remove this rule once it's changed to Warm Sand in the editor. */
-.wc-hero[style*="#e1a48e"] {
+.wc-hero.alignfull[style*="#e1a48e"] {
 	background-color: #F7F5F0 !important;
 }
 
-.wc-hero {
+.wc-hero.alignfull {
 	position: relative;
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
 
-.wc-hero__inner {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	gap: clamp(2rem, 5vw, 4rem);
-}
-
-.wc-hero__content {
-	flex: 1 1 480px;
-}
-
-.wc-hero__eyebrow {
-	color: #8E1616;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-weight: 700;
-}
-
-.wc-hero__heading {
-	margin-block: .5rem 1rem;
-	line-height: 1.05;
-}
-
-.wc-hero__tagline {
-	max-width: 42ch;
-}
-
-.wc-hero__panel {
-	flex: 0 1 340px;
-	background-color: #8E1616;
-	color: #FFFFFF;
-	clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
-	padding: 2.5rem clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.wc-hero__panel p {
-	margin: 0;
-}
-
-.wc-hero__panel-row + .wc-hero__panel-row {
-	margin-top: 1.5rem;
-	padding-top: 1.5rem;
-	border-top: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.wc-hero__panel-label {
-	text-transform: uppercase;
-	letter-spacing: 1.5px;
-	font-weight: 700;
-	font-size: var(--wp--preset--font-size--small);
-	color: #F5A623;
-	display: block;
-	margin-bottom: .35rem;
-}
-
-.fixed-width {
-	max-width: 1400px;
-	margin: auto;
-	width: 80%;
+/* Additional CSS still clips every .wc-hero, including the Contact Us row.
+   This cancels that until Additional CSS is emptied. */
+.wc-hero:not(.alignfull) {
+	clip-path: none !important;
 }
 
 @media (max-width: 781px) {
-	.wc-hero {
+	.wc-hero.alignfull {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
-	}
-
-	.wc-hero__panel {
-		clip-path: none;
-		flex-basis: 100%;
 	}
 }
 
 
 /* ==== 10. Page-specific =============================================== */
 
-/* Code of Conduct: spacing above section headings */
-.page-slug-code-of-conduct .wp-block-heading {
-	margin-top: 20px;
+/* Code of Conduct: room above each section, not above the first heading
+   and not on the footer headings. */
+.page-slug-code-of-conduct .entry-content > .wp-block-heading {
+	margin-top: 2.5rem;
+}
+
+.page-slug-code-of-conduct .entry-content > h3.wp-block-heading:first-of-type {
+	margin-top: 0;
 }
