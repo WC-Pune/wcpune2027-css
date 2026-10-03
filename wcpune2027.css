@@ -79,10 +79,87 @@ a:focus-visible {
 
 /* ==== B2. Header ====================================================== */
 /* The header group uses Accent 3 (peach today, like the hero). In the
-   brand look the header is page colour. */
+   brand look the header is page colour, with a maroon strip on top and
+   one thin line underneath instead of the dotted box. */
+
+/* Stays at the top while scrolling. Logged in, it sits below the admin
+   bar, which is 32px tall, 46px under 783px, and scrolls away under 601px. */
+header.wp-block-template-part {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+body.admin-bar header.wp-block-template-part {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	body.admin-bar header.wp-block-template-part {
+		top: 46px;
+	}
+}
+
+@media (max-width: 600px) {
+	body.admin-bar header.wp-block-template-part {
+		top: 0;
+	}
+}
 
 header.wp-block-template-part .has-accent-3-background-color {
 	background-color: var(--wp--preset--color--base) !important;
+	border-top: 4px solid var(--wp--preset--color--accent-1);
+}
+
+header.wp-block-template-part .has-custom-brick-red-border-color {
+	border-style: none none solid !important;
+	border-color: var(--wp--preset--color--accent-4) !important;
+}
+
+/* Site title: one line, capitals with light spacing. */
+header.wp-block-template-part .wp-block-site-title {
+	font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.25rem);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+header.wp-block-template-part .wp-block-site-title a {
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+}
+
+/* Menu: no permanent underline; a saffron bar grows in on hover and
+   stays under the current page. */
+header.wp-block-template-part .wp-block-navigation {
+	font-size: var(--wp--preset--font-size--medium) !important;
+}
+
+header.wp-block-template-part .wp-block-navigation-item__content {
+	text-decoration: none !important;
+	padding-bottom: 4px;
+	background: linear-gradient(var(--wp--preset--color--accent-2), var(--wp--preset--color--accent-2)) no-repeat left bottom / 0 3px;
+	transition: background-size .2s ease, color .2s ease;
+}
+
+header.wp-block-template-part .wp-block-navigation-item__content:hover,
+header.wp-block-template-part .wp-block-navigation-item__content:focus-visible,
+header.wp-block-template-part .current-menu-item > .wp-block-navigation-item__content {
+	background-size: 100% 3px;
+	color: var(--wp--preset--color--accent-1);
+}
+
+/* Phones: smaller logo so the title fits; bigger links in the menu overlay. */
+@media (max-width: 600px) {
+	header.wp-block-template-part .wp-block-site-logo img {
+		width: 52px !important;
+		height: auto;
+	}
+}
+
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content {
+	font-size: 1.5rem;
 }
 
 
@@ -142,6 +219,60 @@ footer.wp-block-template-part a:where(:not(.wp-element-button)):hover {
 
 footer.wp-block-template-part a:focus-visible {
 	outline-color: var(--wp--preset--color--accent-2);
+}
+
+/* Section labels: small tracked capitals. The first column's heading is
+   the event name and stays large. */
+footer.wp-block-template-part .wp-block-column:not(:first-child) > .wp-block-heading {
+	font-size: 0.85rem !important;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+footer.wp-block-template-part .wp-block-site-tagline {
+	color: var(--wp--preset--color--accent-2);
+	font-weight: 500;
+}
+
+/* Past years as pills; saffron fill on hover. */
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation__container {
+	gap: 0.6rem;
+}
+
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content {
+	display: inline-block;
+	padding: 0.2em 0.9em;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	font-size: 0.95rem;
+	text-decoration: none;
+	transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:hover,
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:focus-visible {
+	background-color: var(--wp--preset--color--accent-2);
+	border-color: var(--wp--preset--color--accent-2);
+	color: var(--wp--preset--color--contrast);
+}
+
+footer.wp-block-template-part .wp-social-link {
+	transition: transform .15s ease;
+}
+
+footer.wp-block-template-part .wp-social-link:hover {
+	transform: translateY(-2px);
+}
+
+/* Bottom row ("Designed with WordPress"): a thin divider above it. */
+footer.wp-block-template-part .is-content-justification-space-between {
+	margin-top: var(--wp--preset--spacing--40);
+	padding-top: var(--wp--preset--spacing--30);
+	border-top: 1px solid var(--wp--preset--color--accent-4);
+}
+
+footer.wp-block-template-part .is-content-justification-space-between p {
+	font-size: 0.9rem !important;
 }
 
 /* The logo file already includes its ring. Radius only clips the
