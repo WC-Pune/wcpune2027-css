@@ -230,6 +230,19 @@ body .wp-element-button:focus-visible {
 	outline-offset: 2px;
 }
 
+/* Outline style (Styles → Outline on a button): clear fill, maroon
+   border and text; fills maroon on hover. */
+body .is-style-outline > .wp-block-button__link {
+	background-color: transparent !important;
+	color: var(--wp--preset--color--accent-1) !important;
+	border: 2px solid var(--wp--preset--color--accent-1) !important;
+}
+
+body .is-style-outline > .wp-block-button__link:hover {
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base) !important;
+}
+
 /* On the maroon footer a maroon hover would vanish. */
 footer.wp-block-template-part .wp-block-button__link:hover,
 footer.wp-block-template-part .wp-element-button:hover {
@@ -356,9 +369,113 @@ body .has-accent-5-border-color {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
 
+/* Eyebrow: the first line above the title, as small maroon capitals. */
+.wc-hero.alignfull .wp-block-column:first-child > p:first-child {
+	margin-bottom: 0.25rem !important;
+	color: var(--wp--preset--color--accent-1);
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Day 1 / Day 2: soft chips. Give their group the class wc-hero-days
+   so they wrap on phones instead of squeezing. */
+.wc-hero.alignfull .is-style-text-annotation {
+	padding: 0.35em 0.9em;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 999px;
+	background-color: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	font-family: inherit;
+	font-size: 0.9rem;
+	font-weight: 600 !important;
+	white-space: nowrap;
+}
+
+.wc-hero.alignfull .wc-hero-days {
+	flex-wrap: wrap !important;
+	gap: 0.5rem;
+}
+
+/* Same, without the class (browsers with :has). Kept as its own rule so
+   a browser or sanitiser that rejects :has only drops this one. */
+.wc-hero.alignfull .wp-block-group:has(> .is-style-text-annotation) {
+	flex-wrap: wrap !important;
+	gap: 0.5rem;
+}
+
+/* Date and venue icons in maroon. */
+.wc-hero.alignfull .wp-block-icon {
+	color: var(--wp--preset--color--accent-1);
+}
+
+.wc-hero.alignfull .wp-block-icon svg {
+	fill: currentColor;
+}
+
+/* Buttons sit left, side by side; full width and stacked on phones. */
+.wc-hero.alignfull .wp-block-buttons {
+	justify-content: flex-start;
+	gap: 0.75rem;
+}
+
+/* Photo: rounded, soft shadow, caption in a small dark pill. On hover the
+   card lifts and the photo slowly zooms (skipped for reduced motion). */
+.wc-hero.alignfull .wp-block-cover {
+	overflow: hidden;
+	border-radius: 16px !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.wc-hero.alignfull .wp-block-cover__inner-container p {
+	display: inline-block;
+	padding: 0.3em 0.9em;
+	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.45);
+	text-align: left !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.wc-hero.alignfull .wp-block-cover {
+		transition: transform .35s ease, box-shadow .35s ease;
+	}
+
+	.wc-hero.alignfull .wp-block-cover__image-background {
+		transition: transform .8s ease;
+	}
+
+	.wc-hero.alignfull .wp-block-cover:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 26px 50px rgba(0, 0, 0, 0.18);
+	}
+
+	.wc-hero.alignfull .wp-block-cover:hover .wp-block-cover__image-background {
+		transform: scale(1.06);
+	}
+}
+
 @media (max-width: 781px) {
 	.wc-hero.alignfull {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+	}
+
+	/* 4:3 photo instead of 496px tall. */
+	.wc-hero.alignfull .wp-block-cover {
+		min-height: 0 !important;
+		aspect-ratio: 4 / 3 !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.wc-hero.alignfull .wp-block-buttons,
+	.wc-hero.alignfull .wp-block-button {
+		width: 100%;
+	}
+
+	.wc-hero.alignfull .wp-block-button__link {
+		display: block;
+		text-align: center;
 	}
 }
 
