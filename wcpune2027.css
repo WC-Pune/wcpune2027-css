@@ -60,6 +60,18 @@ body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-quer
 	margin-right: auto;
 }
 
+/* Homepage: sections that aren't full width (e.g. "Learn Beyond
+   Sessions") had no side padding and ran to the window edges. Give them
+   the theme's side padding and wide width, like the header and footer. */
+body.home .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull) {
+	box-sizing: border-box;
+	max-width: var(--wp--style--global--wide-size);
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: var(--wp--style--root--padding-left) !important;
+	padding-right: var(--wp--style--root--padding-right) !important;
+}
+
 /* The same template sets the space between blocks to 0; restore it,
    with extra room above headings. */
 body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > * + * {
@@ -343,6 +355,17 @@ header.wp-block-template-part .is-menu-open .current-menu-item > .wp-block-navig
 	color: var(--wp--preset--color--accent-1);
 }
 
+/* Opening the menu focuses the first link. Instead of the site-wide focus
+   box, show a saffron underline (still visible for keyboard users). */
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus-visible {
+	outline: none;
+	color: var(--wp--preset--color--accent-1);
+	text-decoration-line: underline !important;
+	text-decoration-color: var(--wp--preset--color--accent-2) !important;
+	text-decoration-thickness: 3px !important;
+	text-underline-offset: 0.3em;
+}
+
 header.wp-block-template-part .is-menu-open .nav-cta {
 	margin-top: var(--wp--preset--spacing--30);
 	border-bottom: 0;
@@ -355,7 +378,9 @@ header.wp-block-template-part .is-menu-open .nav-cta > .wp-block-navigation-item
 }
 
 header.wp-block-template-part .is-menu-open .nav-cta > .wp-block-navigation-item__content:hover,
+header.wp-block-template-part .is-menu-open .nav-cta > .wp-block-navigation-item__content:focus-visible,
 header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-block-navigation-item__content {
+	text-decoration: none !important;
 	background: var(--wp--preset--color--accent-1);
 	color: var(--wp--preset--color--base);
 }
@@ -688,6 +713,51 @@ body .has-accent-5-border-color {
 	.wc-hero.alignfull .wp-block-button__link {
 		display: block;
 		text-align: center;
+	}
+}
+
+
+/* ==== B6b. Homepage sections (e.g. "Learn Beyond Sessions") ========= */
+/* Photo and text fade and slide up as the section scrolls into view
+   (scroll-driven animations: Chrome, Edge, Safari 26+; other browsers
+   show them as is). The photo also zooms gently on hover. Nothing moves
+   for visitors who ask for reduced motion. */
+@keyframes wc-reveal {
+	from {
+		opacity: 0;
+		transform: translateY(32px);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
+	overflow: hidden;
+	border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image img {
+		transition: transform .6s ease;
+	}
+
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image:hover img {
+		transform: scale(1.04);
+	}
+
+	@supports (animation-timeline: view()) {
+		body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) > .wp-block-column {
+			animation: wc-reveal linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 70%;
+		}
+
+		body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) > .wp-block-column + .wp-block-column {
+			animation-range: entry 15% entry 85%;
+		}
 	}
 }
 
