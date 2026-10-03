@@ -1,14 +1,6 @@
-/*
- * BACKUP — Appearance → Additional CSS as it was before the move to Remote CSS
- * (copied 2026-10-02). Not loaded anywhere; kept for rollback only.
- */
-
 .paper {
 	background-color: #f3eee2;
-	background-image:
-		radial-gradient(rgba(80, 65, 45, 0.08) 1px, transparent 1px),
-		radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
-		linear-gradient(110deg,
+	background-image: radial-gradient(rgba(80, 65, 45, 0.08) 1px, transparent 1px), radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px), linear-gradient(110deg,
 			rgba(255,255,255,0.12),
 			rgba(120,100,70,0.04));
 	background-size: 4px 4px, 7px 7px, 100% 100%;
@@ -78,7 +70,7 @@
 	.wc-hero {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
 	}
-
+	
 	.wc-hero__panel {
 		clip-path: none;
 		flex-basis: 100%;
@@ -86,7 +78,7 @@
 }
 
 /* Code of conduct only - add spacing for para*/
-.page-slug-code-of-conduct .wp-block-heading {
+.page-slug-code-of-conduct  .wp-block-heading {
 	margin-top: 20px;
 }
 
@@ -94,4 +86,24 @@
 	max-width: 1400px;
 	margin: auto;
 	width: 80%;
+}
+
+.past-wc-nav .wp-block-navigation__container {
+	display: grid;
+	grid-template-columns: repeat(4, max-content);
+	gap: .5rem 1.5rem;
+}
+
+@media (max-width: 480px) {
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p,
+		      footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+		      footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
+		width: 100%;
+		margin: 0 !important;
+	}
 }

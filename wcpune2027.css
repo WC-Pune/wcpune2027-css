@@ -1,271 +1,176 @@
 /*
  * WordCamp Pune 2027 — site CSS
- * Loaded via Appearance → Remote CSS (mode: "Add on to existing CSS").
  * Theme: Twenty Twenty-Five (block theme).
  *
- * IMPORTANT: WordCamp's CSS sanitiser strips CSS custom properties
- * (`--anything: value;`), so this file uses plain hex values only.
- * Using var(--wp--preset--…) values is fine; declaring variables is not.
+ * COLOURS LIVE IN THE EDITOR, NOT HERE.
+ * Every colour below reads a Theme palette slot from Site Editor → Styles →
+ * Colours, e.g. var(--wp--preset--color--accent-1). To change the look,
+ * edit the slot's hex in the editor; this file never needs a hex.
+ * (WordCamp's sanitiser strips `--name: value;` declarations, but reading
+ * WordPress's own --wp--preset--… variables is fine.)
  *
- * PALETTE — to change a colour, find & replace its hex in this file.
- *   Heritage Maroon    #8E1616   logo, footer bg, dividers, content links
- *   Marigold Saffron   #F5A623   buttons, content-link underlines, hover
- *   Midnight Charcoal  #1A202C   text, header menu, site title
- *   Crisp White        #FFFFFF   page + header background
- *   Warm Sand          #F7F5F0   hero band, inputs, light backgrounds
- *   Sand edge          #D6D5D3   borders on sand (sand 85% + charcoal 15%)
+ * THEME SLOTS (by colour)
+ *   base       page background, text on maroon
+ *   contrast   body text, text on buttons
+ *   accent-1   maroon: brand, headings, links, footer (custom-brick-red = same)
+ *   accent-2   saffron: buttons, link underlines
+ *   accent-3   peach today (header, hero); sand later
+ *   accent-4   sand edge: borders on sand
+ *   accent-5   sand: inputs, light panels
  *
- * Text pairings: never saffron text on white/sand (2:1). Saffron buttons
- * always use charcoal text. White or saffron text is fine on maroon.
+ * PART A is layout only and changes no colours: safe in Additional CSS now.
+ * PART B is the brand styling: it goes live with Remote CSS. It also moves
+ * a few areas to a different slot (footer → maroon, buttons → saffron,
+ * header → base), so switch day needs no block re-colouring.
  */
 
 
-/* ==== 1. Theme palette classes → brand colours ======================== */
-/*
- * The block editor adds classes like .has-custom-brick-red-color. Core
- * declares them with !important, so overriding needs !important too.
- * (Also update Site Editor → Styles → Colours so the picker matches.)
- */
+/* ===================================================================== */
+/* PART A — layout fixes (copy into Appearance → Additional CSS now)      */
+/* ===================================================================== */
 
-/* Maroon */
-.has-accent-1-color,
-.has-custom-brick-red-color,
-.has-custom-dark-wooden-1-color,
-.has-custom-dark-wooden-2-color,
-.has-custom-dark-wooden-3-color {
-	color: #8E1616 !important;
+/* Past WordCamps menu: years in a grid of 4 (two rows). The nav block
+   has the class past-wc-nav (Advanced → Additional CSS class). */
+.past-wc-nav .wp-block-navigation__container {
+	display: grid;
+	grid-template-columns: repeat(4, max-content);
+	gap: 0.5rem 1.5rem;
 }
 
-.has-accent-1-background-color,
-.has-custom-brick-red-background-color,
-.has-custom-dark-wooden-1-background-color,
-.has-custom-dark-wooden-2-background-color,
-.has-custom-dark-wooden-3-background-color {
-	background-color: #8E1616 !important;
-}
+/* Small phones: email field and Subscribe button full width, stacked. */
+@media (max-width: 480px) {
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+		flex-direction: column;
+		gap: 10px;
+	}
 
-.has-accent-1-border-color,
-.has-custom-brick-red-border-color,
-.has-custom-dark-wooden-1-border-color,
-.has-custom-dark-wooden-2-border-color,
-.has-custom-dark-wooden-3-border-color {
-	border-color: #8E1616 !important;
-}
-
-/* Saffron (background/border only — never as text on light backgrounds) */
-.has-custom-light-yellow-background-color,
-.has-custom-timber-pirate-gold-background-color {
-	background-color: #F5A623 !important;
-}
-
-.has-custom-light-yellow-border-color,
-.has-custom-timber-pirate-gold-border-color {
-	border-color: #F5A623 !important;
-}
-
-/* Charcoal */
-.has-contrast-color,
-.has-black-color,
-.has-custom-stone-dark-grey-color {
-	color: #1A202C !important;
-}
-
-.has-contrast-background-color,
-.has-black-background-color,
-.has-custom-stone-dark-grey-background-color {
-	background-color: #1A202C !important;
-}
-
-/* White */
-.has-base-color {
-	color: #FFFFFF !important;
-}
-
-.has-base-background-color {
-	background-color: #FFFFFF !important;
-}
-
-/* Sand */
-.has-accent-5-color {
-	color: #F7F5F0 !important;
-}
-
-.has-accent-5-background-color {
-	background-color: #F7F5F0 !important;
-}
-
-.has-accent-5-border-color {
-	border-color: #D6D5D3 !important;
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p,
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
+		width: 100%;
+		margin: 0 !important;
+	}
 }
 
 
-/* ==== 2. Base: body, text, headings =================================== */
+/* ===================================================================== */
+/* PART B — brand styling (goes live with Remote CSS)                     */
+/* ===================================================================== */
 
-body {
-	background-color: #FFFFFF;
-	color: #1A202C;
-}
+/* ==== B1. Links ======================================================= */
+/* Link text colour comes from Styles → Colours → Link. This adds the
+   saffron underline, which the editor can't set. */
 
-h1, h2, h3, h4, h5, h6 {
-	color: #1A202C;
-}
-
-
-/* ==== 3. Header (white) =============================================== */
-
-/* The header group has an inline background (#e1a48e) set in the block.
-   Remove this rule once it's changed to White in the Site Editor. */
-header.wp-block-template-part .has-background[style*="#e1a48e"] {
-	background-color: #FFFFFF !important;
-}
-
-/* The dotted header border uses the brick-red class, so section 1
-   already turns it maroon. Leave it; sand (#D6D5D3) disappeared on white. */
-
-
-/* ==== 4. Links ======================================================== */
-/*
- * Saffron on white is ~2:1 (fails WCAG AA), so link TEXT is maroon (~9:1)
- * and saffron is the underline only.
- * The menu and site title stay charcoal: they sit beside the maroon logo,
- * and the theme's header rules are stronger than a plain `a` selector.
- */
-
-.entry-content a:where(:not(.wp-element-button)),
 a:where(:not(.wp-element-button)) {
-	color: #8E1616;
-	text-decoration-color: #F5A623;
+	text-decoration-color: var(--wp--preset--color--accent-2);
 	text-decoration-thickness: 2px;
 	text-underline-offset: 0.2em;
 }
 
-.entry-content a:where(:not(.wp-element-button)):hover,
 a:where(:not(.wp-element-button)):hover {
-	text-decoration-color: #8E1616;
+	text-decoration-color: var(--wp--preset--color--accent-1);
+}
+
+a:focus-visible {
+	outline: 2px solid var(--wp--preset--color--accent-1);
+	outline-offset: 2px;
+}
+
+
+/* ==== B2. Header ====================================================== */
+/* The header group uses Accent 3 (peach today, like the hero). In the
+   brand look the header is page colour; the menu and title stay text
+   colour beside the logo. */
+
+header.wp-block-template-part .has-accent-3-background-color {
+	background-color: var(--wp--preset--color--base) !important;
 }
 
 header.wp-block-template-part .wp-block-site-title a,
 header.wp-block-template-part .wp-block-navigation a {
-	color: #1A202C;
-	text-decoration-color: #1A202C;
-}
-
-a:focus-visible {
-	outline: 2px solid #8E1616;
-	outline-offset: 2px;
+	color: var(--wp--preset--color--contrast);
+	text-decoration-color: var(--wp--preset--color--contrast);
 }
 
 
-/* ==== 5. Buttons (saffron) ============================================ */
-/*
- * Charcoal text on saffron (~8:1); white on saffron would fail.
- * !important beats the has-*-background-color / has-*-color classes.
- */
+/* ==== B3. Buttons ===================================================== */
+/* Saffron with text colour; maroon on hover. `body` outranks the block's
+   own colour classes, which WordPress marks !important. */
 
-.wp-block-button__link,
-.wp-element-button,
-.wp-block-jetpack-subscriptions__button,
-.wp-block-search__button {
-	background-color: #F5A623 !important;
-	color: #1A202C !important;
-	border-color: #F5A623 !important;
+body .wp-block-button__link,
+body .wp-element-button {
+	background-color: var(--wp--preset--color--accent-2) !important;
+	color: var(--wp--preset--color--contrast) !important;
+	border-color: var(--wp--preset--color--accent-2) !important;
 	transition: background-color .15s ease, color .15s ease;
 }
 
-.wp-block-button__link:hover,
-.wp-element-button:hover,
-.wp-block-jetpack-subscriptions__button:hover,
-.wp-block-search__button:hover {
-	background-color: #8E1616 !important;
-	color: #FFFFFF !important;
-	border-color: #8E1616 !important;
+body .wp-block-button__link:hover,
+body .wp-element-button:hover {
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base) !important;
+	border-color: var(--wp--preset--color--accent-1) !important;
 }
 
-.wp-block-button__link:focus-visible,
-.wp-element-button:focus-visible,
-.wp-block-jetpack-subscriptions__button:focus-visible,
-.wp-block-search__button:focus-visible {
-	outline: 3px solid #1A202C;
+body .wp-block-button__link:focus-visible,
+body .wp-element-button:focus-visible {
+	outline: 3px solid var(--wp--preset--color--contrast);
 	outline-offset: 2px;
 }
 
-/* Outline stays available in the editor: maroon border, clear fill. */
-.wp-block-button.is-style-outline > .wp-block-button__link {
-	background-color: transparent !important;
-	color: #8E1616 !important;
-	border-color: #8E1616 !important;
-}
-
-.wp-block-button.is-style-outline > .wp-block-button__link:hover {
-	background-color: #8E1616 !important;
-	color: #FFFFFF !important;
-	border-color: #8E1616 !important;
-}
-
-footer.wp-block-template-part .wp-block-button.is-style-outline > .wp-block-button__link {
-	background-color: transparent !important;
-	color: #FFFFFF !important;
-	border-color: #FFFFFF !important;
-}
-
-footer.wp-block-template-part .wp-block-button.is-style-outline > .wp-block-button__link:hover {
-	background-color: #FFFFFF !important;
-	color: #8E1616 !important;
-	border-color: #FFFFFF !important;
+/* On the maroon footer a maroon hover would vanish. */
+footer.wp-block-template-part .wp-block-button__link:hover,
+footer.wp-block-template-part .wp-element-button:hover {
+	background-color: var(--wp--preset--color--base) !important;
+	color: var(--wp--preset--color--accent-1) !important;
+	border-color: var(--wp--preset--color--base) !important;
 }
 
 
-/* ==== 6. Footer (solid maroon, white text) ============================ */
+/* ==== B4. Footer ====================================================== */
+/* Sand with maroon text today; maroon with page-colour text here. */
 
-footer.wp-block-template-part,
 footer.wp-block-template-part > .wp-block-group.has-background {
-	background-color: #8E1616 !important;
-	color: #FFFFFF;
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base);
 }
 
 footer.wp-block-template-part .has-text-color:not(.wp-element-button):not(.wp-block-button__link),
-footer.wp-block-template-part h1,
-footer.wp-block-template-part h2,
-footer.wp-block-template-part h3,
-footer.wp-block-template-part h4,
-footer.wp-block-template-part h5,
-footer.wp-block-template-part h6 {
-	color: #FFFFFF !important;
+footer.wp-block-template-part .wp-block-heading {
+	color: var(--wp--preset--color--base) !important;
 }
 
 footer.wp-block-template-part a:where(:not(.wp-element-button)) {
-	color: #FFFFFF;
-	text-decoration-color: #F5A623;
+	color: var(--wp--preset--color--base);
 }
 
-/* Saffron text is fine on maroon (4.6:1) */
 footer.wp-block-template-part a:where(:not(.wp-element-button)):hover {
-	color: #F5A623;
+	color: var(--wp--preset--color--accent-2);
+	text-decoration-color: var(--wp--preset--color--accent-2);
 }
 
 footer.wp-block-template-part a:focus-visible {
-	outline-color: #F5A623;
+	outline-color: var(--wp--preset--color--accent-2);
 }
 
-/* The logo file already includes its cream ring. Radius only clips
-   the transparent corners of the slightly rectangular PNG. */
+/* The logo file already includes its ring. Radius only clips the
+   transparent corners of the slightly rectangular PNG. */
 footer.wp-block-template-part .wp-block-site-logo img {
 	border-radius: 50%;
 }
 
 
-/* ==== 7. Secondary UI: inputs, cards, borders (sand) ================== */
+/* ==== B5. Inputs and borders ========================================== */
 
 .wp-block-search__input,
 .wp-block-jetpack-subscriptions input[type="email"],
-.wp-block-jetpack-subscriptions .components-text-control__input,
 input[type="text"],
 input[type="email"],
 input[type="search"],
 textarea {
-	background-color: #F7F5F0;
-	border: 1px solid #D6D5D3;
-	color: #1A202C;
+	background-color: var(--wp--preset--color--accent-5);
+	border: 1px solid var(--wp--preset--color--accent-4);
+	color: var(--wp--preset--color--contrast);
 }
 
 .wp-block-search__input:focus,
@@ -274,43 +179,31 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-	outline: 2px solid #8E1616;
+	outline: 2px solid var(--wp--preset--color--accent-1);
 	outline-offset: 1px;
 }
 
-
-/* ==== 8. Section dividers (maroon) ==================================== */
+/* Sand borders (e.g. the hero photo) would vanish on the sand hero. */
+body .has-accent-5-border-color {
+	border-color: var(--wp--preset--color--accent-4) !important;
+}
 
 .wp-block-separator {
-	color: #8E1616;
-	border-color: #8E1616;
-	background-color: #8E1616;
+	color: var(--wp--preset--color--accent-1);
+	border-color: var(--wp--preset--color--accent-1);
+	background-color: var(--wp--preset--color--accent-1);
 	opacity: 1;
 }
 
 
-/* ==== 9. Homepage hero ================================================ */
-/*
- * Only the full-width hero. A second .wc-hero wraps the Contact Us button;
- * these rules must not clip that button.
- * Inline background is still #e1a48e. Remove the attribute rule once the
- * hero background is Warm Sand in the editor.
- */
-
-.wc-hero.alignfull[style*="#e1a48e"] {
-	background-color: #F7F5F0 !important;
-}
+/* ==== B6. Homepage hero =============================================== */
+/* Only the full-width hero. A second .wc-hero wraps the Contact Us
+   button and must not be clipped. */
 
 .wc-hero.alignfull {
 	position: relative;
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
-}
-
-/* Additional CSS still clips every .wc-hero, including the Contact Us row.
-   This cancels that until Additional CSS is emptied. */
-.wc-hero:not(.alignfull) {
-	clip-path: none !important;
 }
 
 @media (max-width: 781px) {
@@ -320,7 +213,7 @@ textarea:focus {
 }
 
 
-/* ==== 10. Page-specific =============================================== */
+/* ==== B7. Page-specific =============================================== */
 
 /* Code of Conduct: room above each section, not above the first heading
    and not on the footer headings. */
