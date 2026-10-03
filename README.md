@@ -42,6 +42,11 @@ WordCamp's sanitiser **deletes every CSS custom property declaration** (`--anyth
 and `@import`. Reading WordPress's own variables, like `var(--wp--preset--color--contrast)`,
 is fine, and that is how this file gets every colour.
 
+It also strips `animation-timeline` and `animation-range` (scroll-driven animations) but
+keeps `animation:`, so a scroll animation would jump straight to its end state. Use hover
+transitions instead. Checked against the served file on 2026-10-04; `:has()`, `@supports`,
+`@keyframes`, `-webkit-line-clamp` and `content:` all survive.
+
 The homepage hero styles apply to `.hero-wrap` (the hero group). The Day 1 / Day 2 group has the class `hero-days`, and the Past WordCamps menu in the footer has `past-wc-nav`.
 
 ## Local development (live site + local CSS)
