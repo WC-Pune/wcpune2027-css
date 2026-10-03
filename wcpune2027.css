@@ -125,6 +125,51 @@ body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-head
 	}
 }
 
+/* Footer social icons: plain icons in the footer's text colour (no brand
+   circles). On hover each shows its network's own badge: brand-coloured
+   circle, white icon. The brand hexes are the only ones in this file:
+   they are the networks' colours (as in WordPress's Social Icons block),
+   not our palette. */
+footer.wp-block-template-part .wp-block-social-links .wp-social-link {
+	background-color: transparent !important;
+	color: inherit !important;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link svg {
+	fill: currentColor;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link:focus-within {
+	color: #FFFFFF !important;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:focus-within {
+	background-color: #25D366 !important;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:focus-within {
+	background-color: #F6405F !important;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:focus-within {
+	background-color: #F00075 !important;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:focus-within {
+	background-color: #0D66C2 !important;
+}
+
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:focus-within {
+	background-color: #000000 !important;
+}
+
 /* Small phones: email field and Subscribe button full width, stacked. */
 @media (max-width: 480px) {
 	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
