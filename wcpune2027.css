@@ -283,6 +283,26 @@ header.wp-block-template-part .current-menu-item > .wp-block-navigation-item__co
 	color: var(--wp--preset--color--accent-1);
 }
 
+/* Call-to-action menu item (Contact now, Tickets later): a small saffron
+   button. Add the class nav-cta to that menu link (select it in the
+   Navigation block → Advanced → Additional CSS class). */
+header.wp-block-template-part .nav-cta > .wp-block-navigation-item__content {
+	padding: 0.45em 1.1em;
+	border-radius: 999px;
+	background: var(--wp--preset--color--accent-2);
+	color: var(--wp--preset--color--contrast);
+	font-weight: 600;
+	line-height: 1.2;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+header.wp-block-template-part .nav-cta > .wp-block-navigation-item__content:hover,
+header.wp-block-template-part .nav-cta > .wp-block-navigation-item__content:focus-visible,
+header.wp-block-template-part .nav-cta.current-menu-item > .wp-block-navigation-item__content {
+	background: var(--wp--preset--color--accent-1);
+	color: var(--wp--preset--color--base);
+}
+
 /* Phones: smaller logo so the title fits; bigger links in the menu overlay. */
 @media (max-width: 600px) {
 	header.wp-block-template-part .wp-block-site-logo img {
@@ -291,8 +311,53 @@ header.wp-block-template-part .current-menu-item > .wp-block-navigation-item__co
 	}
 }
 
+/* Phone menu overlay: a left-aligned list with dividers and large tap
+   targets; the nav-cta item becomes a full-width button at the end.
+   WordPress's overlay rules are very specific, hence the !important. */
+header.wp-block-template-part .is-menu-open .wp-block-navigation__responsive-container-content {
+	align-items: stretch !important;
+	padding-top: var(--wp--preset--spacing--40) !important;
+}
+
+header.wp-block-template-part .is-menu-open .wp-block-navigation__container {
+	align-items: stretch !important;
+	gap: 0 !important;
+	width: 100%;
+}
+
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item {
+	width: 100%;
+	border-bottom: 1px solid var(--wp--preset--color--accent-4);
+}
+
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content {
-	font-size: 1.5rem;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.9rem 0 !important;
+	background: none;
+	font-size: 1.375rem;
+}
+
+header.wp-block-template-part .is-menu-open .current-menu-item > .wp-block-navigation-item__content {
+	color: var(--wp--preset--color--accent-1);
+}
+
+header.wp-block-template-part .is-menu-open .nav-cta {
+	margin-top: var(--wp--preset--spacing--30);
+	border-bottom: 0;
+}
+
+header.wp-block-template-part .is-menu-open .nav-cta > .wp-block-navigation-item__content {
+	padding: 0.85rem 1.25rem !important;
+	background: var(--wp--preset--color--accent-2);
+	text-align: center;
+}
+
+header.wp-block-template-part .is-menu-open .nav-cta > .wp-block-navigation-item__content:hover,
+header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-block-navigation-item__content {
+	background: var(--wp--preset--color--accent-1);
+	color: var(--wp--preset--color--base);
 }
 
 /* On scroll: over the first 120px the header gets shorter, the logo
