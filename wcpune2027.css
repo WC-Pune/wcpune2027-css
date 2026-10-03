@@ -79,17 +79,10 @@ a:focus-visible {
 
 /* ==== B2. Header ====================================================== */
 /* The header group uses Accent 3 (peach today, like the hero). In the
-   brand look the header is page colour; the menu and title stay text
-   colour beside the logo. */
+   brand look the header is page colour. */
 
 header.wp-block-template-part .has-accent-3-background-color {
 	background-color: var(--wp--preset--color--base) !important;
-}
-
-header.wp-block-template-part .wp-block-site-title a,
-header.wp-block-template-part .wp-block-navigation a {
-	color: var(--wp--preset--color--contrast);
-	text-decoration-color: var(--wp--preset--color--contrast);
 }
 
 
@@ -132,11 +125,9 @@ footer.wp-block-template-part .wp-element-button:hover {
 
 footer.wp-block-template-part > .wp-block-group.has-background {
 	background-color: var(--wp--preset--color--accent-1) !important;
-	color: var(--wp--preset--color--base);
 }
 
-footer.wp-block-template-part .has-text-color:not(.wp-element-button):not(.wp-block-button__link),
-footer.wp-block-template-part .wp-block-heading {
+footer.wp-block-template-part .has-text-color:not(.wp-element-button):not(.wp-block-button__link) {
 	color: var(--wp--preset--color--base) !important;
 }
 
@@ -162,22 +153,16 @@ footer.wp-block-template-part .wp-block-site-logo img {
 
 /* ==== B5. Inputs and borders ========================================== */
 
-.wp-block-search__input,
-.wp-block-jetpack-subscriptions input[type="email"],
 input[type="text"],
 input[type="email"],
-input[type="search"],
 textarea {
 	background-color: var(--wp--preset--color--accent-5);
 	border: 1px solid var(--wp--preset--color--accent-4);
 	color: var(--wp--preset--color--contrast);
 }
 
-.wp-block-search__input:focus,
-.wp-block-jetpack-subscriptions input[type="email"]:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="search"]:focus,
 textarea:focus {
 	outline: 2px solid var(--wp--preset--color--accent-1);
 	outline-offset: 1px;
@@ -188,20 +173,12 @@ body .has-accent-5-border-color {
 	border-color: var(--wp--preset--color--accent-4) !important;
 }
 
-.wp-block-separator {
-	color: var(--wp--preset--color--accent-1);
-	border-color: var(--wp--preset--color--accent-1);
-	background-color: var(--wp--preset--color--accent-1);
-	opacity: 1;
-}
-
 
 /* ==== B6. Homepage hero =============================================== */
 /* Only the full-width hero. A second .wc-hero wraps the Contact Us
    button and must not be clipped. */
 
 .wc-hero.alignfull {
-	position: relative;
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
