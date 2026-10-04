@@ -15,6 +15,7 @@ file (layout fixes, no colours) is pasted into **Appearance → Additional CSS**
 Every colour is a **Theme** palette slot in **Site Editor → Styles → Colours**. Blocks use those
 slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`), so
 **the CSS contains no hex values**. To change the look, edit hexes in the editor.
+(One temporary exception: the `body .hero-wrap` rule in B6 hardcodes `#F3EEE6` until switch day.)
 
 | Theme slot | Used for | Today (live) | Switch day |
 |---|---|---|---|
@@ -22,7 +23,7 @@ slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`)
 | Contrast | Body text; text on buttons | `#3d362f` | `#1A202C` |
 | Accent 1 | Maroon: brand, headings, links, footer text today / footer background later | `#8f1402` | `#8E1616` |
 | Accent 2 | Saffron: buttons, link underlines (CSS) | `#F5A623` (unused today) | `#F5A623` |
-| Accent 3 | Header and hero background | `#e1a48e` | `#F7F5F0` |
+| Accent 3 | Header and hero background | `#e1a48e` | `#F3EEE6` |
 | Accent 4 | Sand edge: borders on sand (CSS) | `#D6D5D3` (unused today) | `#D6D5D3` |
 | Accent 5 | Sand: footer background today, inputs, light panels | `#e1d9ca` | `#F7F5F0` |
 | Brick red (custom) | Same as Accent 1; older blocks use it | `#8f1402` | `#8E1616` |
