@@ -677,6 +677,26 @@ textarea {
 	color: var(--wp--preset--color--contrast);
 }
 
+/* Placeholder ("Type your email…"). Jetpack's subscribe form sets it to
+   half-strength currentColor with a stronger selector, hence !important.
+   0.8 keeps it readable on sand (about 4.8:1) yet lighter than real text. */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.8 !important;
+}
+
+/* Logged in, Jetpack pre-fills the subscribe field with your email and
+   disables it; its rule then fades the whole field to 50%, so on the
+   maroon footer it turns pink and the text is unreadable. Visitors who
+   aren't logged in never see this state. */
+input[type="email"]:disabled {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.85 !important;
+	cursor: not-allowed;
+}
+
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
