@@ -693,12 +693,18 @@ body .has-accent-5-border-color {
 
 /* ==== B6. Homepage hero =============================================== */
 /* The homepage hero group has the class hero-wrap
-   (Advanced → Additional CSS class). */
+   (Advanced → Additional CSS class). The block stays on Accent 3
+   (peach) until switch day. */
 
-/* Switch-day Accent 3 is sand (#F7F5F0) on a white page, so the flat
-   colour and the diagonal cut both vanish. A light paper grain — the
-   old .paper look — keeps the band visible. background-image only:
-   the block's Accent 3 colour stays in charge. */
+/* SWITCH: this is the only place in this file that needs a colour
+   swatch changed. Sand is hardcoded so Remote CSS can show the hero
+   before the palette swap. On switch day, set Accent 3 to #F7F5F0 in
+   Site Editor → Styles → Colours, then delete this rule. */
+body .hero-wrap {
+	background-color: #F7F5F0 !important;
+}
+
+/* A light paper grain keeps that sand visible on the white page. */
 .hero-wrap {
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
