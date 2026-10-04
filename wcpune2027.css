@@ -697,20 +697,16 @@ body .has-accent-5-border-color {
 
 /* SWITCH: this is the only place in this file that needs a colour
    swatch changed. Sand is hardcoded so Remote CSS can show the hero
-   before the palette swap. On switch day, set Accent 3 to #F7F5F0 in
+   before the palette swap. #F3EEE6 is deep enough to read on white;
+   #F7F5F0 disappears. On switch day, set Accent 3 to #F3EEE6 in
    Site Editor → Styles → Colours, then delete this rule. */
 body .hero-wrap {
-	background-color: #F7F5F0 !important;
+	background-color: #F3EEE6 !important;
 }
 
-/* A light paper grain keeps that sand visible on the white page. */
 .hero-wrap {
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
-	background-image:
-		radial-gradient(rgba(26, 32, 44, 0.06) 1px, transparent 1px),
-		linear-gradient(110deg, rgba(255, 255, 255, 0.12), rgba(142, 22, 22, 0.03));
-	background-size: 4px 4px, 100% 100%;
 }
 
 /* Eyebrow: the first line above the title, as small maroon capitals. */
@@ -758,7 +754,8 @@ body .hero-wrap {
 	fill: currentColor;
 }
 
-/* Buttons sit left, side by side; full width and stacked on phones. */
+/* Buttons sit left, side by side; full width and stacked on phones.
+   Contact Us is Fill, so the shared saffron button rules apply. */
 .hero-wrap .wp-block-buttons {
 	justify-content: flex-start;
 	gap: 0.75rem;
@@ -839,6 +836,13 @@ body .hero-wrap {
 
 
 /* ==== B6b. Homepage sections (e.g. "More Than Talks") =============== */
+/* Those paragraphs are coloured #000 in the block, so they stay pure
+   black after the palette swap. Use the text colour instead. Headings
+   keep their own maroon. */
+body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) p.has-text-color {
+	color: var(--wp--preset--color--contrast) !important;
+}
+
 /* The photo zooms gently on hover (not for reduced motion). No scroll
    reveal: WordCamp's sanitiser strips animation-timeline. */
 body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
