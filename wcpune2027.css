@@ -435,7 +435,6 @@ header.wp-block-template-part .wp-block-navigation {
 header.wp-block-template-part .wp-block-navigation-item__content {
 	text-decoration: none !important;
 	padding-bottom: 4px;
-	background: linear-gradient(var(--wp--preset--color--accent-2), var(--wp--preset--color--accent-2)) no-repeat left bottom / 0 3px;
 	transition: background-size .2s ease, color .2s ease;
 }
 
