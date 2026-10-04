@@ -695,9 +695,17 @@ body .has-accent-5-border-color {
 /* The homepage hero group has the class hero-wrap
    (Advanced → Additional CSS class). */
 
+/* Switch-day Accent 3 is sand (#F7F5F0) on a white page, so the flat
+   colour and the diagonal cut both vanish. A light paper grain — the
+   old .paper look — keeps the band visible. background-image only:
+   the block's Accent 3 colour stays in charge. */
 .hero-wrap {
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+	background-image:
+		radial-gradient(rgba(26, 32, 44, 0.06) 1px, transparent 1px),
+		linear-gradient(110deg, rgba(255, 255, 255, 0.12), rgba(142, 22, 22, 0.03));
+	background-size: 4px 4px, 100% 100%;
 }
 
 /* Eyebrow: the first line above the title, as small maroon capitals. */
