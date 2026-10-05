@@ -39,6 +39,40 @@ transitions instead. Checked against the served file on 2026-10-04; `:has()`, `@
 
 Classes the CSS relies on (set in Advanced → Additional CSS class): `hero-wrap` on the homepage hero group, `nav-cta` on the header menu item that should look like a button, and `past-wc-nav` on the Past WordCamps menu in the footer.
 
+## Why the CSS does what it does
+Short reasons, kept here so the CSS file stays comment-light.
+
+- **Buttons stay in CSS.** Styles → Elements → Buttons has no text colour, and the Search and
+  Jetpack Subscribe buttons are not Button blocks, so Blocks → Button doesn't reach them.
+  WordPress marks block colour classes `!important`, hence `body …` with `!important`.
+- **Inputs and placeholders.** Jetpack's subscribe form styles its placeholder with a stronger
+  selector (`!important` needed). Logged in, Jetpack pre-fills and disables the email field and
+  fades it to 50%, which turns it pink and unreadable on the maroon footer. Visitors never see this.
+- **Link underline** (colour, thickness, offset) can't be set in the editor. Link text colour comes
+  from Styles → Colours → Link.
+- **Header.** The maroon top strip and thin bottom line are set in the editor (Border panel). The CSS
+  only adds sticky behaviour, with offsets for the admin bar (32px, 46px under 783px, none under
+  601px). The phone menu overlay needs `!important` because WordPress's overlay rules are very
+  specific. Opening the menu focuses the first link, so menu links show a saffron underline instead
+  of the focus box.
+- **`nav-cta`** on a menu item makes it a saffron pill (full-width button in the phone menu).
+  Use it for Contact now, Tickets later.
+- **Sponsors.** WordPress forces each logo into a 16:9 box, which leaves wordmarks floating, so
+  logos go in a 3:1 box with padding. The 2-per-row phone layout applies to the page with the slug `sponsors`.
+- **Hero.** The clip-path, hover zoom, fading veil, caption box, photo order and 4:3 photo on phones
+  can't be set in the editor. Everything static (chips, eyebrow, icons, radius, borders, padding)
+  is.
+- **Search results.** The Search Results template prints each result's full content, so the CSS
+  trims it to a 3-line description and shows a small label for the result type. An Excerpt block in
+  the template would be better than the Content block. Only the main (full-width) query is styled,
+  not "More posts".
+- **Footer.** The editor sets the footer sand with maroon text; the CSS makes it maroon with
+  page-colour text. A maroon hover would vanish on maroon, so footer buttons use the page colour on
+  hover. The logo PNG already includes its ring; the radius only clips its transparent corners.
+  Social icons are plain; each network's own colour shows on hover, and those hexes are the
+  networks' own, not our palette.
+- **Scroll animations don't work** (see the sanitiser note above), so images zoom on hover instead.
+
 ## Guidelines for developers
 **Editor first, CSS last.** The CSS file only holds what the editor can't do (hover and focus
 states, the sticky-header shadow, the phone menu, clip-paths, Jetpack workarounds). Before

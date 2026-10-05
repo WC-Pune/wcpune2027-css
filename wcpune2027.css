@@ -1,42 +1,15 @@
 /*
- * WordCamp Pune 2027 — site CSS
- * Theme: Twenty Twenty-Five (block theme). Loaded through Appearance →
- * Remote CSS from GitHub (WC-Pune/wcpune2027-css, main).
+ * WordCamp Pune 2027 — site CSS (Twenty Twenty-Five). See README.md for the
+ * guidelines: colours come from theme slots, nothing editor-settable lives here.
  *
- * KEEP THIS FILE SMALL. Anything the editor can set (colours, font sizes,
- * spacing, borders) belongs in the editor. This file only holds what the
- * editor can't do: hover/focus states, the sticky header, the phone menu,
- * the homepage hero effects, search cards, footer details and so on.
- *
- * COLOURS LIVE IN THE EDITOR. Every colour reads a Theme palette slot from
- * Site Editor → Styles → Colours, e.g. var(--wp--preset--color--accent-1).
- *   base       page background, text on maroon
- *   contrast   body text, text on buttons
- *   accent-1   maroon: brand, headings, links, footer
- *   accent-2   saffron: buttons, link underlines
- *   accent-3   unused
- *   accent-4   sand edge: borders on sand
- *   accent-5   sand: inputs, light panels
- * The only hexes are the social networks' own colours (see 7).
- *
- * WordCamp's sanitiser deletes `--name: value;` declarations, @import,
- * animation-timeline and animation-range. Reading --wp--preset--… is fine.
- *
- * CONTENTS
- *   1. Links, buttons, inputs   (site-wide)
- *   2. Header
- *   3. Sponsors
+ *   1. Links, buttons, inputs   5. Homepage sections
+ *   2. Header                   6. Search results
+ *   3. Sponsors                 7. Footer
  *   4. Homepage hero
- *   5. Homepage sections
- *   6. Search results
- *   7. Footer
  */
 
 
 /* ==== 1. Links, buttons, inputs =========================================== */
-
-/* Link text colour comes from Styles → Colours → Link. This adds the
-   saffron underline, which the editor can't set. */
 
 a:where(:not(.wp-element-button)) {
 	text-decoration-color: var(--wp--preset--color--accent-2);
@@ -53,12 +26,7 @@ a:focus-visible {
 	outline-offset: 2px;
 }
 
-/* Saffron with text colour; maroon on hover. Kept in CSS for every button:
-   Styles → Elements → Buttons has no text colour, and the Search and
-   Jetpack Subscribe buttons aren't Button blocks, so Blocks → Button
-   doesn't reach them. `body` outranks the block's own colour classes,
-   which WordPress marks !important. */
-
+/* !important beats WordPress's block colour classes. */
 body .wp-block-button__link,
 body .wp-element-button {
 	background-color: var(--wp--preset--color--accent-2) !important;
@@ -80,7 +48,6 @@ body .wp-element-button:focus-visible {
 	outline-offset: 2px;
 }
 
-/* Inputs: sand fill, sand-edge border. */
 input[type="text"],
 input[type="email"],
 input[type="search"],
@@ -90,9 +57,7 @@ textarea {
 	color: var(--wp--preset--color--contrast);
 }
 
-/* Placeholder ("Type your email…"). Jetpack's subscribe form sets it to
-   half-strength currentColor with a stronger selector, hence !important.
-   0.8 keeps it readable on sand (about 4.8:1) yet lighter than real text. */
+/* !important beats Jetpack's placeholder style. */
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="search"]::placeholder,
@@ -101,10 +66,7 @@ textarea::placeholder {
 	opacity: 0.8 !important;
 }
 
-/* Logged in, Jetpack pre-fills the subscribe field with your email and
-   disables it; its rule then fades the whole field to 50%, so on the
-   maroon footer it turns pink and the text is unreadable. Visitors who
-   aren't logged in never see this state. */
+/* Jetpack disables the pre-filled email field and fades it to 50%. */
 input[type="email"]:disabled {
 	color: var(--wp--preset--color--contrast) !important;
 	opacity: 0.85 !important;
@@ -121,11 +83,7 @@ textarea:focus {
 
 
 /* ==== 2. Header =========================================================== */
-/* The header group's maroon strip on top and thin line underneath are
-   set in the editor (Border panel); only the sticky behaviour is here. */
-
-/* Stays at the top while scrolling. Logged in, it sits below the admin
-   bar, which is 32px tall, 46px under 783px, and scrolls away under 601px. */
+/* Sticky; offset for the admin bar (32px, 46px under 783px, none under 601px). */
 header.wp-block-template-part {
 	position: sticky;
 	top: 0;
@@ -149,7 +107,6 @@ body.admin-bar header.wp-block-template-part {
 	}
 }
 
-/* Site title: one line, fluid size. Weight, spacing and line height are in the editor. */
 header.wp-block-template-part .wp-block-site-title {
 	font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.25rem);
 	white-space: nowrap;
@@ -160,8 +117,7 @@ header.wp-block-template-part .wp-block-site-title a {
 	text-decoration: none;
 }
 
-/* Menu: no permanent underline; a saffron bar grows in on hover and
-   stays under the current page. */
+/* Saffron bar grows in on hover and stays under the current page. */
 header.wp-block-template-part .wp-block-navigation-item__content {
 	text-decoration: none !important;
 	padding-bottom: 4px;
@@ -175,9 +131,7 @@ header.wp-block-template-part .current-menu-item > .wp-block-navigation-item__co
 	color: var(--wp--preset--color--accent-1);
 }
 
-/* Call-to-action menu item (Contact now, Tickets later): a small saffron
-   button. Add the class nav-cta to that menu link (select it in the
-   Navigation block → Advanced → Additional CSS class). */
+/* Add the class nav-cta to a menu item to make it a button. */
 header.wp-block-template-part .nav-cta > .wp-block-navigation-item__content {
 	padding: 0.45em 1.1em;
 	border-radius: 999px;
@@ -195,7 +149,7 @@ header.wp-block-template-part .nav-cta.current-menu-item > .wp-block-navigation-
 	color: var(--wp--preset--color--base);
 }
 
-/* Phones: smaller logo so the title fits; bigger links in the menu overlay. */
+/* Phones: smaller logo. */
 @media (max-width: 600px) {
 	header.wp-block-template-part .wp-block-site-logo img {
 		width: 52px !important;
@@ -203,9 +157,7 @@ header.wp-block-template-part .nav-cta.current-menu-item > .wp-block-navigation-
 	}
 }
 
-/* Phone menu overlay: a left-aligned list with dividers and large tap
-   targets; the nav-cta item becomes a full-width button at the end.
-   WordPress's overlay rules are very specific, hence the !important. */
+/* Phone menu overlay. !important beats WordPress's overlay rules. */
 header.wp-block-template-part .is-menu-open .wp-block-navigation__responsive-container-content {
 	align-items: stretch !important;
 	padding-top: var(--wp--preset--spacing--40) !important;
@@ -235,8 +187,7 @@ header.wp-block-template-part .is-menu-open .current-menu-item > .wp-block-navig
 	color: var(--wp--preset--color--accent-1);
 }
 
-/* No focus box around a menu link or its row (the box showed on a tapped
-   or auto-focused link such as Code of Conduct). */
+/* No focus box on menu links; keyboard focus gets an underline below. */
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item,
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content,
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus,
@@ -246,8 +197,6 @@ header.wp-block-template-part .is-menu-open .wp-block-navigation-item:focus-with
 	box-shadow: none !important;
 }
 
-/* Opening the menu focuses the first link. Instead of the site-wide focus
-   box, show a saffron underline (still visible for keyboard users). */
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus-visible {
 	outline: none;
 	box-shadow: none;
@@ -280,10 +229,7 @@ header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-blo
 
 /* ==== 3. Sponsors ========================================================= */
 
-/* Sponsor logos (Query Loop of sponsors): even tiles. WordPress forces each
-   logo into a 16:9 box, which leaves wordmarks floating in empty space;
-   a 3:1 box with padding fits them. Hover: the tile lifts and the border
-   turns highlight colour. */
+/* Sponsor tiles: logos in a 3:1 box (WordPress forces 16:9). */
 .wp-block-post-template {
 	gap: 1rem;
 }
@@ -337,16 +283,12 @@ body:not(.search) .wcb_sponsor:focus-within {
 
 
 /* ==== 4. Homepage hero ==================================================== */
-/* The homepage hero group has the class hero-wrap
-   (Advanced → Additional CSS class). */
-
 .hero-wrap {
 	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
 
-/* Photo: soft shadow, caption in a small dark box. Radius and border
-   are set on the block in the editor. */
+/* Photo: shadow and caption box. */
 .hero-wrap .wp-block-cover {
 	overflow: hidden;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
@@ -361,8 +303,7 @@ body:not(.search) .wcb_sponsor:focus-within {
 	text-align: left !important;
 }
 
-/* Hover for everyone: deeper shadow, and the light grey veil over the
-   photo fades out so it brightens. */
+/* Hover: deeper shadow; the veil fades out. */
 .hero-wrap .wp-block-cover__background {
 	transition: opacity .35s ease;
 }
@@ -375,8 +316,7 @@ body:not(.search) .wcb_sponsor:focus-within {
 	opacity: 0 !important;
 }
 
-/* Movement only when the visitor hasn't asked for reduced motion
-   (macOS: System Settings → Accessibility → Display → Reduce motion). */
+/* Motion only if the visitor allows it. */
 @media (prefers-reduced-motion: no-preference) {
 	.hero-wrap .wp-block-cover__image-background {
 		transition: transform .8s ease;
@@ -428,9 +368,7 @@ body.home .wp-block-post-content > * + * {
 	margin-top: clamp(2.75rem, 6vw, 5.5rem);
 }
 
-/* "More Than Talks": the photo zooms gently on hover (not for reduced
-   motion). No scroll reveal: WordCamp's sanitiser strips
-   animation-timeline. */
+/* Image zoom on hover. */
 body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
 	overflow: hidden;
 	border-radius: 12px;
@@ -449,12 +387,7 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 
 /* ==== 6. Search results =================================================== */
 
-/* Search results: a grid of cards (type, title, date, a few lines of
-   text). The Search Results template prints each result's full content
-   (even the whole homepage); only a short trimmed description shows here.
-   Swap its Content block for an Excerpt block when possible.
-   A small label shows the result type. The whole card is the link.
-   Only the main results (the full-width query), not "More posts". */
+/* Search results as cards. Main results only (full-width query), not "More posts". */
 .search .wp-block-query.alignfull > .wp-block-post-template {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -487,9 +420,7 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 	display: none;
 }
 
-/* A few lines of description under the title. Best with an Excerpt block
-   in the Search Results template; with the Content block, only its first
-   paragraph shows. Either way, trimmed to 3 lines. */
+/* Description trimmed to 3 lines. */
 .search .wp-block-query.alignfull .wp-block-post-excerpt,
 .search .wp-block-query.alignfull .wp-block-post-content {
 	margin: 0.6rem 0 0 !important;
@@ -581,9 +512,6 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 
 
 /* ==== 7. Footer =========================================================== */
-/* The editor sets sand with maroon text; this makes it maroon with
-   page-colour text. */
-
 footer.wp-block-template-part > .wp-block-group.has-background {
 	background-color: var(--wp--preset--color--accent-1) !important;
 }
@@ -605,8 +533,7 @@ footer.wp-block-template-part a:focus-visible {
 	outline-color: var(--wp--preset--color--accent-2);
 }
 
-/* Section labels: small tracked capitals. The first column's heading is
-   the event name and stays large. */
+/* Section labels; the first column's heading stays large. */
 footer.wp-block-template-part .wp-block-column:not(:first-child) > .wp-block-heading {
 	font-size: 0.85rem !important;
 	letter-spacing: 0.12em;
@@ -618,9 +545,7 @@ footer.wp-block-template-part .wp-block-site-tagline {
 	font-weight: 500;
 }
 
-/* Past WordCamps menu: years as pills in a grid of 4 (two rows);
-   saffron fill on hover. The nav block has the class past-wc-nav
-   (Advanced → Additional CSS class). */
+/* Add the class past-wc-nav to the Past WordCamps menu. */
 footer.wp-block-template-part .past-wc-nav .wp-block-navigation__container {
 	display: grid;
 	grid-template-columns: repeat(4, max-content);
@@ -644,7 +569,7 @@ footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:fo
 	color: var(--wp--preset--color--contrast);
 }
 
-/* Bottom row ("Designed with WordPress"): a thin divider above it. */
+/* Divider above the bottom row. */
 footer.wp-block-template-part .alignfull.is-content-justification-space-between {
 	margin-top: var(--wp--preset--spacing--40);
 	padding-top: var(--wp--preset--spacing--30);
@@ -655,13 +580,12 @@ footer.wp-block-template-part .alignfull.is-content-justification-space-between 
 	font-size: 0.9rem !important;
 }
 
-/* The logo file already includes its ring. Radius only clips the
-   transparent corners of the slightly rectangular PNG. */
+/* Clips the transparent corners of the logo PNG. */
 footer.wp-block-template-part .wp-block-site-logo img {
 	border-radius: 50%;
 }
 
-/* On the maroon footer a maroon hover would vanish. */
+/* A maroon hover would vanish on the maroon footer. */
 footer.wp-block-template-part .wp-block-button__link:hover,
 footer.wp-block-template-part .wp-element-button:hover {
 	background-color: var(--wp--preset--color--base) !important;
@@ -669,10 +593,7 @@ footer.wp-block-template-part .wp-element-button:hover {
 	border-color: var(--wp--preset--color--base) !important;
 }
 
-/* Footer social icons: plain icons in the footer's text colour (no brand
-   circles). On hover each shows its network's own badge: brand-coloured
-   circle, white icon, and lifts slightly. These hexes are the networks'
-   own colours (as in WordPress's Social Icons block), not our palette. */
+/* Social icons: plain; each network's own colour on hover (these hexes are the networks'). */
 footer.wp-block-template-part .wp-social-link {
 	background-color: transparent !important;
 	color: inherit !important;
