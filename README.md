@@ -113,6 +113,17 @@ adding a rule, check whether the editor can set it, and set it there.
 12. **Check after editor changes.** Template edits live in the database, not in this repo. After
     changing a template or Styles, re-check the page, and remove the CSS rule it replaces.
 
+## To do
+- [ ] **Header shrink:** after publishing, re-sync Remote CSS and confirm the served file still has
+  `container-type: scroll-state` and the `@container scroll-state(stuck: top)` block. Chrome and Edge only.
+- [ ] **Check by eye** on desktop and phone: footer search and Subscribe (heights, 10px gap,
+  placeholder size), search results cards, the phone menu (divider under the last link, no focus box),
+  the homepage hero and section spacing.
+- [ ] **Sponsors page:** check the tile styling once the page is published (it returns 404 today).
+- [ ] **Hero padding** is a fluid `clamp` in CSS; the editor only offers fixed steps. Move it only if that is acceptable.
+- [ ] **Site title link rule** (`.wp-block-site-title a`) may be redundant now the colour is set in the editor. Remove it if the title looks the same without it.
+- [ ] **Footer top space** uses the `50` spacing step; the old CSS was a responsive 3–5rem. Try `60` if it looks tight.
+
 ## Local development (live site + local CSS)
 1. `cd remote-css && python3 -m http.server 8027`
 2. Install the [Tampermonkey extension for Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en),
