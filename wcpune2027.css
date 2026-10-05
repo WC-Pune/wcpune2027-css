@@ -825,6 +825,10 @@ body .hero-wrap {
 @media (max-width: 781px) {
 	.hero-wrap {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+		/* The hero group is skipped by the homepage side-padding rule in
+		   Part A, so on mobile its content ran to the screen edges. */
+		padding-left: var(--wp--style--root--padding-left) !important;
+		padding-right: var(--wp--style--root--padding-right) !important;
 	}
 
 	/* 4:3 photo instead of 496px tall. */
