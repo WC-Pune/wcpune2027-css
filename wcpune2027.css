@@ -667,6 +667,36 @@ footer.wp-block-template-part .wp-social-link-x:focus-within {
 	background-color: #000000 !important;
 }
 
+/* Search field and button sized like the Subscribe form: same padding and a gap. */
+footer.wp-block-template-part .wp-block-search__inside-wrapper {
+	gap: 10px;
+}
+
+footer.wp-block-template-part .wp-block-search__input,
+footer.wp-block-template-part .wp-block-search__button {
+	box-sizing: border-box;
+	min-height: 2.625rem;
+	margin: 0;
+	padding: 9px 14px;
+}
+
+/* Subscribe form like the search: same gap, height and text size.
+   !important beats the inline font size set by Jetpack. */
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+	align-items: stretch;
+	gap: 10px;
+}
+
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
+	box-sizing: border-box;
+	min-height: 2.625rem;
+}
+
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"] {
+	font-size: 0.875rem !important;
+}
+
 /* Small phones: email field and Subscribe button full width, stacked. */
 @media (max-width: 480px) {
 	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
