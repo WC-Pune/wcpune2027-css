@@ -4,7 +4,7 @@
  *
  *   1. Links, buttons, inputs   5. Homepage sections
  *   2. Header                   6. Search results
- *   3. Sponsors                 7. Footer
+ *   3. Cards (sponsors, search) 7. Footer
  *   4. Homepage hero
  */
 
@@ -256,7 +256,31 @@ header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-blo
 }
 
 
-/* ==== 3. Sponsors ========================================================= */
+/* ==== 3. Cards: sponsors and search ======================================= */
+
+/* Cards: sponsor tiles and search results share one look. */
+body:not(.search) .wcb_sponsor,
+.search .wp-block-query.alignfull .wp-block-post {
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 12px;
+	background-color: var(--wp--preset--color--base);
+	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+body:not(.search) .wcb_sponsor:hover,
+body:not(.search) .wcb_sponsor:focus-within,
+.search .wp-block-query.alignfull .wp-block-post:hover,
+.search .wp-block-query.alignfull .wp-block-post:focus-within {
+	border-color: var(--wp--preset--color--accent-2);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body:not(.search) .wcb_sponsor:hover,
+	.search .wp-block-query.alignfull .wp-block-post:hover {
+		transform: translateY(-3px);
+	}
+}
 
 /* Sponsor tiles: logos in a 3:1 box (WordPress forces 16:9). */
 .wp-block-post-template {
@@ -268,10 +292,6 @@ body:not(.search) .wcb_sponsor {
 	align-items: center;
 	justify-content: center;
 	padding: 1.5rem 2rem;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 12px;
-	background-color: var(--wp--preset--color--base);
-	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
 body:not(.search) .wcb_sponsor .wp-block-post-featured-image {
@@ -285,18 +305,6 @@ body:not(.search) .wcb_sponsor img {
 	height: auto;
 	max-height: 90px;
 	object-fit: contain;
-}
-
-body:not(.search) .wcb_sponsor:hover,
-body:not(.search) .wcb_sponsor:focus-within {
-	border-color: var(--wp--preset--color--accent-2);
-	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	body:not(.search) .wcb_sponsor:hover {
-		transform: translateY(-3px);
-	}
 }
 
 /* Two logos per row on phones. */
@@ -433,10 +441,6 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 	position: relative;
 	margin: 0 !important;
 	padding: 0;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 12px;
-	background-color: var(--wp--preset--color--base);
-	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
 .search .wp-block-query.alignfull .wp-block-post > .wp-block-group {
@@ -523,20 +527,8 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 .search .wp-block-query.alignfull .type-wcb_session > .wp-block-group::before { content: "Session"; }
 .search .wp-block-query.alignfull .type-wcb_organizer > .wp-block-group::before { content: "Organizer"; }
 
-.search .wp-block-query.alignfull .wp-block-post:hover,
-.search .wp-block-query.alignfull .wp-block-post:focus-within {
-	border-color: var(--wp--preset--color--accent-2);
-	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-}
-
 .search .wp-block-query.alignfull .wp-block-post:hover .wp-block-post-title a {
 	color: var(--wp--preset--color--accent-1);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.search .wp-block-query.alignfull .wp-block-post:hover {
-		transform: translateY(-3px);
-	}
 }
 
 
