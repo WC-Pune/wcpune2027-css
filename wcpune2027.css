@@ -89,6 +89,27 @@ header.wp-block-template-part {
 	top: 0;
 	z-index: 100;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px rgba(0, 0, 0, 0.06);
+	container-type: scroll-state;
+}
+
+/* Shrinks once stuck to the top (Chrome and Edge; elsewhere unchanged). */
+@container scroll-state(stuck: top) {
+	header.wp-block-template-part .wp-block-group.alignwide {
+		padding-top: var(--wp--preset--spacing--20) !important;
+		padding-bottom: var(--wp--preset--spacing--20) !important;
+	}
+
+	header.wp-block-template-part .wp-block-site-logo img {
+		width: 56px !important;
+		height: auto;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	header.wp-block-template-part .wp-block-group.alignwide,
+	header.wp-block-template-part .wp-block-site-logo img {
+		transition: padding .2s ease, width .2s ease;
+	}
 }
 
 body.admin-bar header.wp-block-template-part {
@@ -154,6 +175,14 @@ header.wp-block-template-part .nav-cta.current-menu-item > .wp-block-navigation-
 	header.wp-block-template-part .wp-block-site-logo img {
 		width: 52px !important;
 		height: auto;
+	}
+}
+
+@media (max-width: 600px) {
+	@container scroll-state(stuck: top) {
+		header.wp-block-template-part .wp-block-site-logo img {
+			width: 40px !important;
+		}
 	}
 }
 

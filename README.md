@@ -55,6 +55,10 @@ Short reasons, kept here so the CSS file stays comment-light.
   601px). The phone menu overlay needs `!important` because WordPress's overlay rules are very
   specific. Opening the menu focuses the first link, so menu links show a saffron underline instead
   of the focus box.
+- **Header shrinks on scroll** (smaller logo and padding) using `@container scroll-state(stuck: top)`.
+  Plain CSS can't detect scrolling and the sanitiser strips scroll-driven animations, so this works
+  in Chrome and Edge only; other browsers keep the normal header. After publishing, check the served
+  file still contains `container-type: scroll-state` and the `@container` block.
 - **`nav-cta`** on a menu item makes it a saffron pill (full-width button in the phone menu).
   Use it for Contact now, Tickets later.
 - **Sponsors.** WordPress forces each logo into a 16:9 box, which leaves wordmarks floating, so
