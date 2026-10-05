@@ -6,7 +6,7 @@
  * KEEP THIS FILE SMALL. Anything the editor can set (colours, font sizes,
  * spacing, borders) belongs in the editor. This file only holds what the
  * editor can't do: hover/focus states, the sticky header, the phone menu,
- * layout fixes for the templates, search cards and so on.
+ * the homepage hero effects, search cards, footer details and so on.
  *
  * COLOURS LIVE IN THE EDITOR. Every colour reads a Theme palette slot from
  * Site Editor → Styles → Colours, e.g. var(--wp--preset--color--accent-1).
@@ -113,6 +113,7 @@ input[type="email"]:disabled {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="search"]:focus,
 textarea:focus {
 	outline: 2px solid var(--wp--preset--color--accent-1);
 	outline-offset: 1px;
