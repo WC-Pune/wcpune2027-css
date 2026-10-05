@@ -1,35 +1,32 @@
 # WordCamp Pune 2027 — Remote CSS
 
 `wcpune2027.css` is the custom stylesheet for pune.wordcamp.org/2027 (theme: Twenty Twenty-Five).
-Remote CSS is not switched on yet (waiting on team approval). Until then, only **Part A** of the
-file (layout fixes, no colours) is pasted into **Appearance → Additional CSS**.
+It is loaded on the site through **Appearance → Remote CSS** from the raw GitHub URL of
+`WC-Pune/wcpune2027-css` (`main`). **Appearance → Additional CSS** is empty and should stay so.
 
 | File | Purpose |
 |---|---|
-| `wcpune2027.css` | Site CSS. Part A = layout (Additional CSS now). Part B = brand styling (Remote CSS later) |
-| `dev-switch-palette.css` | Dev only — the switch-day Theme hexes, for previewing |
-| `dev-inject.user.js` | Dev only — preview the palette + local CSS on the live site |
-| `legacy-additional-css.css` | Backup of the old Additional CSS, for rollback |
+| `wcpune2027.css` | Site CSS. Part A = layout. Part B = brand styling |
+| `dev-inject.user.js` | Dev only — preview local CSS on the live site |
 
 ## Colours live in the editor
 Every colour is a **Theme** palette slot in **Site Editor → Styles → Colours**. Blocks use those
 slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`), so
 **the CSS contains no hex values**. To change the look, edit hexes in the editor.
-(One temporary exception: the `body .hero-wrap` rule in B6 hardcodes `#F3EEE6` until switch day.)
+(One exception: the `body .hero-wrap` rule in B6 hardcodes the hero sand `#F3EEE6`.)
 
-| Theme slot | Used for | Today (live) | Switch day |
-|---|---|---|---|
-| Base | Page background; text on maroon | `#fbfaf3` | `#FFFFFF` |
-| Contrast | Body text; text on buttons | `#3d362f` | `#1A202C` |
-| Accent 1 | Maroon: brand, headings, links, footer text today / footer background later | `#8f1402` | `#8E1616` |
-| Accent 2 | Saffron: buttons, link underlines (CSS) | `#F5A623` (unused today) | `#F5A623` |
-| Accent 3 | Header and hero background | `#e1a48e` | `#F3EEE6` |
-| Accent 4 | Sand edge: borders on sand (CSS) | `#D6D5D3` (unused today) | `#D6D5D3` |
-| Accent 5 | Sand: footer background today, inputs, light panels | `#e1d9ca` | `#F7F5F0` |
+| Theme slot | Used for | Live hex |
+|---|---|---|
+| Base | Page background; text on maroon | `#fbfaf3` |
+| Contrast | Body text; text on buttons | `#3d362f` |
+| Accent 1 | Maroon: brand, headings, links, footer background | `#8f1402` |
+| Accent 2 | Saffron: buttons, link underlines (CSS) | `#f5a623` |
+| Accent 3 | Unused (same hex as Base) | `#fbfaf3` |
+| Accent 4 | Sand edge: borders on sand (CSS) | `#d6d5d3` |
+| Accent 5 | Sand: inputs, light panels | `#e1d9ca` |
 
-Part B of the CSS moves a few areas to a different slot, so switch day needs no block
-re-colouring: footer → Accent 1 with Base text, buttons → Accent 2 with Contrast text,
-header → Base.
+Part B of the CSS moves a few areas to a different slot than the blocks use: footer →
+Accent 1 with Base text, buttons → Accent 2 with Contrast text.
 
 When you re-colour a block, always pick a Theme slot, never a custom swatch or hex. No block uses
 Brick red any more, so it can be deleted from the palette, along with the unused Dark wooden /
@@ -56,18 +53,29 @@ The homepage hero styles apply to `.hero-wrap` (the hero group). The Day 1 / Day
    then add `dev-inject.user.js` as a new script.
    (In `chrome://extensions` → Tampermonkey → Details, turn on **Allow User Scripts**.)
 3. Open https://pune.wordcamp.org/2027/ — edit the CSS, save, reload.
-   The script also loads `dev-switch-palette.css`, so you see the switch-day colours.
    Toggle the userscript off to compare with the current live site.
 
 No-install alternative: paste the body of `dev-inject.user.js` into the DevTools console after each reload.
 
-## Switch day (once Remote CSS is approved)
-1. Push this repo, then wp-admin → **Appearance → Remote CSS**: paste the raw GitHub URL of
-   `wcpune2027.css`, choose **Add on to the existing CSS**, click **Update**.
-2. Copy the webhook URL shown on that screen into GitHub → repo Settings → Webhooks,
-   so every `git push` re-syncs the site.
-3. Check it's live: view the page source and search for `wordcamp_remote_css`.
-   If it's missing, the save on the Remote CSS screen failed: look for a red error there.
-4. Empty **Appearance → Additional CSS** (Part A is in the Remote CSS file too).
-5. **Site Editor → Styles → Colours**: set each Theme slot to its
-   "Switch day" hex above (also listed in `dev-switch-palette.css`). Save.
+## Homepage flow classes
+
+The homepage CSS supports a clearer visitor flow when the matching blocks are given these Advanced → Additional CSS classes in the WordPress editor:
+
+| Class | Use |
+|---|---|
+| `home-section` / `home-section__inner` | Shared section wrapper and constrained inner group |
+| `hero-days` | Day 1 and Day 2 cards |
+| `audience-grid` | Developers, agencies, business owners, students |
+| `outcomes-grid` | Why attend / expected outcomes |
+| `speakers-grid` / `speakers-coming-soon` | Speaker cards or the coming-soon state |
+| `venue-card` | Venue details and Google Maps CTA |
+| `sponsor-band` | Sponsor logos and “Become a sponsor” button |
+| `community-stats` | Meetups held, past attendees, and years |
+| `home-faq` | FAQ accordion for refunds, food, Contributor Day, and beginners |
+
+The CSS keeps these sections responsive and gives the page a deliberate order: event overview → two-day shape → who it is for → outcomes → speakers → venue → sponsors → community proof → FAQ.
+
+## Publishing changes
+1. Push to `origin` (`WC-Pune/wcpune2027-css`).
+2. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click
+   **Update** to re-sync. Check the `ver=` number on `wordcamp_remote_css` in the page source goes up.

@@ -14,19 +14,17 @@
  *   contrast   body text, text on buttons
  *   accent-1   maroon: brand, headings, links, footer
  *   accent-2   saffron: buttons, link underlines
- *   accent-3   peach today (header, hero); sand later
+ *   accent-3   unused
  *   accent-4   sand edge: borders on sand
  *   accent-5   sand: inputs, light panels
  *
- * PART A is layout only and changes no colours: safe in Additional CSS now.
- * PART B is the brand styling: it goes live with Remote CSS. It also moves
- * a few areas to a different slot (footer → maroon, buttons → saffron,
- * header → base), so switch day needs no block re-colouring.
+ * PART B moves a few areas to a different slot than the blocks use
+ * (footer → maroon, buttons → saffron).
  */
 
 
 /* ===================================================================== */
-/* PART A — layout fixes (copy into Appearance → Additional CSS now)      */
+/* PART A — layout fixes                                                  */
 /* ===================================================================== */
 
 /* Past WordCamps menu: years in a grid of 4 (two rows). The nav block
@@ -349,7 +347,7 @@ body.search main > :last-child {
 
 
 /* ===================================================================== */
-/* PART B — brand styling (goes live with Remote CSS)                     */
+/* PART B — brand styling                                                 */
 /* ===================================================================== */
 
 /* ==== B1. Links ======================================================= */
@@ -373,9 +371,8 @@ a:focus-visible {
 
 
 /* ==== B2. Header ====================================================== */
-/* The header group uses Accent 3 (peach today, like the hero). In the
-   brand look the header is page colour, with a maroon strip on top and
-   one thin line underneath instead of the dotted box. */
+/* The header group is Base in the editor. Here it gets a maroon strip
+   on top and one thin line underneath instead of the dotted box. */
 
 /* Stays at the top while scrolling. Logged in, it sits below the admin
    bar, which is 32px tall, 46px under 783px, and scrolls away under 601px. */
@@ -402,14 +399,10 @@ body.admin-bar header.wp-block-template-part {
 	}
 }
 
-header.wp-block-template-part .has-accent-3-background-color {
-	background-color: var(--wp--preset--color--base) !important;
-	border-top: 4px solid var(--wp--preset--color--accent-1);
-}
-
 header.wp-block-template-part .has-accent-1-border-color {
 	border-style: none none solid !important;
 	border-color: var(--wp--preset--color--accent-4) !important;
+	border-top: 4px solid var(--wp--preset--color--accent-1) !important;
 }
 
 /* Site title: one line, capitals with light spacing. */
@@ -583,7 +576,8 @@ footer.wp-block-template-part .wp-element-button:hover {
 
 
 /* ==== B4. Footer ====================================================== */
-/* Sand with maroon text today; maroon with page-colour text here. */
+/* The editor sets sand with maroon text; this makes it maroon with
+   page-colour text. */
 
 footer.wp-block-template-part > .wp-block-group.has-background {
 	background-color: var(--wp--preset--color--accent-1) !important;
@@ -712,14 +706,12 @@ body .has-accent-5-border-color {
 
 /* ==== B6. Homepage hero =============================================== */
 /* The homepage hero group has the class hero-wrap
-   (Advanced → Additional CSS class). The block stays on Accent 3
-   (peach) until switch day. */
+   (Advanced → Additional CSS class). */
 
-/* SWITCH: this is the only place in this file that needs a colour
-   swatch changed. Sand is hardcoded so Remote CSS can show the hero
-   before the palette swap. #F3EEE6 is deep enough to read on white;
-   #F7F5F0 disappears. On switch day, set Accent 3 to #F3EEE6 in
-   Site Editor → Styles → Colours, then delete this rule. */
+/* The only hex in this file: no palette slot holds this sand.
+   #F3EEE6 is deep enough to read on white; #F7F5F0 disappears.
+   To drop it, give a slot this hex in Site Editor → Styles → Colours,
+   set the hero block to that slot, then delete this rule. */
 body .hero-wrap {
 	background-color: #F3EEE6 !important;
 }
@@ -877,6 +869,197 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 
 	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image:hover img {
 		transform: scale(1.04);
+	}
+}
+
+
+/* ==== B6c. Homepage flow ============================================= */
+/*
+ * Content blocks use these small, semantic classes in the editor:
+ *   home-section       full-width section wrapper
+ *   home-section__inner constrained inner group
+ *   audience-grid      four audience cards
+ *   outcomes-grid      expected-outcome cards
+ *   speakers-grid      speaker cards / coming-soon panel
+ *   venue-card         venue details + map link
+ *   sponsor-band       sponsor logos + sponsor CTA
+ *   community-stats    three or four number-led stats
+ *   home-faq           Details/FAQ accordion
+ *
+ * The classes keep the page scannable: orient visitors, show the two-day
+ * shape, then answer the practical questions before the final CTA.
+ */
+
+body.home .wp-block-post-content > * + * {
+	margin-top: clamp(2.75rem, 6vw, 5.5rem);
+}
+
+body.home .wp-block-post-content > .wp-block-heading {
+	max-width: 18ch;
+	margin-bottom: 1rem;
+	line-height: 1.05;
+}
+
+body.home .home-section,
+body.home .venue-card,
+body.home .sponsor-band,
+body.home .home-faq {
+	box-sizing: border-box;
+	padding: clamp(1.5rem, 4vw, 3rem) !important;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 1rem;
+	background-color: var(--wp--preset--color--accent-5);
+}
+
+body.home .home-section__inner {
+	width: 100%;
+	max-width: var(--wp--style--global--wide-size);
+	margin-inline: auto;
+}
+
+/* Day 1 and Day 2 should read as a decision point, not two paragraphs. */
+body.home .hero-days,
+body.home .audience-grid,
+body.home .outcomes-grid,
+body.home .speakers-grid,
+body.home .community-stats {
+	align-items: stretch;
+	gap: 1rem;
+}
+
+body.home .hero-days > *,
+body.home .audience-grid > *,
+body.home .outcomes-grid > *,
+body.home .speakers-grid > * {
+	box-sizing: border-box;
+	min-width: 0;
+	padding: clamp(1.1rem, 2.5vw, 1.5rem);
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 0.75rem;
+	background-color: var(--wp--preset--color--base);
+}
+
+body.home .hero-days > * {
+	flex: 0 1 auto;
+	width: fit-content;
+	padding: 0.35em 0.9em;
+}
+
+body.home .audience-grid > *::before,
+body.home .outcomes-grid > *::before {
+	display: block;
+	margin-bottom: 0.55rem;
+	color: var(--wp--preset--color--accent-1);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+body.home .audience-grid > *,
+body.home .outcomes-grid > * {
+	flex: 1 1 12rem;
+	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+body.home .audience-grid > *:hover,
+body.home .outcomes-grid > *:hover,
+body.home .speakers-grid > *:hover {
+	border-color: var(--wp--preset--color--accent-2);
+	box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body.home .audience-grid > *:hover,
+	body.home .outcomes-grid > *:hover,
+	body.home .speakers-grid > *:hover {
+		transform: translateY(-3px);
+	}
+}
+
+/* Short labels make the audience section easy to scan. */
+body.home .audience-grid > :nth-child(1)::before { content: "Build"; }
+body.home .audience-grid > :nth-child(2)::before { content: "Deliver"; }
+body.home .audience-grid > :nth-child(3)::before { content: "Grow"; }
+body.home .audience-grid > :nth-child(4)::before { content: "Start"; }
+
+/* Stats are intentionally bold and quiet: proof, not a competing hero. */
+body.home .community-stats > * {
+	flex: 1 1 10rem;
+	padding: 1.25rem 1rem;
+	border-left: 3px solid var(--wp--preset--color--accent-2);
+}
+
+body.home .community-stats strong,
+body.home .community-stats .wp-block-heading {
+	display: block;
+	margin: 0 0 0.2rem;
+	color: var(--wp--preset--color--accent-1);
+	font-size: clamp(1.8rem, 3vw, 2.75rem) !important;
+	line-height: 1;
+}
+
+body.home .speakers-coming-soon {
+	border: 2px dashed var(--wp--preset--color--accent-1);
+	background-color: var(--wp--preset--color--base);
+}
+
+body.home .venue-card {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
+	align-items: center;
+	gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+body.home .venue-card .wp-block-buttons {
+	margin-top: 1.25rem;
+}
+
+body.home .sponsor-band {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+body.home .sponsor-band .wp-block-post-template {
+	grid-column: 1 / -1;
+}
+
+/* Native Details blocks stay lightweight, readable, and keyboard-friendly. */
+body.home .home-faq details {
+	border-top: 1px solid var(--wp--preset--color--accent-4);
+}
+
+body.home .home-faq details:last-child {
+	border-bottom: 1px solid var(--wp--preset--color--accent-4);
+}
+
+body.home .home-faq summary {
+	padding: 1.1rem 2rem 1.1rem 0;
+	color: var(--wp--preset--color--accent-1);
+	font-size: 1.05rem;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+body.home .home-faq summary::marker {
+	color: var(--wp--preset--color--accent-2);
+}
+
+body.home .home-faq details > :not(summary) {
+	max-width: 65ch;
+	padding-bottom: 1.1rem;
+}
+
+@media (max-width: 700px) {
+	body.home .venue-card,
+	body.home .sponsor-band {
+		display: block;
+	}
+
+	body.home .sponsor-band .wp-block-buttons {
+		margin-top: 1.25rem;
 	}
 }
 
