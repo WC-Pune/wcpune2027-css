@@ -17,8 +17,7 @@
  *   accent-3   unused
  *   accent-4   sand edge: borders on sand
  *   accent-5   sand: inputs, light panels
- * The only hexes are the hero sand (see 5) and the social networks' own
- * colours (see 8).
+ * The only hexes are the social networks' own colours (see 8).
  *
  * WordCamp's sanitiser deletes `--name: value;` declarations, @import,
  * animation-timeline and animation-range. Reading --wp--preset--… is fine.
@@ -257,10 +256,22 @@ header.wp-block-template-part .is-menu-open .current-menu-item > .wp-block-navig
 	color: var(--wp--preset--color--accent-1);
 }
 
+/* No focus box around a menu link or its row (the box showed on a tapped
+   or auto-focused link such as Code of Conduct). */
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item,
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content,
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus,
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus-visible,
+header.wp-block-template-part .is-menu-open .wp-block-navigation-item:focus-within {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
 /* Opening the menu focuses the first link. Instead of the site-wide focus
    box, show a saffron underline (still visible for keyboard users). */
 header.wp-block-template-part .is-menu-open .wp-block-navigation-item__content:focus-visible {
 	outline: none;
+	box-shadow: none;
 	color: var(--wp--preset--color--accent-1);
 	text-decoration-line: underline !important;
 	text-decoration-color: var(--wp--preset--color--accent-2) !important;
@@ -514,6 +525,11 @@ body .has-accent-5-border-color {
 		   its own side padding; on phones the text ran to the screen edges. */
 		padding-left: var(--wp--style--root--padding-left) !important;
 		padding-right: var(--wp--style--root--padding-right) !important;
+	}
+
+	/* Photo above the text when the columns stack. */
+	.hero-wrap .wp-block-columns {
+		flex-direction: column-reverse;
 	}
 
 	/* 4:3 photo instead of 496px tall. */
