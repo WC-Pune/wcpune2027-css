@@ -17,7 +17,7 @@
  *   accent-3   unused
  *   accent-4   sand edge: borders on sand
  *   accent-5   sand: inputs, light panels
- * The only hexes are the social networks' own colours (see 8).
+ * The only hexes are the social networks' own colours (see 7).
  *
  * WordCamp's sanitiser deletes `--name: value;` declarations, @import,
  * animation-timeline and animation-range. Reading --wp--preset--… is fine.
@@ -25,12 +25,11 @@
  * CONTENTS
  *   1. Links, buttons, inputs   (site-wide)
  *   2. Header
- *   3. Page layout
- *   4. Sponsors
- *   5. Homepage hero
- *   6. Homepage sections
- *   7. Search results
- *   8. Footer
+ *   3. Sponsors
+ *   4. Homepage hero
+ *   5. Homepage sections
+ *   6. Search results
+ *   7. Footer
  */
 
 
@@ -299,28 +298,7 @@ header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-blo
 }
 
 
-/* ==== 3. Page layout ====================================================== */
-
-/* Space above the footer on every page. The theme only leaves its 19px
-   block gap, so pages ending in a photo or text sat close to the footer.
-   Inner pages' content block can add its own bottom padding (70px on Code
-   of Conduct); drop it so the space is the same everywhere. */
-footer.wp-block-template-part {
-	margin-top: clamp(3rem, 6vw, 5rem) !important;
-}
-
-body:not(.home) main .wp-block-post-content {
-	padding-bottom: 0 !important;
-}
-
-/* Search Results template: its last section ("More posts") adds a large
-   bottom padding of its own. */
-body.search main > :last-child {
-	padding-bottom: 0 !important;
-}
-
-
-/* ==== 4. Sponsors ========================================================= */
+/* ==== 3. Sponsors ========================================================= */
 
 /* Sponsor logos (Query Loop of sponsors): even tiles. WordPress forces each
    logo into a 16:9 box, which leaves wordmarks floating in empty space;
@@ -378,7 +356,7 @@ body:not(.search) .wp-block-post-template > .wcb_sponsor:focus-within {
 }
 
 
-/* ==== 5. Homepage hero ==================================================== */
+/* ==== 4. Homepage hero ==================================================== */
 /* The homepage hero group has the class hero-wrap
    (Advanced → Additional CSS class). */
 
@@ -514,7 +492,7 @@ body .has-accent-5-border-color {
 }
 
 
-/* ==== 6. Homepage sections ================================================ */
+/* ==== 5. Homepage sections ================================================ */
 
 /* Space between the sections below the hero. */
 body.home .wp-block-post-content > * + * {
@@ -540,7 +518,7 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
 }
 
 
-/* ==== 7. Search results =================================================== */
+/* ==== 6. Search results =================================================== */
 
 /* Search results: a grid of cards (type, title, date, a few lines of
    text). The Search Results template prints each result's full content
@@ -673,7 +651,7 @@ body.search .wp-block-query.alignfull .wp-block-post:hover .wp-block-post-title 
 }
 
 
-/* ==== 8. Footer =========================================================== */
+/* ==== 7. Footer =========================================================== */
 /* The editor sets sand with maroon text; this makes it maroon with
    page-colour text. */
 
