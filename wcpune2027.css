@@ -301,40 +301,6 @@ header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-blo
 
 /* ==== 3. Page layout ====================================================== */
 
-/* Inner pages: the Pages template's Content block is full width with no
-   inner width and no side padding, so content ran edge to edge. Give it
-   the theme's side padding and widths: text at content width (640px),
-   wide blocks and lists of posts (e.g. sponsor logos) at wide width.
-   Pages on the "Page (no title)" template (Home, Contact) are already
-   constrained, so these rules skip them. */
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow {
-	padding-left: var(--wp--style--root--padding-left) !important;
-	padding-right: var(--wp--style--root--padding-right) !important;
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull):not(.alignwide):not(.wp-block-query) {
-	max-width: var(--wp--style--global--content-size);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .alignwide,
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-query {
-	max-width: var(--wp--style--global--wide-size);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* The Pages template sets the space between blocks to 0; restore it,
-   with extra room above headings. */
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > * + * {
-	margin-top: var(--wp--preset--spacing--30);
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-heading {
-	margin-top: var(--wp--preset--spacing--50);
-}
-
 /* Space above the footer on every page. The theme only leaves its 19px
    block gap, so pages ending in a photo or text sat close to the footer.
    Inner pages' content block can add its own bottom padding (70px on Code
@@ -521,10 +487,6 @@ body .has-accent-5-border-color {
 @media (max-width: 781px) {
 	.hero-wrap {
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
-		/* The hero sits inside the padded Content block, so WordPress drops
-		   its own side padding; on phones the text ran to the screen edges. */
-		padding-left: var(--wp--style--root--padding-left) !important;
-		padding-right: var(--wp--style--root--padding-right) !important;
 	}
 
 	/* Photo above the text when the columns stack. */
