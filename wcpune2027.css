@@ -53,8 +53,11 @@ a:focus-visible {
 	outline-offset: 2px;
 }
 
-/* Saffron with text colour; maroon on hover. `body` outranks the block's
-   own colour classes, which WordPress marks !important. */
+/* Saffron with text colour; maroon on hover. Kept in CSS for every button:
+   Styles → Elements → Buttons has no text colour, and the Search and
+   Jetpack Subscribe buttons aren't Button blocks, so Blocks → Button
+   doesn't reach them. `body` outranks the block's own colour classes,
+   which WordPress marks !important. */
 
 body .wp-block-button__link,
 body .wp-element-button {
@@ -75,19 +78,6 @@ body .wp-block-button__link:focus-visible,
 body .wp-element-button:focus-visible {
 	outline: 3px solid var(--wp--preset--color--contrast);
 	outline-offset: 2px;
-}
-
-/* Outline style (Styles → Outline on a button): clear fill, maroon
-   border and text; fills maroon on hover. */
-body .is-style-outline > .wp-block-button__link {
-	background-color: transparent !important;
-	color: var(--wp--preset--color--accent-1) !important;
-	border: 2px solid var(--wp--preset--color--accent-1) !important;
-}
-
-body .is-style-outline > .wp-block-button__link:hover {
-	background-color: var(--wp--preset--color--accent-1) !important;
-	color: var(--wp--preset--color--base) !important;
 }
 
 /* Inputs: sand fill, sand-edge border. */
@@ -128,8 +118,8 @@ textarea:focus {
 
 
 /* ==== 2. Header =========================================================== */
-/* The header group is Base in the editor. Here it gets a maroon strip
-   on top and one thin line underneath instead of the dotted box. */
+/* The header group's maroon strip on top and thin line underneath are
+   set in the editor (Border panel); only the sticky behaviour is here. */
 
 /* Stays at the top while scrolling. Logged in, it sits below the admin
    bar, which is 32px tall, 46px under 783px, and scrolls away under 601px. */
@@ -156,18 +146,9 @@ body.admin-bar header.wp-block-template-part {
 	}
 }
 
-header.wp-block-template-part .has-accent-1-border-color {
-	border-style: none none solid !important;
-	border-color: var(--wp--preset--color--accent-4) !important;
-	border-top: 4px solid var(--wp--preset--color--accent-1) !important;
-}
-
-/* Site title: one line, capitals with light spacing. */
+/* Site title: one line, fluid size. Weight, spacing and line height are in the editor. */
 header.wp-block-template-part .wp-block-site-title {
 	font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.25rem);
-	font-weight: 700;
-	letter-spacing: 0.02em;
-	line-height: 1.2;
 	white-space: nowrap;
 }
 
@@ -178,10 +159,6 @@ header.wp-block-template-part .wp-block-site-title a {
 
 /* Menu: no permanent underline; a saffron bar grows in on hover and
    stays under the current page. */
-header.wp-block-template-part .wp-block-navigation {
-	font-size: var(--wp--preset--font-size--medium) !important;
-}
-
 header.wp-block-template-part .wp-block-navigation-item__content {
 	text-decoration: none !important;
 	padding-bottom: 4px;
@@ -365,63 +342,12 @@ body:not(.search) .wp-block-post-template > .wcb_sponsor:focus-within {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }
 
-/* Eyebrow: the first line above the title, as small maroon capitals. */
-.hero-wrap .wp-block-column:first-child > p:first-child {
-	margin-bottom: 0.25rem !important;
-	color: var(--wp--preset--color--accent-1);
-	font-size: var(--wp--preset--font-size--medium) !important;
-	font-weight: 600 !important;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-}
-
-/* Day 1 / Day 2: soft chips, as wide as their text. Their group has the
-   class hero-days so they wrap on phones instead of squeezing. */
-.hero-wrap .is-style-text-annotation {
-	padding: 0.35em 0.9em;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 0.75rem;
-	background-color: var(--wp--preset--color--base);
-	color: var(--wp--preset--color--contrast);
-	font-family: inherit;
-	font-size: 0.9rem;
-	font-weight: 600 !important;
-	white-space: nowrap;
-}
-
-.hero-wrap .hero-days {
-	flex-wrap: wrap !important;
-	gap: 0.5rem;
-}
-
-/* Date and venue icons in maroon. */
-.hero-wrap .wp-block-icon {
-	color: var(--wp--preset--color--accent-1);
-}
-
-.hero-wrap .wp-block-icon svg {
-	fill: currentColor;
-}
-
-/* Buttons sit left, side by side; full width and stacked on phones.
-   Contact Us is Fill, so the shared saffron button rules apply. */
-.hero-wrap .wp-block-buttons {
-	justify-content: flex-start;
-	gap: 0.75rem;
-}
-
-/* Photo: rounded, soft shadow, caption in a small dark box. */
+/* Photo: soft shadow, caption in a small dark box. Radius and border
+   are set on the block in the editor. */
 .hero-wrap .wp-block-cover {
 	overflow: hidden;
-	border-radius: 16px !important;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
 	transition: transform .35s ease, box-shadow .35s ease;
-}
-
-/* The photo's border is Accent 5 (sand) in the block, which vanishes on
-   the sand hero; use the darker sand edge. */
-body .has-accent-5-border-color {
-	border-color: var(--wp--preset--color--accent-4) !important;
 }
 
 .hero-wrap .wp-block-cover__inner-container p {
