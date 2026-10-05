@@ -6,14 +6,14 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 
 | File | Purpose |
 |---|---|
-| `wcpune2027.css` | Site CSS. Part A = layout. Part B = brand styling |
+| `wcpune2027.css` | Site CSS: links, buttons, header, layout, sponsors, hero, search, footer |
 | `dev-inject.user.js` | Dev only — preview local CSS on the live site |
 
 ## Colours live in the editor
 Every colour is a **Theme** palette slot in **Site Editor → Styles → Colours**. Blocks use those
 slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`), so
 **the CSS contains no hex values**. To change the look, edit hexes in the editor.
-(One exception: the `body .hero-wrap` rule in B6 hardcodes the hero sand `#F3EEE6`.)
+(One exception: the footer social icons use each network's brand hex.)
 
 | Theme slot | Used for | Live hex |
 |---|---|---|
@@ -25,7 +25,7 @@ slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`)
 | Accent 4 | Sand edge: borders on sand (CSS) | `#d6d5d3` |
 | Accent 5 | Sand: inputs, light panels | `#e1d9ca` |
 
-Part B of the CSS moves a few areas to a different slot than the blocks use: footer →
+The CSS moves a few areas to a different slot than the blocks use: footer →
 Accent 1 with Base text, buttons → Accent 2 with Contrast text.
 
 When you re-colour a block, always pick a Theme slot, never a custom swatch or hex. No block uses
@@ -56,24 +56,6 @@ The homepage hero styles apply to `.hero-wrap` (the hero group). The Day 1 / Day
    Toggle the userscript off to compare with the current live site.
 
 No-install alternative: paste the body of `dev-inject.user.js` into the DevTools console after each reload.
-
-## Homepage flow classes
-
-The homepage CSS supports a clearer visitor flow when the matching blocks are given these Advanced → Additional CSS classes in the WordPress editor:
-
-| Class | Use |
-|---|---|
-| `home-section` / `home-section__inner` | Shared section wrapper and constrained inner group |
-| `hero-days` | Day 1 and Day 2 cards |
-| `audience-grid` | Developers, agencies, business owners, students |
-| `outcomes-grid` | Why attend / expected outcomes |
-| `speakers-grid` / `speakers-coming-soon` | Speaker cards or the coming-soon state |
-| `venue-card` | Venue details and Google Maps CTA |
-| `sponsor-band` | Sponsor logos and “Become a sponsor” button |
-| `community-stats` | Meetups held, past attendees, and years |
-| `home-faq` | FAQ accordion for refunds, food, Contributor Day, and beginners |
-
-The CSS keeps these sections responsive and gives the page a deliberate order: event overview → two-day shape → who it is for → outcomes → speakers → venue → sponsors → community proof → FAQ.
 
 ## Publishing changes
 1. Push to `origin` (`WC-Pune/wcpune2027-css`).

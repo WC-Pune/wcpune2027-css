@@ -1,15 +1,15 @@
 /*
  * WordCamp Pune 2027 — site CSS
- * Theme: Twenty Twenty-Five (block theme).
+ * Theme: Twenty Twenty-Five (block theme). Loaded through Appearance →
+ * Remote CSS from GitHub (WC-Pune/wcpune2027-css, main).
  *
- * COLOURS LIVE IN THE EDITOR, NOT HERE.
- * Every colour below reads a Theme palette slot from Site Editor → Styles →
- * Colours, e.g. var(--wp--preset--color--accent-1). To change the look,
- * edit the slot's hex in the editor; this file never needs a hex.
- * (WordCamp's sanitiser strips `--name: value;` declarations, but reading
- * WordPress's own --wp--preset--… variables is fine.)
+ * KEEP THIS FILE SMALL. Anything the editor can set (colours, font sizes,
+ * spacing, borders) belongs in the editor. This file only holds what the
+ * editor can't do: hover/focus states, the sticky header, the phone menu,
+ * layout fixes for the templates, search cards and so on.
  *
- * THEME SLOTS (by colour)
+ * COLOURS LIVE IN THE EDITOR. Every colour reads a Theme palette slot from
+ * Site Editor → Styles → Colours, e.g. var(--wp--preset--color--accent-1).
  *   base       page background, text on maroon
  *   contrast   body text, text on buttons
  *   accent-1   maroon: brand, headings, links, footer
@@ -17,340 +17,26 @@
  *   accent-3   unused
  *   accent-4   sand edge: borders on sand
  *   accent-5   sand: inputs, light panels
+ * The only hexes are the hero sand (see 5) and the social networks' own
+ * colours (see 8).
  *
- * PART B moves a few areas to a different slot than the blocks use
- * (footer → maroon, buttons → saffron).
+ * WordCamp's sanitiser deletes `--name: value;` declarations, @import,
+ * animation-timeline and animation-range. Reading --wp--preset--… is fine.
+ *
+ * CONTENTS
+ *   1. Links, buttons, inputs   (site-wide)
+ *   2. Header
+ *   3. Page layout
+ *   4. Sponsors
+ *   5. Homepage hero
+ *   6. Homepage sections
+ *   7. Search results
+ *   8. Footer
  */
 
 
-/* ===================================================================== */
-/* PART A — layout fixes                                                  */
-/* ===================================================================== */
+/* ==== 1. Links, buttons, inputs =========================================== */
 
-/* Past WordCamps menu: years in a grid of 4 (two rows). The nav block
-   has the class past-wc-nav (Advanced → Additional CSS class). */
-.past-wc-nav .wp-block-navigation__container {
-	display: grid;
-	grid-template-columns: repeat(4, max-content);
-	gap: 0.5rem 1.5rem;
-}
-
-/* Inner pages: the Pages template's Content block is full width with no
-   inner width and no side padding, so content ran edge to edge. Give it
-   the theme's side padding and widths: text at content width (640px),
-   wide blocks and lists of posts (e.g. sponsor logos) at wide width.
-   The homepage uses the same template but is designed full width. */
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow {
-	padding-left: var(--wp--style--root--padding-left) !important;
-	padding-right: var(--wp--style--root--padding-right) !important;
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull):not(.alignwide):not(.wp-block-query) {
-	max-width: var(--wp--style--global--content-size);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .alignwide,
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-query {
-	max-width: var(--wp--style--global--wide-size);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* Homepage: sections that aren't full width (e.g. "Learn Beyond
-   Sessions") had no side padding and ran to the window edges. Give them
-   the theme's side padding and wide width, like the header and footer.
-   Groups are left alone: they manage their own padding, and one may wrap
-   the full-width hero. */
-body.home .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull):not(.wp-block-group) {
-	box-sizing: border-box;
-	max-width: var(--wp--style--global--wide-size);
-	margin-left: auto !important;
-	margin-right: auto !important;
-	padding-left: var(--wp--style--root--padding-left) !important;
-	padding-right: var(--wp--style--root--padding-right) !important;
-}
-
-/* The same template sets the space between blocks to 0; restore it,
-   with extra room above headings. */
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > * + * {
-	margin-top: var(--wp--preset--spacing--30);
-}
-
-body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-heading {
-	margin-top: var(--wp--preset--spacing--50);
-}
-
-/* Sponsor logos (Query Loop of sponsors): even tiles. WordPress forces each
-   logo into a 16:9 box, which leaves wordmarks floating in empty space;
-   a 3:1 box with padding fits them. Hover: the tile lifts and the border
-   turns highlight colour. */
-.wp-block-post-template {
-	gap: 1rem;
-}
-
-body:not(.search) .wp-block-post-template > .wcb_sponsor {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1.5rem 2rem;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 12px;
-	background-color: var(--wp--preset--color--base);
-	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-
-body:not(.search) .wp-block-post-template > .wcb_sponsor .wp-block-post-featured-image {
-	width: 100%;
-	margin: 0;
-}
-
-body:not(.search) .wp-block-post-template > .wcb_sponsor img {
-	aspect-ratio: 3 / 1 !important;
-	width: 100% !important;
-	height: auto;
-	max-height: 90px;
-	object-fit: contain;
-}
-
-body:not(.search) .wp-block-post-template > .wcb_sponsor:hover,
-body:not(.search) .wp-block-post-template > .wcb_sponsor:focus-within {
-	border-color: var(--wp--preset--color--accent-2);
-	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	body:not(.search) .wp-block-post-template > .wcb_sponsor:hover {
-		transform: translateY(-3px);
-	}
-}
-
-/* Two logos per row on phones. */
-@media (max-width: 600px) {
-	.page-slug-sponsors .wp-block-post-template {
-		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-	}
-
-	body:not(.search) .wp-block-post-template > .wcb_sponsor {
-		padding: 1rem;
-	}
-}
-
-/* Footer social icons: plain icons in the footer's text colour (no brand
-   circles). On hover each shows its network's own badge: brand-coloured
-   circle, white icon. The brand hexes are the only ones in this file:
-   they are the networks' colours (as in WordPress's Social Icons block),
-   not our palette. */
-footer.wp-block-template-part .wp-block-social-links .wp-social-link {
-	background-color: transparent !important;
-	color: inherit !important;
-	transition: background-color .15s ease, color .15s ease;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link svg {
-	fill: currentColor;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link:focus-within {
-	color: #FFFFFF !important;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:focus-within {
-	background-color: #25D366 !important;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:focus-within {
-	background-color: #F6405F !important;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:focus-within {
-	background-color: #F00075 !important;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:focus-within {
-	background-color: #0D66C2 !important;
-}
-
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:hover,
-footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:focus-within {
-	background-color: #000000 !important;
-}
-
-/* Search results: a grid of cards (type, title, date, a few lines of
-   text). The Search Results template prints each result's full content
-   (even the whole homepage); only a short trimmed description shows here.
-   Swap its Content block for an Excerpt block when possible.
-   A small label shows the result type. The whole card is the link.
-   Only the main results (the full-width query), not "More posts". */
-body.search .wp-block-query.alignfull > .wp-block-post-template {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-	gap: 1rem;
-	box-sizing: border-box;
-	max-width: var(--wp--style--global--wide-size);
-	margin: var(--wp--preset--spacing--40) auto var(--wp--preset--spacing--60) !important;
-	padding-left: var(--wp--style--root--padding-left);
-	padding-right: var(--wp--style--root--padding-right);
-}
-
-body.search .wp-block-query.alignfull .wp-block-post {
-	display: block;
-	position: relative;
-	margin: 0 !important;
-	padding: 0;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 12px;
-	background-color: var(--wp--preset--color--base);
-	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post > .wp-block-group {
-	box-sizing: border-box;
-	height: 100%;
-	padding: 1.25rem 1.5rem !important;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-featured-image {
-	display: none;
-}
-
-/* A few lines of description under the title. Best with an Excerpt block
-   in the Search Results template; with the Content block, only its first
-   paragraph shows. Either way, trimmed to 3 lines. */
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt,
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content {
-	margin: 0.6rem 0 0 !important;
-	padding: 0 !important;
-	font-size: 0.95rem !important;
-	line-height: 1.5;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content > * {
-	display: none;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt__more-text {
-	display: none;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt__excerpt,
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content > p:first-of-type {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-	overflow: hidden;
-	max-width: none;
-	margin: 0;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title {
-	margin: 0;
-	font-size: 1.25rem !important;
-	line-height: 1.3;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title a {
-	color: var(--wp--preset--color--contrast);
-	text-decoration: none;
-}
-
-/* Stretch the title link over the whole card. */
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title a::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border-radius: 12px;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-date {
-	margin-top: 0.5rem !important;
-	color: var(--wp--preset--color--contrast);
-	font-size: 0.85rem !important;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-date a {
-	color: inherit;
-	text-decoration: none;
-}
-
-body.search .wp-block-query.alignfull .wp-block-post > .wp-block-group::before {
-	display: block;
-	margin-bottom: 0.4rem;
-	color: var(--wp--preset--color--accent-1);
-	font-size: 0.75rem;
-	font-weight: 600;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-}
-
-body.search .wp-block-query.alignfull .type-page > .wp-block-group::before { content: "Page"; }
-body.search .wp-block-query.alignfull .type-post > .wp-block-group::before { content: "News"; }
-body.search .wp-block-query.alignfull .type-wcb_sponsor > .wp-block-group::before { content: "Sponsor"; }
-body.search .wp-block-query.alignfull .type-wcb_speaker > .wp-block-group::before { content: "Speaker"; }
-body.search .wp-block-query.alignfull .type-wcb_session > .wp-block-group::before { content: "Session"; }
-body.search .wp-block-query.alignfull .type-wcb_organizer > .wp-block-group::before { content: "Organizer"; }
-
-body.search .wp-block-query.alignfull .wp-block-post:hover,
-body.search .wp-block-query.alignfull .wp-block-post:focus-within {
-	border-color: var(--wp--preset--color--accent-2);
-	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-}
-
-body.search .wp-block-query.alignfull .wp-block-post:hover .wp-block-post-title a {
-	color: var(--wp--preset--color--accent-1);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	body.search .wp-block-query.alignfull .wp-block-post:hover {
-		transform: translateY(-3px);
-	}
-}
-
-/* Space above the footer on every page. The theme only leaves its 19px
-   block gap, so pages ending in a photo or text sat close to the footer.
-   Inner pages' content block can add its own bottom padding (70px on Code
-   of Conduct); drop it so the space is the same everywhere. */
-footer.wp-block-template-part {
-	margin-top: clamp(3rem, 6vw, 5rem) !important;
-}
-
-body:not(.home) main .wp-block-post-content {
-	padding-bottom: 0 !important;
-}
-
-/* Search Results template: its last section ("More posts") adds a large
-   bottom padding of its own. */
-body.search main > :last-child {
-	padding-bottom: 0 !important;
-}
-
-/* Small phones: email field and Subscribe button full width, stacked. */
-@media (max-width: 480px) {
-	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p,
-	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
-	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
-		width: 100%;
-		margin: 0 !important;
-	}
-}
-
-
-/* ===================================================================== */
-/* PART B — brand styling                                                 */
-/* ===================================================================== */
-
-/* ==== B1. Links ======================================================= */
 /* Link text colour comes from Styles → Colours → Link. This adds the
    saffron underline, which the editor can't set. */
 
@@ -369,8 +55,81 @@ a:focus-visible {
 	outline-offset: 2px;
 }
 
+/* Saffron with text colour; maroon on hover. `body` outranks the block's
+   own colour classes, which WordPress marks !important. */
 
-/* ==== B2. Header ====================================================== */
+body .wp-block-button__link,
+body .wp-element-button {
+	background-color: var(--wp--preset--color--accent-2) !important;
+	color: var(--wp--preset--color--contrast) !important;
+	border-color: var(--wp--preset--color--accent-2) !important;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+body .wp-block-button__link:hover,
+body .wp-element-button:hover {
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base) !important;
+	border-color: var(--wp--preset--color--accent-1) !important;
+}
+
+body .wp-block-button__link:focus-visible,
+body .wp-element-button:focus-visible {
+	outline: 3px solid var(--wp--preset--color--contrast);
+	outline-offset: 2px;
+}
+
+/* Outline style (Styles → Outline on a button): clear fill, maroon
+   border and text; fills maroon on hover. */
+body .is-style-outline > .wp-block-button__link {
+	background-color: transparent !important;
+	color: var(--wp--preset--color--accent-1) !important;
+	border: 2px solid var(--wp--preset--color--accent-1) !important;
+}
+
+body .is-style-outline > .wp-block-button__link:hover {
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base) !important;
+}
+
+/* Inputs: sand fill, sand-edge border. */
+input[type="text"],
+input[type="email"],
+textarea {
+	background-color: var(--wp--preset--color--accent-5);
+	border: 1px solid var(--wp--preset--color--accent-4);
+	color: var(--wp--preset--color--contrast);
+}
+
+/* Placeholder ("Type your email…"). Jetpack's subscribe form sets it to
+   half-strength currentColor with a stronger selector, hence !important.
+   0.8 keeps it readable on sand (about 4.8:1) yet lighter than real text. */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.8 !important;
+}
+
+/* Logged in, Jetpack pre-fills the subscribe field with your email and
+   disables it; its rule then fades the whole field to 50%, so on the
+   maroon footer it turns pink and the text is unreadable. Visitors who
+   aren't logged in never see this state. */
+input[type="email"]:disabled {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.85 !important;
+	cursor: not-allowed;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+	outline: 2px solid var(--wp--preset--color--accent-1);
+	outline-offset: 1px;
+}
+
+
+/* ==== 2. Header =========================================================== */
 /* The header group is Base in the editor. Here it gets a maroon strip
    on top and one thin line underneath instead of the dotted box. */
 
@@ -528,54 +287,415 @@ header.wp-block-template-part .is-menu-open .nav-cta.current-menu-item > .wp-blo
 	color: var(--wp--preset--color--base);
 }
 
-/* ==== B3. Buttons ===================================================== */
-/* Saffron with text colour; maroon on hover. `body` outranks the block's
-   own colour classes, which WordPress marks !important. */
 
-body .wp-block-button__link,
-body .wp-element-button {
-	background-color: var(--wp--preset--color--accent-2) !important;
-	color: var(--wp--preset--color--contrast) !important;
-	border-color: var(--wp--preset--color--accent-2) !important;
-	transition: background-color .15s ease, color .15s ease;
+/* ==== 3. Page layout ====================================================== */
+
+/* Inner pages: the Pages template's Content block is full width with no
+   inner width and no side padding, so content ran edge to edge. Give it
+   the theme's side padding and widths: text at content width (640px),
+   wide blocks and lists of posts (e.g. sponsor logos) at wide width.
+   Pages on the "Page (no title)" template (Home, Contact) are already
+   constrained, so these rules skip them. */
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow {
+	padding-left: var(--wp--style--root--padding-left) !important;
+	padding-right: var(--wp--style--root--padding-right) !important;
 }
 
-body .wp-block-button__link:hover,
-body .wp-element-button:hover {
-	background-color: var(--wp--preset--color--accent-1) !important;
-	color: var(--wp--preset--color--base) !important;
-	border-color: var(--wp--preset--color--accent-1) !important;
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > :not(.alignfull):not(.alignwide):not(.wp-block-query) {
+	max-width: var(--wp--style--global--content-size);
+	margin-left: auto;
+	margin-right: auto;
 }
 
-body .wp-block-button__link:focus-visible,
-body .wp-element-button:focus-visible {
-	outline: 3px solid var(--wp--preset--color--contrast);
-	outline-offset: 2px;
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .alignwide,
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-query {
+	max-width: var(--wp--style--global--wide-size);
+	margin-left: auto;
+	margin-right: auto;
 }
 
-/* Outline style (Styles → Outline on a button): clear fill, maroon
-   border and text; fills maroon on hover. */
-body .is-style-outline > .wp-block-button__link {
-	background-color: transparent !important;
-	color: var(--wp--preset--color--accent-1) !important;
-	border: 2px solid var(--wp--preset--color--accent-1) !important;
+/* The Pages template sets the space between blocks to 0; restore it,
+   with extra room above headings. */
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > * + * {
+	margin-top: var(--wp--preset--spacing--30);
 }
 
-body .is-style-outline > .wp-block-button__link:hover {
-	background-color: var(--wp--preset--color--accent-1) !important;
-	color: var(--wp--preset--color--base) !important;
+body:not(.home) .wp-block-post-content.alignfull.is-layout-flow > .wp-block-heading {
+	margin-top: var(--wp--preset--spacing--50);
 }
 
-/* On the maroon footer a maroon hover would vanish. */
-footer.wp-block-template-part .wp-block-button__link:hover,
-footer.wp-block-template-part .wp-element-button:hover {
-	background-color: var(--wp--preset--color--base) !important;
-	color: var(--wp--preset--color--accent-1) !important;
-	border-color: var(--wp--preset--color--base) !important;
+/* Space above the footer on every page. The theme only leaves its 19px
+   block gap, so pages ending in a photo or text sat close to the footer.
+   Inner pages' content block can add its own bottom padding (70px on Code
+   of Conduct); drop it so the space is the same everywhere. */
+footer.wp-block-template-part {
+	margin-top: clamp(3rem, 6vw, 5rem) !important;
+}
+
+body:not(.home) main .wp-block-post-content {
+	padding-bottom: 0 !important;
+}
+
+/* Search Results template: its last section ("More posts") adds a large
+   bottom padding of its own. */
+body.search main > :last-child {
+	padding-bottom: 0 !important;
 }
 
 
-/* ==== B4. Footer ====================================================== */
+/* ==== 4. Sponsors ========================================================= */
+
+/* Sponsor logos (Query Loop of sponsors): even tiles. WordPress forces each
+   logo into a 16:9 box, which leaves wordmarks floating in empty space;
+   a 3:1 box with padding fits them. Hover: the tile lifts and the border
+   turns highlight colour. */
+.wp-block-post-template {
+	gap: 1rem;
+}
+
+body:not(.search) .wp-block-post-template > .wcb_sponsor {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5rem 2rem;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 12px;
+	background-color: var(--wp--preset--color--base);
+	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+body:not(.search) .wp-block-post-template > .wcb_sponsor .wp-block-post-featured-image {
+	width: 100%;
+	margin: 0;
+}
+
+body:not(.search) .wp-block-post-template > .wcb_sponsor img {
+	aspect-ratio: 3 / 1 !important;
+	width: 100% !important;
+	height: auto;
+	max-height: 90px;
+	object-fit: contain;
+}
+
+body:not(.search) .wp-block-post-template > .wcb_sponsor:hover,
+body:not(.search) .wp-block-post-template > .wcb_sponsor:focus-within {
+	border-color: var(--wp--preset--color--accent-2);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body:not(.search) .wp-block-post-template > .wcb_sponsor:hover {
+		transform: translateY(-3px);
+	}
+}
+
+/* Two logos per row on phones. */
+@media (max-width: 600px) {
+	.page-slug-sponsors .wp-block-post-template {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+
+	body:not(.search) .wp-block-post-template > .wcb_sponsor {
+		padding: 1rem;
+	}
+}
+
+
+/* ==== 5. Homepage hero ==================================================== */
+/* The homepage hero group has the class hero-wrap
+   (Advanced → Additional CSS class). */
+
+.hero-wrap {
+	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+}
+
+/* Eyebrow: the first line above the title, as small maroon capitals. */
+.hero-wrap .wp-block-column:first-child > p:first-child {
+	margin-bottom: 0.25rem !important;
+	color: var(--wp--preset--color--accent-1);
+	font-size: var(--wp--preset--font-size--medium) !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Day 1 / Day 2: soft chips, as wide as their text. Their group has the
+   class hero-days so they wrap on phones instead of squeezing. */
+.hero-wrap .is-style-text-annotation {
+	padding: 0.35em 0.9em;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 0.75rem;
+	background-color: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	font-family: inherit;
+	font-size: 0.9rem;
+	font-weight: 600 !important;
+	white-space: nowrap;
+}
+
+.hero-wrap .hero-days {
+	flex-wrap: wrap !important;
+	gap: 0.5rem;
+}
+
+/* Date and venue icons in maroon. */
+.hero-wrap .wp-block-icon {
+	color: var(--wp--preset--color--accent-1);
+}
+
+.hero-wrap .wp-block-icon svg {
+	fill: currentColor;
+}
+
+/* Buttons sit left, side by side; full width and stacked on phones.
+   Contact Us is Fill, so the shared saffron button rules apply. */
+.hero-wrap .wp-block-buttons {
+	justify-content: flex-start;
+	gap: 0.75rem;
+}
+
+/* Photo: rounded, soft shadow, caption in a small dark box. */
+.hero-wrap .wp-block-cover {
+	overflow: hidden;
+	border-radius: 16px !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
+	transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* The photo's border is Accent 5 (sand) in the block, which vanishes on
+   the sand hero; use the darker sand edge. */
+body .has-accent-5-border-color {
+	border-color: var(--wp--preset--color--accent-4) !important;
+}
+
+.hero-wrap .wp-block-cover__inner-container p {
+	display: inline-block;
+	padding: 0.3em 0.9em;
+	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.45);
+	text-align: left !important;
+}
+
+/* Hover for everyone: deeper shadow, and the light grey veil over the
+   photo fades out so it brightens. */
+.hero-wrap .wp-block-cover__background {
+	transition: opacity .35s ease;
+}
+
+.hero-wrap .wp-block-cover:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 26px 50px rgba(0, 0, 0, 0.18);
+}
+
+.hero-wrap .wp-block-cover:hover .wp-block-cover__background {
+	opacity: 0 !important;
+}
+
+/* Movement only when the visitor hasn't asked for reduced motion
+   (macOS: System Settings → Accessibility → Display → Reduce motion). */
+@media (prefers-reduced-motion: no-preference) {
+	.hero-wrap .wp-block-cover__image-background {
+		transition: transform .8s ease;
+	}
+
+	.hero-wrap .wp-block-cover:hover {
+		transform: translateY(-4px);
+	}
+
+	.hero-wrap .wp-block-cover:hover .wp-block-cover__image-background {
+		transform: scale(1.06);
+	}
+}
+
+@media (max-width: 781px) {
+	.hero-wrap {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+		/* The hero sits inside the padded Content block, so WordPress drops
+		   its own side padding; on phones the text ran to the screen edges. */
+		padding-left: var(--wp--style--root--padding-left) !important;
+		padding-right: var(--wp--style--root--padding-right) !important;
+	}
+
+	/* 4:3 photo instead of 496px tall. */
+	.hero-wrap .wp-block-cover {
+		min-height: 0 !important;
+		aspect-ratio: 4 / 3 !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-wrap .wp-block-buttons,
+	.hero-wrap .wp-block-button {
+		width: 100%;
+	}
+
+	.hero-wrap .wp-block-button__link {
+		display: block;
+		text-align: center;
+	}
+}
+
+
+/* ==== 6. Homepage sections ================================================ */
+
+/* Space between the sections below the hero. */
+body.home .wp-block-post-content > * + * {
+	margin-top: clamp(2.75rem, 6vw, 5.5rem);
+}
+
+/* "More Than Talks": the photo zooms gently on hover (not for reduced
+   motion). No scroll reveal: WordCamp's sanitiser strips
+   animation-timeline. */
+body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
+	overflow: hidden;
+	border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image img {
+		transition: transform .6s ease;
+	}
+
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image:hover img {
+		transform: scale(1.04);
+	}
+}
+
+
+/* ==== 7. Search results =================================================== */
+
+/* Search results: a grid of cards (type, title, date, a few lines of
+   text). The Search Results template prints each result's full content
+   (even the whole homepage); only a short trimmed description shows here.
+   Swap its Content block for an Excerpt block when possible.
+   A small label shows the result type. The whole card is the link.
+   Only the main results (the full-width query), not "More posts". */
+body.search .wp-block-query.alignfull > .wp-block-post-template {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 1rem;
+	box-sizing: border-box;
+	max-width: var(--wp--style--global--wide-size);
+	margin: var(--wp--preset--spacing--40) auto var(--wp--preset--spacing--60) !important;
+	padding-left: var(--wp--style--root--padding-left);
+	padding-right: var(--wp--style--root--padding-right);
+}
+
+body.search .wp-block-query.alignfull .wp-block-post {
+	display: block;
+	position: relative;
+	margin: 0 !important;
+	padding: 0;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 12px;
+	background-color: var(--wp--preset--color--base);
+	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post > .wp-block-group {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 1.25rem 1.5rem !important;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-featured-image {
+	display: none;
+}
+
+/* A few lines of description under the title. Best with an Excerpt block
+   in the Search Results template; with the Content block, only its first
+   paragraph shows. Either way, trimmed to 3 lines. */
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt,
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content {
+	margin: 0.6rem 0 0 !important;
+	padding: 0 !important;
+	font-size: 0.95rem !important;
+	line-height: 1.5;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content > * {
+	display: none;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt__more-text {
+	display: none;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-excerpt__excerpt,
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-content > p:first-of-type {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+	max-width: none;
+	margin: 0;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title {
+	margin: 0;
+	font-size: 1.25rem !important;
+	line-height: 1.3;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title a {
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+}
+
+/* Stretch the title link over the whole card. */
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 12px;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-date {
+	margin-top: 0.5rem !important;
+	color: var(--wp--preset--color--contrast);
+	font-size: 0.85rem !important;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post .wp-block-post-date a {
+	color: inherit;
+	text-decoration: none;
+}
+
+body.search .wp-block-query.alignfull .wp-block-post > .wp-block-group::before {
+	display: block;
+	margin-bottom: 0.4rem;
+	color: var(--wp--preset--color--accent-1);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+body.search .wp-block-query.alignfull .type-page > .wp-block-group::before { content: "Page"; }
+body.search .wp-block-query.alignfull .type-post > .wp-block-group::before { content: "News"; }
+body.search .wp-block-query.alignfull .type-wcb_sponsor > .wp-block-group::before { content: "Sponsor"; }
+body.search .wp-block-query.alignfull .type-wcb_speaker > .wp-block-group::before { content: "Speaker"; }
+body.search .wp-block-query.alignfull .type-wcb_session > .wp-block-group::before { content: "Session"; }
+body.search .wp-block-query.alignfull .type-wcb_organizer > .wp-block-group::before { content: "Organizer"; }
+
+body.search .wp-block-query.alignfull .wp-block-post:hover,
+body.search .wp-block-query.alignfull .wp-block-post:focus-within {
+	border-color: var(--wp--preset--color--accent-2);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+body.search .wp-block-query.alignfull .wp-block-post:hover .wp-block-post-title a {
+	color: var(--wp--preset--color--accent-1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body.search .wp-block-query.alignfull .wp-block-post:hover {
+		transform: translateY(-3px);
+	}
+}
+
+
+/* ==== 8. Footer =========================================================== */
 /* The editor sets sand with maroon text; this makes it maroon with
    page-colour text. */
 
@@ -613,8 +733,12 @@ footer.wp-block-template-part .wp-block-site-tagline {
 	font-weight: 500;
 }
 
-/* Past years as pills; saffron fill on hover. */
+/* Past WordCamps menu: years as pills in a grid of 4 (two rows);
+   saffron fill on hover. The nav block has the class past-wc-nav
+   (Advanced → Additional CSS class). */
 footer.wp-block-template-part .past-wc-nav .wp-block-navigation__container {
+	display: grid;
+	grid-template-columns: repeat(4, max-content);
 	gap: 0.6rem;
 }
 
@@ -635,14 +759,6 @@ footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:fo
 	color: var(--wp--preset--color--contrast);
 }
 
-footer.wp-block-template-part .wp-social-link {
-	transition: transform .15s ease;
-}
-
-footer.wp-block-template-part .wp-social-link:hover {
-	transform: translateY(-2px);
-}
-
 /* Bottom row ("Designed with WordPress"): a thin divider above it. */
 footer.wp-block-template-part .is-content-justification-space-between {
 	margin-top: var(--wp--preset--spacing--40);
@@ -660,422 +776,73 @@ footer.wp-block-template-part .wp-block-site-logo img {
 	border-radius: 50%;
 }
 
-
-/* ==== B5. Inputs and borders ========================================== */
-
-input[type="text"],
-input[type="email"],
-textarea {
-	background-color: var(--wp--preset--color--accent-5);
-	border: 1px solid var(--wp--preset--color--accent-4);
-	color: var(--wp--preset--color--contrast);
+/* On the maroon footer a maroon hover would vanish. */
+footer.wp-block-template-part .wp-block-button__link:hover,
+footer.wp-block-template-part .wp-element-button:hover {
+	background-color: var(--wp--preset--color--base) !important;
+	color: var(--wp--preset--color--accent-1) !important;
+	border-color: var(--wp--preset--color--base) !important;
 }
 
-/* Placeholder ("Type your email…"). Jetpack's subscribe form sets it to
-   half-strength currentColor with a stronger selector, hence !important.
-   0.8 keeps it readable on sand (about 4.8:1) yet lighter than real text. */
-input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-textarea::placeholder {
-	color: var(--wp--preset--color--contrast) !important;
-	opacity: 0.8 !important;
+/* Footer social icons: plain icons in the footer's text colour (no brand
+   circles). On hover each shows its network's own badge: brand-coloured
+   circle, white icon, and lifts slightly. These hexes are the networks'
+   own colours (as in WordPress's Social Icons block), not our palette. */
+footer.wp-block-template-part .wp-block-social-links .wp-social-link {
+	background-color: transparent !important;
+	color: inherit !important;
+	transition: background-color .15s ease, color .15s ease, transform .15s ease;
 }
 
-/* Logged in, Jetpack pre-fills the subscribe field with your email and
-   disables it; its rule then fades the whole field to 50%, so on the
-   maroon footer it turns pink and the text is unreadable. Visitors who
-   aren't logged in never see this state. */
-input[type="email"]:disabled {
-	color: var(--wp--preset--color--contrast) !important;
-	opacity: 0.85 !important;
-	cursor: not-allowed;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-	outline: 2px solid var(--wp--preset--color--accent-1);
-	outline-offset: 1px;
-}
-
-/* Sand borders (e.g. the hero photo) would vanish on the sand hero. */
-body .has-accent-5-border-color {
-	border-color: var(--wp--preset--color--accent-4) !important;
-}
-
-
-/* ==== B6. Homepage hero =============================================== */
-/* The homepage hero group has the class hero-wrap
-   (Advanced → Additional CSS class). */
-
-/* The only hex in this file: no palette slot holds this sand.
-   #F3EEE6 is deep enough to read on white; #F7F5F0 disappears.
-   To drop it, give a slot this hex in Site Editor → Styles → Colours,
-   set the hero block to that slot, then delete this rule. */
-body .hero-wrap {
-	background-color: #F3EEE6 !important;
-}
-
-.hero-wrap {
-	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
-}
-
-/* Eyebrow: the first line above the title, as small maroon capitals. */
-.hero-wrap .wp-block-column:first-child > p:first-child {
-	margin-bottom: 0.25rem !important;
-	color: var(--wp--preset--color--accent-1);
-	font-size: var(--wp--preset--font-size--medium) !important;
-	font-weight: 600 !important;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-}
-
-/* Day 1 / Day 2: soft chips. Give their group the class hero-days
-   so they wrap on phones instead of squeezing. */
-.hero-wrap .is-style-text-annotation {
-	padding: 0.35em 0.9em;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 999px;
-	background-color: var(--wp--preset--color--base);
-	color: var(--wp--preset--color--contrast);
-	font-family: inherit;
-	font-size: 0.9rem;
-	font-weight: 600 !important;
-	white-space: nowrap;
-}
-
-.hero-wrap .hero-days {
-	flex-wrap: wrap !important;
-	gap: 0.5rem;
-}
-
-/* Same, without the class (browsers with :has). Kept as its own rule so
-   a browser or sanitiser that rejects :has only drops this one. */
-.hero-wrap .wp-block-group:has(> .is-style-text-annotation) {
-	flex-wrap: wrap !important;
-	gap: 0.5rem;
-}
-
-/* Date and venue icons in maroon. */
-.hero-wrap .wp-block-icon {
-	color: var(--wp--preset--color--accent-1);
-}
-
-.hero-wrap .wp-block-icon svg {
+footer.wp-block-template-part .wp-block-social-links .wp-social-link svg {
 	fill: currentColor;
 }
 
-/* Buttons sit left, side by side; full width and stacked on phones.
-   Contact Us is Fill, so the shared saffron button rules apply. */
-.hero-wrap .wp-block-buttons {
-	justify-content: flex-start;
-	gap: 0.75rem;
+footer.wp-block-template-part .wp-block-social-links .wp-social-link:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link:focus-within {
+	color: #FFFFFF !important;
 }
 
-/* Photo: rounded, soft shadow, caption in a small dark box. */
-.hero-wrap .wp-block-cover {
-	overflow: hidden;
-	border-radius: 16px !important;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
+footer.wp-block-template-part .wp-block-social-links .wp-social-link:hover {
+	transform: translateY(-2px);
 }
 
-.hero-wrap .wp-block-cover__inner-container p {
-	display: inline-block;
-	padding: 0.3em 0.9em;
-	border-radius: 12px;
-	background-color: rgba(0, 0, 0, 0.45);
-	text-align: left !important;
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-whatsapp:focus-within {
+	background-color: #25D366 !important;
 }
 
-/* Hover for everyone: deeper shadow, and the light grey veil over the
-   photo fades out so it brightens. */
-.hero-wrap .wp-block-cover {
-	transition: transform .35s ease, box-shadow .35s ease;
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-meetup:focus-within {
+	background-color: #F6405F !important;
 }
 
-.hero-wrap .wp-block-cover__background {
-	transition: opacity .35s ease;
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-instagram:focus-within {
+	background-color: #F00075 !important;
 }
 
-.hero-wrap .wp-block-cover:hover {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 26px 50px rgba(0, 0, 0, 0.18);
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-linkedin:focus-within {
+	background-color: #0D66C2 !important;
 }
 
-.hero-wrap .wp-block-cover:hover .wp-block-cover__background {
-	opacity: 0 !important;
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:hover,
+footer.wp-block-template-part .wp-block-social-links .wp-social-link-x:focus-within {
+	background-color: #000000 !important;
 }
 
-/* Movement only when the visitor hasn't asked for reduced motion
-   (macOS: System Settings → Accessibility → Display → Reduce motion). */
-@media (prefers-reduced-motion: no-preference) {
-	.hero-wrap .wp-block-cover__image-background {
-		transition: transform .8s ease;
-	}
-
-	.hero-wrap .wp-block-cover:hover {
-		transform: translateY(-4px);
-	}
-
-	.hero-wrap .wp-block-cover:hover .wp-block-cover__image-background {
-		transform: scale(1.06);
-	}
-}
-
-@media (max-width: 781px) {
-	.hero-wrap {
-		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
-		/* The hero group is skipped by the homepage side-padding rule in
-		   Part A, so on mobile its content ran to the screen edges. */
-		padding-left: var(--wp--style--root--padding-left) !important;
-		padding-right: var(--wp--style--root--padding-right) !important;
-	}
-
-	/* 4:3 photo instead of 496px tall. */
-	.hero-wrap .wp-block-cover {
-		min-height: 0 !important;
-		aspect-ratio: 4 / 3 !important;
-	}
-}
-
+/* Small phones: email field and Subscribe button full width, stacked. */
 @media (max-width: 480px) {
-	.hero-wrap .wp-block-buttons,
-	.hero-wrap .wp-block-button {
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p,
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
 		width: 100%;
+		margin: 0 !important;
 	}
-
-	.hero-wrap .wp-block-button__link {
-		display: block;
-		text-align: center;
-	}
-}
-
-
-/* ==== B6b. Homepage sections (e.g. "More Than Talks") =============== */
-/* Those paragraphs are coloured #000 in the block, so they stay pure
-   black after the palette swap. Use the text colour instead. Headings
-   keep their own maroon. */
-body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) p.has-text-color {
-	color: var(--wp--preset--color--contrast) !important;
-}
-
-/* The photo zooms gently on hover (not for reduced motion). No scroll
-   reveal: WordCamp's sanitiser strips animation-timeline. */
-body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
-	overflow: hidden;
-	border-radius: 12px;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image img {
-		transition: transform .6s ease;
-	}
-
-	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image:hover img {
-		transform: scale(1.04);
-	}
-}
-
-
-/* ==== B6c. Homepage flow ============================================= */
-/*
- * Content blocks use these small, semantic classes in the editor:
- *   home-section       full-width section wrapper
- *   home-section__inner constrained inner group
- *   audience-grid      four audience cards
- *   outcomes-grid      expected-outcome cards
- *   speakers-grid      speaker cards / coming-soon panel
- *   venue-card         venue details + map link
- *   sponsor-band       sponsor logos + sponsor CTA
- *   community-stats    three or four number-led stats
- *   home-faq           Details/FAQ accordion
- *
- * The classes keep the page scannable: orient visitors, show the two-day
- * shape, then answer the practical questions before the final CTA.
- */
-
-body.home .wp-block-post-content > * + * {
-	margin-top: clamp(2.75rem, 6vw, 5.5rem);
-}
-
-body.home .wp-block-post-content > .wp-block-heading {
-	max-width: 18ch;
-	margin-bottom: 1rem;
-	line-height: 1.05;
-}
-
-body.home .home-section,
-body.home .venue-card,
-body.home .sponsor-band,
-body.home .home-faq {
-	box-sizing: border-box;
-	padding: clamp(1.5rem, 4vw, 3rem) !important;
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 1rem;
-	background-color: var(--wp--preset--color--accent-5);
-}
-
-body.home .home-section__inner {
-	width: 100%;
-	max-width: var(--wp--style--global--wide-size);
-	margin-inline: auto;
-}
-
-/* Day 1 and Day 2 should read as a decision point, not two paragraphs. */
-body.home .hero-days,
-body.home .audience-grid,
-body.home .outcomes-grid,
-body.home .speakers-grid,
-body.home .community-stats {
-	align-items: stretch;
-	gap: 1rem;
-}
-
-body.home .hero-days > *,
-body.home .audience-grid > *,
-body.home .outcomes-grid > *,
-body.home .speakers-grid > * {
-	box-sizing: border-box;
-	min-width: 0;
-	padding: clamp(1.1rem, 2.5vw, 1.5rem);
-	border: 1px solid var(--wp--preset--color--accent-4);
-	border-radius: 0.75rem;
-	background-color: var(--wp--preset--color--base);
-}
-
-body.home .hero-days > * {
-	flex: 0 1 auto;
-	width: fit-content;
-	padding: 0.35em 0.9em;
-}
-
-body.home .audience-grid > *::before,
-body.home .outcomes-grid > *::before {
-	display: block;
-	margin-bottom: 0.55rem;
-	color: var(--wp--preset--color--accent-1);
-	font-size: 0.78rem;
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-}
-
-body.home .audience-grid > *,
-body.home .outcomes-grid > * {
-	flex: 1 1 12rem;
-	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-
-body.home .audience-grid > *:hover,
-body.home .outcomes-grid > *:hover,
-body.home .speakers-grid > *:hover {
-	border-color: var(--wp--preset--color--accent-2);
-	box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	body.home .audience-grid > *:hover,
-	body.home .outcomes-grid > *:hover,
-	body.home .speakers-grid > *:hover {
-		transform: translateY(-3px);
-	}
-}
-
-/* Short labels make the audience section easy to scan. */
-body.home .audience-grid > :nth-child(1)::before { content: "Build"; }
-body.home .audience-grid > :nth-child(2)::before { content: "Deliver"; }
-body.home .audience-grid > :nth-child(3)::before { content: "Grow"; }
-body.home .audience-grid > :nth-child(4)::before { content: "Start"; }
-
-/* Stats are intentionally bold and quiet: proof, not a competing hero. */
-body.home .community-stats > * {
-	flex: 1 1 10rem;
-	padding: 1.25rem 1rem;
-	border-left: 3px solid var(--wp--preset--color--accent-2);
-}
-
-body.home .community-stats strong,
-body.home .community-stats .wp-block-heading {
-	display: block;
-	margin: 0 0 0.2rem;
-	color: var(--wp--preset--color--accent-1);
-	font-size: clamp(1.8rem, 3vw, 2.75rem) !important;
-	line-height: 1;
-}
-
-body.home .speakers-coming-soon {
-	border: 2px dashed var(--wp--preset--color--accent-1);
-	background-color: var(--wp--preset--color--base);
-}
-
-body.home .venue-card {
-	display: grid;
-	grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
-	align-items: center;
-	gap: clamp(1.5rem, 4vw, 3rem);
-}
-
-body.home .venue-card .wp-block-buttons {
-	margin-top: 1.25rem;
-}
-
-body.home .sponsor-band {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	align-items: center;
-	gap: 1.5rem;
-}
-
-body.home .sponsor-band .wp-block-post-template {
-	grid-column: 1 / -1;
-}
-
-/* Native Details blocks stay lightweight, readable, and keyboard-friendly. */
-body.home .home-faq details {
-	border-top: 1px solid var(--wp--preset--color--accent-4);
-}
-
-body.home .home-faq details:last-child {
-	border-bottom: 1px solid var(--wp--preset--color--accent-4);
-}
-
-body.home .home-faq summary {
-	padding: 1.1rem 2rem 1.1rem 0;
-	color: var(--wp--preset--color--accent-1);
-	font-size: 1.05rem;
-	font-weight: 700;
-	cursor: pointer;
-}
-
-body.home .home-faq summary::marker {
-	color: var(--wp--preset--color--accent-2);
-}
-
-body.home .home-faq details > :not(summary) {
-	max-width: 65ch;
-	padding-bottom: 1.1rem;
-}
-
-@media (max-width: 700px) {
-	body.home .venue-card,
-	body.home .sponsor-band {
-		display: block;
-	}
-
-	body.home .sponsor-band .wp-block-buttons {
-		margin-top: 1.25rem;
-	}
-}
-
-
-/* ==== B7. Page-specific =============================================== */
-
-/* Code of Conduct: room above each section, not above the first heading
-   and not on the footer headings. */
-.page-slug-code-of-conduct .entry-content > .wp-block-heading {
-	margin-top: 2.5rem;
-}
-
-.page-slug-code-of-conduct .entry-content > h3.wp-block-heading:first-of-type {
-	margin-top: 0;
 }
