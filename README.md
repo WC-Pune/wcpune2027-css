@@ -37,7 +37,7 @@ keeps `animation:`, so a scroll animation would jump straight to its end state. 
 transitions instead. Checked against the served file on 2026-10-04; `:has()`, `@supports`,
 `@keyframes`, `-webkit-line-clamp` and `content:` all survive.
 
-The homepage hero styles apply to `.hero-wrap` (the hero group). The Day 1 / Day 2 group has the class `hero-days`, and the Past WordCamps menu in the footer has `past-wc-nav`.
+Classes the CSS relies on (set in Advanced → Additional CSS class): `hero-wrap` on the homepage hero group, `nav-cta` on the header menu item that should look like a button, and `past-wc-nav` on the Past WordCamps menu in the footer.
 
 ## Guidelines for developers
 **Editor first, CSS last.** The CSS file only holds what the editor can't do (hover and focus

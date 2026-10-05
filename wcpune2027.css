@@ -83,6 +83,7 @@ body .wp-element-button:focus-visible {
 /* Inputs: sand fill, sand-edge border. */
 input[type="text"],
 input[type="email"],
+input[type="search"],
 textarea {
 	background-color: var(--wp--preset--color--accent-5);
 	border: 1px solid var(--wp--preset--color--accent-4);
@@ -94,6 +95,7 @@ textarea {
    0.8 keeps it readable on sand (about 4.8:1) yet lighter than real text. */
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
+input[type="search"]::placeholder,
 textarea::placeholder {
 	color: var(--wp--preset--color--contrast) !important;
 	opacity: 0.8 !important;
@@ -642,13 +644,13 @@ footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:fo
 }
 
 /* Bottom row ("Designed with WordPress"): a thin divider above it. */
-footer.wp-block-template-part .is-content-justification-space-between {
+footer.wp-block-template-part .alignfull.is-content-justification-space-between {
 	margin-top: var(--wp--preset--spacing--40);
 	padding-top: var(--wp--preset--spacing--30);
 	border-top: 1px solid var(--wp--preset--color--accent-4);
 }
 
-footer.wp-block-template-part .is-content-justification-space-between p {
+footer.wp-block-template-part .alignfull.is-content-justification-space-between p {
 	font-size: 0.9rem !important;
 }
 
