@@ -26,14 +26,14 @@ slots, and the stylesheet only reads them (`var(--wp--preset--color--accent-1)`)
 | Accent 3 | Header and hero background | `#e1a48e` | `#F3EEE6` |
 | Accent 4 | Sand edge: borders on sand (CSS) | `#D6D5D3` (unused today) | `#D6D5D3` |
 | Accent 5 | Sand: footer background today, inputs, light panels | `#e1d9ca` | `#F7F5F0` |
-| Brick red (custom) | Same as Accent 1; older blocks use it | `#8f1402` | `#8E1616` |
 
 Part B of the CSS moves a few areas to a different slot, so switch day needs no block
 re-colouring: footer → Accent 1 with Base text, buttons → Accent 2 with Contrast text,
 header → Base.
 
-When you re-colour a block, pick a Theme slot rather than Brick red; once nothing uses
-Brick red (or the unused Dark wooden / Timber / Light yellow / Stone swatches) they can be deleted.
+When you re-colour a block, always pick a Theme slot, never a custom swatch or hex. No block uses
+Brick red any more, so it can be deleted from the palette, along with the unused Dark wooden /
+Timber / Light yellow / Stone swatches.
 
 Text pairings for the brand palette: never saffron text on white or sand (2:1). Saffron buttons
 use charcoal text. White or saffron text is fine on maroon.
@@ -69,5 +69,5 @@ No-install alternative: paste the body of `dev-inject.user.js` into the DevTools
 3. Check it's live: view the page source and search for `wordcamp_remote_css`.
    If it's missing, the save on the Remote CSS screen failed: look for a red error there.
 4. Empty **Appearance → Additional CSS** (Part A is in the Remote CSS file too).
-5. **Site Editor → Styles → Colours**: set each Theme slot (and Brick red) to its
+5. **Site Editor → Styles → Colours**: set each Theme slot to its
    "Switch day" hex above (also listed in `dev-switch-palette.css`). Save.

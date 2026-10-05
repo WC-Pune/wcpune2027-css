@@ -12,7 +12,7 @@
  * THEME SLOTS (by colour)
  *   base       page background, text on maroon
  *   contrast   body text, text on buttons
- *   accent-1   maroon: brand, headings, links, footer (custom-brick-red = same)
+ *   accent-1   maroon: brand, headings, links, footer
  *   accent-2   saffron: buttons, link underlines
  *   accent-3   peach today (header, hero); sand later
  *   accent-4   sand edge: borders on sand
@@ -407,7 +407,7 @@ header.wp-block-template-part .has-accent-3-background-color {
 	border-top: 4px solid var(--wp--preset--color--accent-1);
 }
 
-header.wp-block-template-part .has-custom-brick-red-border-color {
+header.wp-block-template-part .has-accent-1-border-color {
 	border-style: none none solid !important;
 	border-color: var(--wp--preset--color--accent-4) !important;
 }
