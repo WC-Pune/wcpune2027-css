@@ -6,7 +6,7 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 
 | File | Purpose |
 |---|---|
-| `wcpune2027.css` | Site CSS: links, buttons, header, layout, sponsors, hero, search, footer |
+| `wcpune2027.css` | Site CSS: links, buttons, header, cards (sponsors, search), hero, footer |
 | `dev-inject.user.js` | Dev only — preview local CSS on the live site |
 
 ## Theme colours
