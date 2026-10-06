@@ -1,0 +1,22 @@
+/* ==== 5. Homepage sections ================================================ */
+
+/* Space between the sections below the hero. */
+body.home .wp-block-post-content > * + * {
+	margin-top: clamp(2.75rem, 6vw, 5.5rem);
+}
+
+/* Image zoom on hover. */
+body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image {
+	overflow: hidden;
+	border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image img {
+		transition: transform .6s ease;
+	}
+
+	body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-image:hover img {
+		transform: scale(1.04);
+	}
+}

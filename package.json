@@ -1,0 +1,13 @@
+{
+  "name": "wcpune2027-css",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remote CSS for WordCamp Pune 2027, compiled from SCSS",
+  "scripts": {
+    "build": "sass scss/main.scss wcpune2027.css --no-source-map --style=expanded",
+    "watch": "sass scss/main.scss wcpune2027.css --no-source-map --style=expanded --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.77.6"
+  }
+}

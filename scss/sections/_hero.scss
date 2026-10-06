@@ -1,0 +1,77 @@
+/* ==== 4. Homepage hero ==================================================== */
+.hero-wrap {
+	padding-block: clamp(3rem, 6vw, 6rem) clamp(4.5rem, 9vw, 8rem);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+}
+
+/* Photo: shadow and caption box. */
+.hero-wrap .wp-block-cover {
+	overflow: hidden;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.14);
+	transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.hero-wrap .wp-block-cover__inner-container p {
+	display: inline-block;
+	padding: 0.3em 0.9em;
+	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.45);
+	text-align: left !important;
+}
+
+/* Hover: deeper shadow; the veil fades out. */
+.hero-wrap .wp-block-cover__background {
+	transition: opacity .35s ease;
+}
+
+.hero-wrap .wp-block-cover:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 26px 50px rgba(0, 0, 0, 0.18);
+}
+
+.hero-wrap .wp-block-cover:hover .wp-block-cover__background {
+	opacity: 0 !important;
+}
+
+/* Motion only if the visitor allows it. */
+@media (prefers-reduced-motion: no-preference) {
+	.hero-wrap .wp-block-cover__image-background {
+		transition: transform .8s ease;
+	}
+
+	.hero-wrap .wp-block-cover:hover {
+		transform: translateY(-4px);
+	}
+
+	.hero-wrap .wp-block-cover:hover .wp-block-cover__image-background {
+		transform: scale(1.06);
+	}
+}
+
+@media (max-width: 781px) {
+	.hero-wrap {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 97%);
+	}
+
+	/* Photo above the text when the columns stack. */
+	.hero-wrap .wp-block-columns {
+		flex-direction: column-reverse;
+	}
+
+	/* 4:3 photo instead of 496px tall. */
+	.hero-wrap .wp-block-cover {
+		min-height: 0 !important;
+		aspect-ratio: 4 / 3 !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-wrap .wp-block-buttons,
+	.hero-wrap .wp-block-button {
+		width: 100%;
+	}
+
+	.hero-wrap .wp-block-button__link {
+		display: block;
+		text-align: center;
+	}
+}

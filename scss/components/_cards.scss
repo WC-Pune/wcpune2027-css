@@ -1,0 +1,61 @@
+/* ==== 3. Cards: sponsors and search ======================================= */
+
+/* Cards: sponsor tiles and search results share one look. */
+body:not(.search) .wcb_sponsor,
+.search .wp-block-query.alignfull .wp-block-post {
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-radius: 12px;
+	background-color: var(--wp--preset--color--base);
+	transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+body:not(.search) .wcb_sponsor:hover,
+body:not(.search) .wcb_sponsor:focus-within,
+.search .wp-block-query.alignfull .wp-block-post:hover,
+.search .wp-block-query.alignfull .wp-block-post:focus-within {
+	border-color: var(--wp--preset--color--accent-2);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	body:not(.search) .wcb_sponsor:hover,
+	.search .wp-block-query.alignfull .wp-block-post:hover {
+		transform: translateY(-3px);
+	}
+}
+
+/* Sponsor tiles: logos in a 3:1 box (WordPress forces 16:9). */
+.wp-block-post-template {
+	gap: 1rem;
+}
+
+body:not(.search) .wcb_sponsor {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5rem 2rem;
+}
+
+body:not(.search) .wcb_sponsor .wp-block-post-featured-image {
+	width: 100%;
+	margin: 0;
+}
+
+body:not(.search) .wcb_sponsor img {
+	aspect-ratio: 3 / 1 !important;
+	width: 100% !important;
+	height: auto;
+	max-height: 90px;
+	object-fit: contain;
+}
+
+/* Two logos per row on phones. */
+@media (max-width: 600px) {
+	.page-slug-sponsors .wp-block-post-template {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+
+	body:not(.search) .wcb_sponsor {
+		padding: 1rem;
+	}
+}

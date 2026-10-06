@@ -1,0 +1,72 @@
+/* ==== 1. Links, buttons, inputs =========================================== */
+
+a:where(:not(.wp-element-button)) {
+	text-decoration-color: var(--wp--preset--color--accent-2);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.2em;
+}
+
+a:where(:not(.wp-element-button)):hover {
+	text-decoration-color: var(--wp--preset--color--accent-1);
+}
+
+a:focus-visible {
+	outline: 2px solid var(--wp--preset--color--accent-1);
+	outline-offset: 2px;
+}
+
+/* !important beats WordPress's block colour classes. */
+body .wp-block-button__link,
+body .wp-element-button {
+	background-color: var(--wp--preset--color--accent-2) !important;
+	color: var(--wp--preset--color--contrast) !important;
+	border-color: var(--wp--preset--color--accent-2) !important;
+	transition: background-color .15s ease, color .15s ease;
+}
+
+body .wp-block-button__link:hover,
+body .wp-element-button:hover {
+	background-color: var(--wp--preset--color--accent-1) !important;
+	color: var(--wp--preset--color--base) !important;
+	border-color: var(--wp--preset--color--accent-1) !important;
+}
+
+body .wp-block-button__link:focus-visible,
+body .wp-element-button:focus-visible {
+	outline: 3px solid var(--wp--preset--color--contrast);
+	outline-offset: 2px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea {
+	background-color: var(--wp--preset--color--accent-5);
+	border: 1px solid var(--wp--preset--color--accent-4);
+	color: var(--wp--preset--color--contrast);
+}
+
+/* !important beats Jetpack's placeholder style. */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.8 !important;
+}
+
+/* Jetpack disables the pre-filled email field and fades it to 50%. */
+input[type="email"]:disabled {
+	color: var(--wp--preset--color--contrast) !important;
+	opacity: 0.85 !important;
+	cursor: not-allowed;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+	outline: 2px solid var(--wp--preset--color--accent-1);
+	outline-offset: 1px;
+}
+
