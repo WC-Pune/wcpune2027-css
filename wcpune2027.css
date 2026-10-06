@@ -676,6 +676,28 @@ footer.wp-block-template-part .wp-block-search__button {
   padding: 9px 14px;
 }
 
+/* Phones: logo and search stack. Smaller logo; search full width, left aligned
+   (the theme right-aligns it once the row wraps). */
+@media (max-width: 600px) {
+  footer.wp-block-template-part .wp-block-group:has(> .wp-block-site-logo) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--wp--preset--spacing--30);
+  }
+  footer.wp-block-template-part .wp-block-site-logo img {
+    width: 64px !important;
+    height: auto;
+  }
+  footer.wp-block-template-part .wp-block-group:has(> .wp-block-search),
+  footer.wp-block-template-part .wp-block-search {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  /* The theme gives this group a 320px flex-basis, which is a height in a column. */
+  footer.wp-block-template-part .wp-block-group:has(> .wp-block-search) {
+    flex-basis: auto;
+  }
+}
 /* Subscribe form like the search: same gap, height and text size.
    !important beats the inline font size set by Jetpack. */
 footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
