@@ -204,10 +204,21 @@ No-install alternative: paste the body of `dev-inject.user.js` into the DevTools
 
 ## Publishing changes
 1. Run `npm run build` and commit the rebuilt `wcpune2027.css` with your SCSS changes. `npm run check` confirms the two match.
-2. Push to `origin` (`WC-Pune/wcpune2027-css`). A push to `main` goes live, so review changes
-   in a branch or pull request first.
-3. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click
-   **Update** to re-sync. Check the `ver=` number on `wordcamp_remote_css` in the page source goes up.
+2. Push to `origin` (`WC-Pune/wcpune2027-css`). A push to `main` goes live as soon as the site
+   syncs it (webhook below, or the Update button), so review changes in a branch or pull request first.
+3. The site doesn't read the file on each page load. WordCamp.org downloads it, sanitises and
+   minifies it, and stores a local copy, which it re-syncs automatically through the webhook. If the
+   webhook isn't working, go to wp-admin → **Appearance → Remote CSS** and click **Update**. Check the
+   `ver=` number on `wordcamp_remote_css` in the page source goes up.
+
+### Remote CSS URL and webhook
+- WordCamp.org converts any GitHub URL you enter into the API form
+  (`https://api.github.com/repos/WC-Pune/wcpune2027-css/contents/wcpune2027.css`). That is expected.
+- Auto-sync webhook (repo Settings → Webhooks, admin account needed):
+  - Payload URL: `https://pune.wordcamp.org/2027/wp-admin/admin-ajax.php?action=wcrcss_webhook`
+  - Content type `application/x-www-form-urlencoded`, no secret, SSL verification on, **push** events only.
+  - To test, push a change and check **Recent Deliveries** for a 200, then that `ver=` went up.
+- Rules in the Core/Jetpack editor (Additional CSS, Site Editor styles) take precedence over Remote CSS.
 
 ## Troubleshooting
 - **`npm ci` fails:** check `node -v` is 18 or newer. If `package-lock.json` is out of step with
@@ -215,5 +226,5 @@ No-install alternative: paste the body of `dev-inject.user.js` into the DevTools
 - **`npm run check` shows a diff:** the build is stale. Run `npm run build` and commit `wcpune2027.css`.
 - **Local CSS doesn't show on the live site:** make sure `python3 -m http.server 8027` is running
   from the repo folder, the Tampermonkey script is on, and **Allow User Scripts** is enabled.
-- **Live site didn't update after merging to `main`:** re-sync with **Appearance → Remote CSS → Update**
-  (the steps above), and view the served file to confirm your change is there.
+- **Live site didn't update after merging to `main`:** check the webhook's **Recent Deliveries** for an error,
+  or re-sync with **Appearance → Remote CSS → Update**, then view the served file to confirm your change is there.
