@@ -48,6 +48,19 @@ body .wp-element-button:focus-visible {
   outline-offset: 2px;
 }
 
+/* Outline style: keep it hollow so it reads differently from the fill button. */
+body .is-style-outline > .wp-block-button__link {
+  background-color: transparent !important;
+  color: var(--wp--preset--color--contrast) !important;
+  border-color: var(--wp--preset--color--accent-2) !important;
+}
+
+body .is-style-outline > .wp-block-button__link:hover {
+  background-color: var(--wp--preset--color--accent-1) !important;
+  color: var(--wp--preset--color--base) !important;
+  border-color: var(--wp--preset--color--accent-1) !important;
+}
+
 input[type=text],
 input[type=email],
 input[type=search],
