@@ -272,7 +272,7 @@ body:not(.search) .wcb_sponsor:focus-within,
   }
 }
 /* Sponsor tiles: logos in a 3:1 box (WordPress forces 16:9). */
-.wp-block-post-template {
+body:not(.search) .wp-block-post-template:has(.wcb_sponsor) {
   gap: 1rem;
 }
 
@@ -477,7 +477,10 @@ body.home .wp-block-post-content > .wp-block-columns:not(.alignfull) .wp-block-i
   font-size: 0.85rem !important;
 }
 
+/* Sits above the stretched title link so the date stays clickable. */
 .search .wp-block-query.alignfull .wp-block-post-date a {
+  position: relative;
+  z-index: 1;
   color: inherit;
   text-decoration: none;
 }
@@ -618,10 +621,11 @@ footer.wp-block-template-part .wp-social-link:focus-within {
   color: #FFFFFF !important;
 }
 
-footer.wp-block-template-part .wp-social-link:hover {
-  transform: translateY(-2px);
+@media (prefers-reduced-motion: no-preference) {
+  footer.wp-block-template-part .wp-social-link:hover {
+    transform: translateY(-2px);
+  }
 }
-
 footer.wp-block-template-part .wp-social-link-whatsapp:hover,
 footer.wp-block-template-part .wp-social-link-whatsapp:focus-within {
   background-color: #25D366 !important;

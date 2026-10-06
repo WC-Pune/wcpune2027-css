@@ -81,7 +81,10 @@
 	font-size: 0.85rem !important;
 }
 
+/* Sits above the stretched title link so the date stays clickable. */
 .search .wp-block-query.alignfull .wp-block-post-date a {
+	position: relative;
+	z-index: 1;
 	color: inherit;
 	text-decoration: none;
 }

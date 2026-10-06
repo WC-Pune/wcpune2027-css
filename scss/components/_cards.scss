@@ -25,7 +25,7 @@ body:not(.search) .wcb_sponsor:focus-within,
 }
 
 /* Sponsor tiles: logos in a 3:1 box (WordPress forces 16:9). */
-.wp-block-post-template {
+body:not(.search) .wp-block-post-template:has(.wcb_sponsor) {
 	gap: 1rem;
 }
 
