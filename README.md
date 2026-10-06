@@ -159,7 +159,7 @@ adding a rule, check whether the editor can set it, and set it there.
 - [ ] **Sponsors page:** check the tile styling once the page is published (it returns 404 today).
 - [ ] **Hero padding** is a fluid `clamp` in CSS; the editor only offers fixed steps. Move it only if that is acceptable.
 - [ ] **Site title link rule** (`.wp-block-site-title a`) may be redundant now the colour is set in the editor. Remove it if the title looks the same without it.
-- [ ] **Footer top space** uses the `50` spacing step; the old CSS was a responsive 3–5rem. Try `60` if it looks tight.
+- [ ] **Footer top space** is the `60` spacing step (70px) on every page. Check it by eye; use `50` or `70` in `scss/layout/_footer.scss` if it looks off.
 
 ## SCSS setup
 The CSS is written as SCSS partials and compiled into the single file the site loads. Splitting it
