@@ -1,0 +1,35 @@
+/* ==== 8. Announcement strip =============================================== */
+/* Class `announce` on a full-width Group. Background, text colour, padding and
+   the text itself are set in the editor; this only adds what it can't. */
+.announce {
+	text-align: center;
+	/* Room before whatever follows; the editor sets the space above. */
+	margin-block-end: var(--wp--preset--spacing--60);
+}
+
+.announce p {
+	margin: 0;
+}
+
+.announce a:where(:not(.wp-element-button)) {
+	color: inherit;
+	text-decoration-color: currentColor;
+	font-weight: 700;
+}
+
+/* A small button or two sit inline with the text, wrapping on phones. */
+.announce .wp-block-buttons {
+	margin: 0;
+	justify-content: center;
+	gap: 0.5rem 0.75rem;
+}
+
+@media (max-width: 600px) {
+	.announce {
+		text-align: left;
+	}
+
+	.announce .wp-block-buttons {
+		justify-content: flex-start;
+	}
+}

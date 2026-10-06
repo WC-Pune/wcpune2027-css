@@ -10,6 +10,8 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 | [`wcpune2027.css`](wcpune2027.css) | **Generated** from `scss/` and committed; this is the file Remote CSS loads. Don't edit it by hand |
 | [`package.json`](package.json) | Sass scripts: `npm run build`, `watch` and `check` |
 | [`docs/editor-guide.md`](docs/editor-guide.md) | For organizers: editing the site in WordPress, no code needed |
+| [`docs/patterns.md`](docs/patterns.md) | Block markup for the components in `scss/components/` |
+| [`docs/todo.md`](docs/todo.md) | Components and docs still to do |
 | [`dev-inject.user.js`](dev-inject.user.js) | Dev only — preview local CSS on the live site |
 
 ## Quick start

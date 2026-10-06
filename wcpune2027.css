@@ -8,7 +8,8 @@
  *   1. Links, buttons, inputs   5. Homepage sections
  *   2. Header                   6. Search results
  *   3. Cards (sponsors, search) 7. Footer
- *   4. Homepage hero
+ *   4. Homepage hero            8. Announcement strip
+ *                               9. Ticket card
  */
 /* ==== 1. Links, buttons, inputs =========================================== */
 a:where(:not(.wp-element-button)) {
@@ -727,4 +728,137 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
     width: 100%;
     margin: 0 !important;
   }
+}
+/* ==== 8. Announcement strip =============================================== */
+/* Class `announce` on a full-width Group. Background, text colour, padding and
+   the text itself are set in the editor; this only adds what it can't. */
+.announce {
+  text-align: center;
+  /* Room before whatever follows; the editor sets the space above. */
+  margin-block-end: var(--wp--preset--spacing--60);
+}
+
+.announce p {
+  margin: 0;
+}
+
+.announce a:where(:not(.wp-element-button)) {
+  color: inherit;
+  text-decoration-color: currentColor;
+  font-weight: 700;
+}
+
+/* A small button or two sit inline with the text, wrapping on phones. */
+.announce .wp-block-buttons {
+  margin: 0;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .announce {
+    text-align: left;
+  }
+  .announce .wp-block-buttons {
+    justify-content: flex-start;
+  }
+}
+/* ==== 9. Ticket card ====================================================== */
+/* Class `ticket-card` on a Group (usually inside a Columns block, one card per
+   column). Colours, padding, radius and the text are set in the editor. The CSS
+   gives equal heights, the dashed tear line, ticks on the list and the hover.
+
+   Inside the card, in order:
+     - a heading (name) and a big price paragraph
+     - a Separator with the class `ticket-card__perf`
+     - a List of what's included
+     - a Buttons block (it sits at the bottom of the card)
+   Add `ticket-card-featured` for the recommended ticket. */
+.ticket-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--wp--preset--color--accent-4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ticket-card > * {
+  margin-block-start: 0;
+}
+
+.ticket-card-featured {
+  /* Same 1px border as the others, so the content doesn't shift; the ring is a shadow. */
+  border-color: var(--wp--preset--color--accent-2);
+  box-shadow: 0 0 0 1px var(--wp--preset--color--accent-2), 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.ticket-card:hover,
+.ticket-card:focus-within {
+  border-color: var(--wp--preset--color--accent-2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.ticket-card-featured:hover,
+.ticket-card-featured:focus-within {
+  box-shadow: 0 0 0 1px var(--wp--preset--color--accent-2), 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* A little air between the name and the price. */
+.ticket-card :is(h2, h3, h4) {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ticket-card:hover {
+    transform: translateY(-3px);
+  }
+}
+/* Space after a row of cards. */
+.wp-block-columns:has(.ticket-card) {
+  margin-block-end: var(--wp--preset--spacing--60);
+}
+
+/* Tear line: the Separator block can't be dashed in the editor. */
+.ticket-card .ticket-card__perf {
+  width: 100%;
+  max-width: none;
+  margin-block: var(--wp--preset--spacing--30);
+  border: 0;
+  border-top: 2px dashed var(--wp--preset--color--accent-4);
+  background: none;
+}
+
+/* Ticks instead of bullets. */
+.ticket-card ul {
+  margin: 0 0 var(--wp--preset--spacing--40);
+  padding: 0;
+  list-style: none;
+}
+
+.ticket-card ul li {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+.ticket-card ul li + li {
+  margin-top: 0.5em;
+}
+
+.ticket-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--wp--preset--color--accent-1);
+}
+
+/* The button row drops to the bottom so cards of different lengths line up. */
+.ticket-card .wp-block-buttons {
+  margin-top: auto;
+}
+
+.ticket-card .wp-block-button,
+.ticket-card .wp-block-button__link {
+  width: 100%;
+  text-align: center;
 }

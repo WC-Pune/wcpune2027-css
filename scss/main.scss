@@ -7,7 +7,8 @@
  *   1. Links, buttons, inputs   5. Homepage sections
  *   2. Header                   6. Search results
  *   3. Cards (sponsors, search) 7. Footer
- *   4. Homepage hero
+ *   4. Homepage hero            8. Announcement strip
+ *                               9. Ticket card
  */
 
 // Order matches the original stylesheet cascade — do not reorder.
@@ -18,3 +19,5 @@
 @use "sections/home";
 @use "pages/search";
 @use "layout/footer";
+@use "components/announce";
+@use "components/ticket-card";
