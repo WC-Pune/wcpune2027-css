@@ -9,6 +9,7 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 | `scss/` | **Source of truth.** SCSS partials, one per area (see [SCSS setup](#scss-setup)) |
 | `wcpune2027.css` | **Generated** from `scss/` and committed; this is the file Remote CSS loads. Don't edit it by hand |
 | `package.json` | Sass scripts: `npm run build`, `watch` and `check` |
+| `docs/editor-guide.md` | For organizers: editing the site in WordPress, no code needed |
 | `dev-inject.user.js` | Dev only — preview local CSS on the live site |
 
 ## Quick start
