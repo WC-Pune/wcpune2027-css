@@ -6,7 +6,9 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 
 | File | Purpose |
 |---|---|
-| `wcpune2027.css` | Site CSS: links, buttons, header, cards (sponsors, search), hero, footer |
+| `scss/` | **Source of truth.** SCSS partials, one per area (see [SCSS setup](#scss-setup)) |
+| `wcpune2027.css` | **Generated** from `scss/` and committed; this is the file Remote CSS loads. Don't edit it by hand |
+| `package.json` | Sass build scripts (`npm run build`, `npm run watch`) |
 | `dev-inject.user.js` | Dev only — preview local CSS on the live site |
 
 ## Theme colours
@@ -37,7 +39,29 @@ keeps `animation:`, so a scroll animation would jump straight to its end state. 
 transitions instead. Checked against the served file on 2026-10-04; `:has()`, `@supports`,
 `@keyframes`, `-webkit-line-clamp` and `content:` all survive.
 
-Classes the CSS relies on (set in Advanced → Additional CSS class): `hero-wrap` on the homepage hero group, `nav-cta` on the header menu item that should look like a button, and `past-wc-nav` on the Past WordCamps menu in the footer.
+## Classes the CSS relies on
+The CSS only styles what the site already outputs, so some of it breaks if these change.
+
+**Set in the editor** (block → Advanced → Additional CSS class). If one is removed or renamed
+there, that part loses its styling.
+
+| Class | Set on | Styles |
+|---|---|---|
+| `hero-wrap` | Homepage hero group | Clip-path, hover zoom, photo order and 4:3 photo on phones |
+| `nav-cta` | A header menu item | Saffron pill button (full width in the phone menu) |
+| `past-wc-nav` | The Past WordCamps menu in the footer | Pill-shaped link grid |
+
+**Added by WordPress, the theme or plugins** (not set by us). A plugin or theme update that
+changes its markup can break the matching CSS without any change in this repo.
+
+| Class | Comes from | Used for |
+|---|---|---|
+| `wcb_sponsor`, `type-wcb_sponsor`, `type-wcb_speaker`, `type-wcb_session`, `type-wcb_organizer` | WordCamp post types | Sponsor tiles; result-type labels in search |
+| `page-slug-sponsors` | Page slug (body/post class) | 2-per-row sponsor logos on phones |
+| `body.home`, `.search`, `.admin-bar` | WordPress body classes | Homepage spacing, search cards, sticky-header offset |
+| `wp-block-jetpack-subscriptions__form-elements` | Jetpack Subscribe block | Footer subscribe form |
+| `wp-social-link-*` | Social Icons block | Brand colours on hover |
+| `wp-block-*`, `wp-element-button` | WordPress core blocks | Header, buttons, search, query loop |
 
 ## Why the CSS does what it does
 Short reasons, kept here so the CSS file stays comment-light.
@@ -97,7 +121,8 @@ adding a rule, check whether the editor can set it, and set it there.
      the `50` step for left and right padding, 0 top and bottom, and the `30` step for block spacing.
    - *Page (no title)*: the homepage only. Full-width sections use the **Full width**
      alignment, so they ignore the content width.
-5. **Don't touch Appearance → Additional CSS.** It stays empty. All CSS goes in `wcpune2027.css`.
+5. **Don't touch Appearance → Additional CSS.** It stays empty. All CSS goes in the `scss/` partials
+   (compiled into `wcpune2027.css`).
 6. **Target classes, not positions.** Add a class in the block's Advanced → Additional CSS
    class and style that class. Avoid selectors tied to block order, such as `:nth-child`.
 7. **`!important` only to beat WordPress.** WordPress marks block colour classes and the phone
@@ -107,8 +132,8 @@ adding a rule, check whether the editor can set it, and set it there.
    `@media (prefers-reduced-motion: no-preference)`.
 9. **Mobile first check.** Test at 782px, 600px and 480px or narrower, and logged in (the admin bar
    moves the sticky header). Look at the phone menu overlay every time you touch the header.
-10. **Keep it small and sectioned.** Put new rules in the matching numbered section (see the file's
-    contents list) and comment *why*, not what. Delete rules once the editor does the same job.
+10. **Keep it small and sectioned.** Put new rules in the matching partial (see [SCSS setup](#scss-setup))
+    and comment *why*, not what. Delete rules once the editor does the same job.
 11. **Don't hardcode content.** No page-specific text, IDs or URLs. Use block classes.
 12. **Check after editor changes.** Template edits live in the database, not in this repo. After
     changing a template or Styles, re-check the page, and remove the CSS rule it replaces.
@@ -124,8 +149,42 @@ adding a rule, check whether the editor can set it, and set it there.
 - [ ] **Site title link rule** (`.wp-block-site-title a`) may be redundant now the colour is set in the editor. Remove it if the title looks the same without it.
 - [ ] **Footer top space** uses the `50` spacing step; the old CSS was a responsive 3–5rem. Try `60` if it looks tight.
 
+## SCSS setup
+The CSS is written as SCSS partials and compiled into the single file the site loads. Splitting it
+by area means several people can work at once without editing the same file.
+
+```
+scss/
+├── main.scss                      # header comment + @use list (order = cascade order, don't reorder)
+├── base/_links-buttons-inputs.scss
+├── layout/_header.scss
+├── components/_cards.scss         # sponsor + search card look
+├── sections/_hero.scss
+├── sections/_home.scss
+├── pages/_search.scss
+└── layout/_footer.scss
+```
+
+**Setup (once):** needs Node 18+. Run `npm install`.
+
+**Compile:**
+- `npm run build` — compile `scss/main.scss` to `wcpune2027.css` once.
+- `npm run watch` — recompile on every save while you work.
+
+**Rules**
+- Edit the partials in `scss/`, never `wcpune2027.css`; the next build overwrites it.
+- Commit **both** the changed partials and the rebuilt `wcpune2027.css`. The site loads the built
+  file straight from GitHub, so a stale build means a stale site.
+- New rule? Put it in the matching partial and comment *why*. A new area gets a new partial plus a
+  `@use` line in `main.scss`, placed where it should sit in the cascade.
+- The sanitiser limits still apply to the compiled output. SCSS `$variables` are fine because they
+  compile away, but a plain CSS `--custom-property: value;` or `@import` in a partial is stripped
+  on the site.
+- The built file uses spaces for indentation, not tabs.
+
 ## Local development (live site + local CSS)
-1. `cd remote-css && python3 -m http.server 8027`
+1. `cd remote-css && npm install && npm run watch` in one terminal, and
+   `python3 -m http.server 8027` in another.
 2. Install the [Tampermonkey extension for Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en),
    then add `dev-inject.user.js` as a new script.
    (In `chrome://extensions` → Tampermonkey → Details, turn on **Allow User Scripts**.)
@@ -135,6 +194,8 @@ adding a rule, check whether the editor can set it, and set it there.
 No-install alternative: paste the body of `dev-inject.user.js` into the DevTools console after each reload.
 
 ## Publishing changes
-1. Push to `origin` (`WC-Pune/wcpune2027-css`).
-2. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click
+1. Run `npm run build` and commit the rebuilt `wcpune2027.css` with your SCSS changes.
+2. Push to `origin` (`WC-Pune/wcpune2027-css`). A push to `main` goes live, so review changes
+   in a branch or pull request first.
+3. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click
    **Update** to re-sync. Check the `ver=` number on `wordcamp_remote_css` in the page source goes up.
