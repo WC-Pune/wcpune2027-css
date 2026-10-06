@@ -54,6 +54,21 @@ Don't invent other class names. They won't have styles.
 - **Your CSS in Appearance → Additional CSS has no effect, or fights the site.** Leave that screen empty. All CSS lives in the repo.
 - **Search results show a short description.** The template prints the full content, and the CSS trims it to three lines.
 
+## Test page and test post
+Two **private** items for trying out styling. Only logged-in editors and developers can see them. Leave them private.
+
+- Test page: https://pune.wordcamp.org/2027/test-page-for-testing-our-styling/
+- Test post: https://pune.wordcamp.org/2027/test-post-to-check-styling/
+
+Use them before and after a styling change. Look at them at desktop width and at about 390px:
+- header stays at the top, and nothing hides under it
+- links, Fill and Outline buttons (rounded pills, no coloured block behind them)
+- headings, lists, quote and table
+- the post's date, categories and tags
+- spacing above the footer, and the footer's search and Subscribe form
+
+Add new block types to them as you start using those blocks on the site. Don't publish them or put real content on them.
+
 ## Where changes go
 | You want to change | Where |
 |---|---|
