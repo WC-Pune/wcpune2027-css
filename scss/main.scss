@@ -1,0 +1,20 @@
+/*
+ * WordCamp Pune 2027 — site CSS (Twenty Twenty-Five).
+ * GENERATED from scss/ — edit the partials, then run `npm run build`.
+ * See README.md for the guidelines: colours come from theme slots, nothing
+ * editor-settable lives here.
+ *
+ *   1. Links, buttons, inputs   5. Homepage sections
+ *   2. Header                   6. Search results
+ *   3. Cards (sponsors, search) 7. Footer
+ *   4. Homepage hero
+ */
+
+// Order matches the original stylesheet cascade — do not reorder.
+@use "base/links-buttons-inputs";
+@use "layout/header";
+@use "components/cards";
+@use "sections/hero";
+@use "sections/home";
+@use "pages/search";
+@use "layout/footer";

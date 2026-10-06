@@ -1,0 +1,173 @@
+/* ==== 7. Footer =========================================================== */
+footer.wp-block-template-part > .wp-block-group.has-background {
+	background-color: var(--wp--preset--color--accent-1) !important;
+}
+
+footer.wp-block-template-part .has-text-color:not(.wp-element-button):not(.wp-block-button__link) {
+	color: var(--wp--preset--color--base) !important;
+}
+
+footer.wp-block-template-part a:where(:not(.wp-element-button)) {
+	color: var(--wp--preset--color--base);
+}
+
+footer.wp-block-template-part a:where(:not(.wp-element-button)):hover {
+	color: var(--wp--preset--color--accent-2);
+	text-decoration-color: var(--wp--preset--color--accent-2);
+}
+
+footer.wp-block-template-part a:focus-visible {
+	outline-color: var(--wp--preset--color--accent-2);
+}
+
+/* Section labels; the first column's heading stays large. */
+footer.wp-block-template-part .wp-block-column:not(:first-child) > .wp-block-heading {
+	font-size: 0.85rem !important;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+footer.wp-block-template-part .wp-block-site-tagline {
+	color: var(--wp--preset--color--accent-2);
+	font-weight: 500;
+}
+
+/* Add the class past-wc-nav to the Past WordCamps menu. */
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation__container {
+	display: grid;
+	grid-template-columns: repeat(4, max-content);
+	gap: 0.6rem;
+}
+
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content {
+	display: inline-block;
+	padding: 0.2em 0.9em;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	font-size: 0.95rem;
+	text-decoration: none;
+	transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:hover,
+footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content:focus-visible {
+	background-color: var(--wp--preset--color--accent-2);
+	border-color: var(--wp--preset--color--accent-2);
+	color: var(--wp--preset--color--contrast);
+}
+
+/* Divider above the bottom row. */
+footer.wp-block-template-part .alignfull.is-content-justification-space-between {
+	margin-top: var(--wp--preset--spacing--40);
+	padding-top: var(--wp--preset--spacing--30);
+	border-top: 1px solid var(--wp--preset--color--accent-4);
+}
+
+footer.wp-block-template-part .alignfull.is-content-justification-space-between p {
+	font-size: 0.9rem !important;
+}
+
+/* Clips the transparent corners of the logo PNG. */
+footer.wp-block-template-part .wp-block-site-logo img {
+	border-radius: 50%;
+}
+
+/* A maroon hover would vanish on the maroon footer. */
+footer.wp-block-template-part .wp-block-button__link:hover,
+footer.wp-block-template-part .wp-element-button:hover {
+	background-color: var(--wp--preset--color--base) !important;
+	color: var(--wp--preset--color--accent-1) !important;
+	border-color: var(--wp--preset--color--base) !important;
+}
+
+/* Social icons: plain; each network's own colour on hover (these hexes are the networks'). */
+footer.wp-block-template-part .wp-social-link {
+	background-color: transparent !important;
+	color: inherit !important;
+	transition: background-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+footer.wp-block-template-part .wp-social-link svg {
+	fill: currentColor;
+}
+
+footer.wp-block-template-part .wp-social-link:hover,
+footer.wp-block-template-part .wp-social-link:focus-within {
+	color: #FFFFFF !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	footer.wp-block-template-part .wp-social-link:hover {
+		transform: translateY(-2px);
+	}
+}
+
+footer.wp-block-template-part .wp-social-link-whatsapp:hover,
+footer.wp-block-template-part .wp-social-link-whatsapp:focus-within {
+	background-color: #25D366 !important;
+}
+
+footer.wp-block-template-part .wp-social-link-meetup:hover,
+footer.wp-block-template-part .wp-social-link-meetup:focus-within {
+	background-color: #F6405F !important;
+}
+
+footer.wp-block-template-part .wp-social-link-instagram:hover,
+footer.wp-block-template-part .wp-social-link-instagram:focus-within {
+	background-color: #F00075 !important;
+}
+
+footer.wp-block-template-part .wp-social-link-linkedin:hover,
+footer.wp-block-template-part .wp-social-link-linkedin:focus-within {
+	background-color: #0D66C2 !important;
+}
+
+footer.wp-block-template-part .wp-social-link-x:hover,
+footer.wp-block-template-part .wp-social-link-x:focus-within {
+	background-color: #000000 !important;
+}
+
+/* Search field and button sized like the Subscribe form: same padding and a gap. */
+footer.wp-block-template-part .wp-block-search__inside-wrapper {
+	gap: 10px;
+}
+
+footer.wp-block-template-part .wp-block-search__input,
+footer.wp-block-template-part .wp-block-search__button {
+	box-sizing: border-box;
+	min-height: 2.625rem;
+	margin: 0;
+	padding: 9px 14px;
+}
+
+/* Subscribe form like the search: same gap, height and text size.
+   !important beats the inline font size set by Jetpack. */
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+	align-items: stretch;
+	gap: 10px;
+}
+
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
+	box-sizing: border-box;
+	min-height: 2.625rem;
+}
+
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"] {
+	font-size: 0.875rem !important;
+}
+
+/* Small phones: email field and Subscribe button full width, stacked. */
+@media (max-width: 480px) {
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p,
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
+	footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements button {
+		width: 100%;
+		margin: 0 !important;
+	}
+}
