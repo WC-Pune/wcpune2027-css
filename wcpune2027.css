@@ -48,8 +48,14 @@ body .wp-element-button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Pill shape. The theme's radius is in :where(), so it loses to other rules
-   and the hero button showed square corners until hover. */
+/* Site Editor → Styles → Blocks → Buttons sets the accent-2 background on the
+   .wp-block-buttons wrapper, which painted a square behind the pill. Clear it
+   there too, then this can go. */
+body .wp-block-buttons {
+  background-color: transparent;
+}
+
+/* Pill shape, in case another rule beats the theme's :where() radius. */
 body .wp-block-button:not(.is-style-squared):not(.no-border-radius) > .wp-block-button__link {
   border-radius: 9999px;
 }
