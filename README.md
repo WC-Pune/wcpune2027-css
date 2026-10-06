@@ -165,11 +165,13 @@ scss/
 └── layout/_footer.scss
 ```
 
-**Setup (once):** needs Node 18+. Run `npm install`.
+**Setup (once):** needs Node 18+. Run `npm ci` (installs the exact versions in `package-lock.json`).
 
 **Compile:**
 - `npm run build` — compile `scss/main.scss` to `wcpune2027.css` once.
 - `npm run watch` — recompile on every save while you work.
+- `npm run check` — fails if `wcpune2027.css` doesn't match what the partials compile to. Run it
+  before committing to catch a forgotten build (needs `diff`, so macOS/Linux; use WSL on Windows).
 
 **Rules**
 - Edit the partials in `scss/`, never `wcpune2027.css`; the next build overwrites it.
@@ -183,7 +185,7 @@ scss/
 - The built file uses spaces for indentation, not tabs.
 
 ## Local development (live site + local CSS)
-1. `cd remote-css && npm install && npm run watch` in one terminal, and
+1. `cd remote-css && npm ci && npm run watch` in one terminal, and
    `python3 -m http.server 8027` in another.
 2. Install the [Tampermonkey extension for Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en),
    then add `dev-inject.user.js` as a new script.
@@ -194,7 +196,7 @@ scss/
 No-install alternative: paste the body of `dev-inject.user.js` into the DevTools console after each reload.
 
 ## Publishing changes
-1. Run `npm run build` and commit the rebuilt `wcpune2027.css` with your SCSS changes.
+1. Run `npm run build` and commit the rebuilt `wcpune2027.css` with your SCSS changes. `npm run check` confirms the two match.
 2. Push to `origin` (`WC-Pune/wcpune2027-css`). A push to `main` goes live, so review changes
    in a branch or pull request first.
 3. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click

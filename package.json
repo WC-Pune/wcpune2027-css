@@ -5,6 +5,7 @@
   "description": "Remote CSS for WordCamp Pune 2027, compiled from SCSS",
   "scripts": {
     "build": "sass scss/main.scss wcpune2027.css --no-source-map --style=expanded",
+    "check": "sass scss/main.scss --no-source-map --style=expanded | diff - wcpune2027.css && echo 'wcpune2027.css is up to date'",
     "watch": "sass scss/main.scss wcpune2027.css --no-source-map --style=expanded --watch"
   },
   "devDependencies": {
