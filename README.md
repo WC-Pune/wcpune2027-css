@@ -8,8 +8,20 @@ It is loaded on the site through **Appearance → Remote CSS** from the raw GitH
 |---|---|
 | `scss/` | **Source of truth.** SCSS partials, one per area (see [SCSS setup](#scss-setup)) |
 | `wcpune2027.css` | **Generated** from `scss/` and committed; this is the file Remote CSS loads. Don't edit it by hand |
-| `package.json` | Sass build scripts (`npm run build`, `npm run watch`) |
+| `package.json` | Sass scripts: `npm run build`, `watch` and `check` |
 | `dev-inject.user.js` | Dev only — preview local CSS on the live site |
+
+## Quick start
+Needs Node 18+ (`node -v`) and a clone of this repo.
+
+1. `npm ci` — installs Sass at the versions in `package-lock.json` (once per clone).
+2. Edit the relevant partial in `scss/`. Never edit `wcpune2027.css`; it is generated.
+3. `npm run build` — compile to `wcpune2027.css`. Use `npm run watch` instead to recompile on every save.
+4. `npm run check` — confirms `wcpune2027.css` matches the partials.
+5. Commit the partials **and** `wcpune2027.css` together, on a branch.
+
+**A push to `main` changes the live site within seconds**, so use a branch and a pull request.
+To preview changes on the live site before merging, see [Local development](#local-development-live-site--local-css).
 
 ## Theme colours
 Colours live in **Site Editor → Styles → Colours**; the CSS only reads them (see the
@@ -165,9 +177,7 @@ scss/
 └── layout/_footer.scss
 ```
 
-**Setup (once):** needs Node 18+. Run `npm ci` (installs the exact versions in `package-lock.json`).
-
-**Compile:**
+**Commands** (after the [Quick start](#quick-start) install):
 - `npm run build` — compile `scss/main.scss` to `wcpune2027.css` once.
 - `npm run watch` — recompile on every save while you work.
 - `npm run check` — fails if `wcpune2027.css` doesn't match what the partials compile to. Run it
@@ -185,12 +195,12 @@ scss/
 - The built file uses spaces for indentation, not tabs.
 
 ## Local development (live site + local CSS)
-1. `cd remote-css && npm ci && npm run watch` in one terminal, and
-   `python3 -m http.server 8027` in another.
+1. Run two terminals from the repo folder: `npm run watch` (recompiles the SCSS on every save) and
+   `python3 -m http.server 8027` (only serves `wcpune2027.css` to the browser; it does not compile).
 2. Install the [Tampermonkey extension for Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en),
    then add `dev-inject.user.js` as a new script.
    (In `chrome://extensions` → Tampermonkey → Details, turn on **Allow User Scripts**.)
-3. Open https://pune.wordcamp.org/2027/ — edit the CSS, save, reload.
+3. Open https://pune.wordcamp.org/2027/ — edit the SCSS, save, reload.
    Toggle the userscript off to compare with the current live site.
 
 No-install alternative: paste the body of `dev-inject.user.js` into the DevTools console after each reload.
@@ -201,3 +211,12 @@ No-install alternative: paste the body of `dev-inject.user.js` into the DevTools
    in a branch or pull request first.
 3. If the GitHub webhook isn't set up, go to wp-admin → **Appearance → Remote CSS** and click
    **Update** to re-sync. Check the `ver=` number on `wordcamp_remote_css` in the page source goes up.
+
+## Troubleshooting
+- **`npm ci` fails:** check `node -v` is 18 or newer. If `package-lock.json` is out of step with
+  `package.json`, run `npm install` once and commit the updated lock file.
+- **`npm run check` shows a diff:** the build is stale. Run `npm run build` and commit `wcpune2027.css`.
+- **Local CSS doesn't show on the live site:** make sure `python3 -m http.server 8027` is running
+  from the repo folder, the Tampermonkey script is on, and **Allow User Scripts** is enabled.
+- **Live site didn't update after merging to `main`:** re-sync with **Appearance → Remote CSS → Update**
+  (the steps above), and view the served file to confirm your change is there.
