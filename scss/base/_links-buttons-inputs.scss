@@ -37,6 +37,12 @@ body .wp-element-button:focus-visible {
 	outline-offset: 2px;
 }
 
+/* Pill shape. The theme's radius is in :where(), so it loses to other rules
+   and the hero button showed square corners until hover. */
+body .wp-block-button:not(.is-style-squared):not(.no-border-radius) > .wp-block-button__link {
+	border-radius: 9999px;
+}
+
 /* Outline style: keep it hollow so it reads differently from the fill button. */
 body .is-style-outline > .wp-block-button__link {
 	background-color: transparent !important;

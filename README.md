@@ -91,10 +91,9 @@ Short reasons, kept here so the CSS file stays comment-light.
   601px). The phone menu overlay needs `!important` because WordPress's overlay rules are very
   specific. Opening the menu focuses the first link, so menu links show a saffron underline instead
   of the focus box.
-- **Header shrinks on scroll** (smaller logo and padding) using `@container scroll-state(stuck: top)`.
-  Plain CSS can't detect scrolling and the sanitiser strips scroll-driven animations, so this works
-  in Chrome and Edge only; other browsers keep the normal header. After publishing, check the served
-  file still contains `container-type: scroll-state` and the `@container` block.
+- **Header is compact, not shrinking.** Shrink-on-scroll needed `container-type: scroll-state` and
+  `@container`, but the sanitiser strips `container-type` and breaks the `@container` block, so it
+  never worked in Remote CSS. Don't add it back. The header stays sticky with fixed small padding and logo.
 - **`nav-cta`** on a menu item makes it a saffron pill (full-width button in the phone menu).
   Use it for Contact now, Tickets later.
 - **Sponsors.** WordPress forces each logo into a 16:9 box, which leaves wordmarks floating, so
@@ -151,8 +150,6 @@ adding a rule, check whether the editor can set it, and set it there.
     changing a template or Styles, re-check the page, and remove the CSS rule it replaces.
 
 ## To do
-- [ ] **Header shrink:** after publishing, re-sync Remote CSS and confirm the served file still has
-  `container-type: scroll-state` and the `@container scroll-state(stuck: top)` block. Chrome and Edge only.
 - [ ] **Check by eye** on desktop and phone: footer search and Subscribe (heights, 10px gap,
   placeholder size), search results cards, the phone menu (divider under the last link, no focus box),
   the homepage hero and section spacing.
