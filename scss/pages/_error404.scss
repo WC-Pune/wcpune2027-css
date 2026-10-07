@@ -1,0 +1,50 @@
+/* ==== 10. 404 page ======================================================== */
+
+/* Scoped to WordPress's body.error404 so nothing else is touched. */
+
+/* Illustration (it already says "404" and "you're lost"): add error404-image to the Image block. */
+.error404 .error404-image {
+	margin: 0 auto var(--wp--preset--spacing--40);
+}
+
+.error404 .error404-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+}
+
+.error404 .error404-intro {
+	text-align: center;
+}
+
+/* Search sits on a sand panel; the input is a pill like the buttons. */
+.error404 .error404-search {
+	box-sizing: border-box;
+	max-width: 640px;
+	margin: var(--wp--preset--spacing--40) auto;
+	padding: var(--wp--preset--spacing--30);
+	border-radius: 12px;
+	background: var(--wp--preset--color--accent-5);
+}
+
+.error404 .error404-search .wp-block-search__input {
+	border-radius: 9999px;
+	padding-left: 1.25rem;
+}
+
+.error404 .error404-search .wp-block-search__button {
+	border-radius: 9999px;
+}
+
+/* Phones: buttons full width, tighter search panel. */
+@media (max-width: 600px) {
+	.error404 .error404-buttons .wp-block-button,
+	.error404 .error404-buttons .wp-block-button__link {
+		width: 100%;
+		text-align: center;
+	}
+	.error404 .error404-search {
+		padding: var(--wp--preset--spacing--20);
+	}
+}

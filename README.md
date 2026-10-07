@@ -174,7 +174,10 @@ scss/
 ├── sections/_hero.scss
 ├── sections/_home.scss
 ├── pages/_search.scss
-└── layout/_footer.scss
+├── pages/_error404.scss           # 404 page (scoped to body.error404)
+├── layout/_footer.scss
+├── components/_announce.scss
+└── components/_ticket-card.scss
 ```
 
 **Commands** (after the [Quick start](#quick-start) install):

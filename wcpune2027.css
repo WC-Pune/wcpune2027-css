@@ -10,6 +10,7 @@
  *   3. Cards (sponsors, search) 7. Footer
  *   4. Homepage hero            8. Announcement strip
  *                               9. Ticket card
+ *                              10. 404 page
  */
 /* ==== 1. Links, buttons, inputs =========================================== */
 a:where(:not(.wp-element-button)) {
@@ -769,21 +770,27 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
   }
 }
 /* ==== 9. Ticket card ====================================================== */
-/* Class `ticket-card` on a Group (usually inside a Columns block, one card per
-   column). Colours, padding, radius and the text are set in the editor. The CSS
-   gives equal heights, the dashed tear line, ticks on the list and the hover.
+/* Layout borrowed from the Deccan Queen on Rails ticket card: a header, a body
+   and a tinted footer. Class `ticket-card` on a Group with no padding of its own
+   (usually inside a Columns block, one card per column). Colours, padding,
+   radius and the text are set in the editor. The CSS gives equal heights, the
+   top accent bar, the pills, the ticks and the hover.
 
-   Inside the card, in order:
-     - a heading (name) and a big price paragraph
-     - a Separator with the class `ticket-card__perf`
-     - a List of what's included
-     - a Buttons block (it sits at the bottom of the card)
-   Add `ticket-card-featured` for the recommended ticket. */
+   Inside the card, three Groups in order:
+     ticket-card__header  paragraphs `ticket-card__type` and `ticket-card__state`
+                          inside a Group `ticket-card__badges`, then a heading
+     ticket-card__body    a description paragraph and a List of what's included
+     ticket-card__footer  sand background; price paragraph `ticket-card__price`,
+                          note paragraph `ticket-card__note`, a Buttons block
+   Add `ticket-card-featured` for the recommended ticket. One card = one pattern;
+   editors put each copy in its own column. */
 .ticket-card {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
   border: 1px solid var(--wp--preset--color--accent-4);
+  border-top: 4px solid var(--wp--preset--color--accent-1);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -792,7 +799,7 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
 }
 
 .ticket-card-featured {
-  /* Same 1px border as the others, so the content doesn't shift; the ring is a shadow. */
+  /* Saffron instead of maroon; the ring is a shadow so the content doesn't shift. */
   border-color: var(--wp--preset--color--accent-2);
   box-shadow: 0 0 0 1px var(--wp--preset--color--accent-2), 0 10px 24px rgba(0, 0, 0, 0.08);
 }
@@ -808,11 +815,6 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
   box-shadow: 0 0 0 1px var(--wp--preset--color--accent-2), 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* A little air between the name and the price. */
-.ticket-card :is(h2, h3, h4) {
-  margin-bottom: var(--wp--preset--spacing--20);
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .ticket-card:hover {
     transform: translateY(-3px);
@@ -823,47 +825,161 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
   margin-block-end: var(--wp--preset--spacing--60);
 }
 
-/* Tear line: the Separator block can't be dashed in the editor. */
-.ticket-card .ticket-card__perf {
-  width: 100%;
-  max-width: none;
-  margin-block: var(--wp--preset--spacing--30);
-  border: 0;
-  border-top: 2px dashed var(--wp--preset--color--accent-4);
-  background: none;
+/* Header: pills, then the name. */
+.ticket-card__header > * {
+  margin-block-start: 0;
 }
 
-/* Ticks instead of bullets. */
+.ticket-card__badges {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.ticket-card__type,
+.ticket-card__state {
+  margin: 0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ticket-card__type {
+  color: var(--wp--preset--color--accent-1);
+  background: var(--wp--preset--color--accent-5);
+}
+
+.ticket-card__state {
+  border: 1px solid var(--wp--preset--color--accent-4);
+  color: var(--wp--preset--color--contrast);
+  background: var(--wp--preset--color--base);
+}
+
+.ticket-card__header :is(h2, h3, h4) {
+  margin: 0;
+}
+
+/* Body takes the spare height so the footers line up across cards. */
+.ticket-card__body {
+  flex: 1;
+}
+
+.ticket-card__body > p {
+  margin: 0 0 var(--wp--preset--spacing--30);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Round maroon tick badges instead of bullets (drawn in CSS: no image to be stripped). */
 .ticket-card ul {
-  margin: 0 0 var(--wp--preset--spacing--40);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .ticket-card ul li {
   position: relative;
-  padding-left: 1.6em;
+  padding-left: 1.9em;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .ticket-card ul li + li {
-  margin-top: 0.5em;
+  margin-top: 0.65em;
 }
 
 .ticket-card ul li::before {
   content: "✓";
   position: absolute;
+  top: 0.2em;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 50%;
+  font-size: 0.75em;
   font-weight: 700;
-  color: var(--wp--preset--color--accent-1);
+  line-height: 1;
+  color: var(--wp--preset--color--base);
+  background: var(--wp--preset--color--accent-1);
 }
 
-/* The button row drops to the bottom so cards of different lengths line up. */
-.ticket-card .wp-block-buttons {
-  margin-top: auto;
+/* Footer: tinted band with the price and the button. */
+.ticket-card__footer {
+  border-top: 1px solid var(--wp--preset--color--accent-4);
+}
+
+.ticket-card__footer > * {
+  margin-block-start: 0;
+}
+
+.ticket-card__price {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ticket-card__note {
+  margin: 0 0 var(--wp--preset--spacing--30);
+  font-size: 0.75rem;
 }
 
 .ticket-card .wp-block-button,
 .ticket-card .wp-block-button__link {
   width: 100%;
   text-align: center;
+}
+
+/* ==== 10. 404 page ======================================================== */
+/* Scoped to WordPress's body.error404 so nothing else is touched. */
+/* Illustration (it already says "404" and "you're lost"): add error404-image to the Image block. */
+.error404 .error404-image {
+  margin: 0 auto var(--wp--preset--spacing--40);
+}
+
+.error404 .error404-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.error404 .error404-intro {
+  text-align: center;
+}
+
+/* Search sits on a sand panel; the input is a pill like the buttons. */
+.error404 .error404-search {
+  box-sizing: border-box;
+  max-width: 640px;
+  margin: var(--wp--preset--spacing--40) auto;
+  padding: var(--wp--preset--spacing--30);
+  border-radius: 12px;
+  background: var(--wp--preset--color--accent-5);
+}
+
+.error404 .error404-search .wp-block-search__input {
+  border-radius: 9999px;
+  padding-left: 1.25rem;
+}
+
+.error404 .error404-search .wp-block-search__button {
+  border-radius: 9999px;
+}
+
+/* Phones: buttons full width, tighter search panel. */
+@media (max-width: 600px) {
+  .error404 .error404-buttons .wp-block-button,
+  .error404 .error404-buttons .wp-block-button__link {
+    width: 100%;
+    text-align: center;
+  }
+  .error404 .error404-search {
+    padding: var(--wp--preset--spacing--20);
+  }
 }

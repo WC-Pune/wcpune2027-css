@@ -32,8 +32,17 @@ Select the block, open **Advanced → Additional CSS class(es)**, and type the c
 | `hero-wrap` | the homepage hero group | angled bottom edge, hover zoom on the photo, photo above the text on phones |
 | `nav-cta` | a header menu item | makes it a saffron button (full width in the phone menu); use it for Contact now and Tickets later |
 | `past-wc-nav` | the Past WordCamps menu in the footer | pill-shaped links in a grid |
+| `error404-image`, `error404-intro`, `error404-search`, `error404-buttons` | blocks in the 404 template | rounded illustration, centred text, search panel, full-width buttons on phones. Used only in the 404 template (Appearance → Editor → Templates → 404) |
 
 Don't invent other class names. They won't have styles.
+
+## Ready-made patterns
+Insert these from the block inserter → **Patterns** instead of building them by hand. Edit the text, links and swatches; don't change the class names.
+
+| Pattern | Use it for |
+|---|---|
+| Announcement strip | one fact at the top of the homepage, such as "Tickets are now open" |
+| Ticket card | one card per ticket type; add `ticket-card-featured` for the recommended one |
 
 ## Common tasks
 **Add a menu item.** Site Editor → Navigation → add the link. Add `nav-cta` only for the one main button.

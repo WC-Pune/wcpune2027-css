@@ -22,27 +22,36 @@ Full width, one or two lines, optional buttons. Use the Accent 1 swatch (maroon)
 Edit the sentence and link. For "what's open now", keep it to one fact per strip.
 
 ## Ticket card (`ticket-card`)
-One card per column. Add `ticket-card-featured` next to `ticket-card` in Additional CSS class for the recommended ticket. The example is a row of two.
+One card per pattern, so editors can add as many as they need. Layout from the Deccan Queen on Rails ticket page: a header (type pill, state pill, name), a body (description and list), and a sand footer (price, note, button).
+
+**To use it:** add a **Columns** block (2 or 3 columns), then insert this pattern into each column and edit the text. For the recommended ticket, add `ticket-card-featured` next to `ticket-card` in Additional CSS class.
 
 ```html
-<!-- wp:columns {"align":"wide"} -->
-<div class="wp-block-columns alignwide"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"ticket-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"border":{"radius":"12px"}},"backgroundColor":"base","layout":{"type":"default"}} -->
-<div class="wp-block-group ticket-card has-base-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">General ticket</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"x-large","style":{"typography":{"fontWeight":"700"}}} -->
-<p class="has-x-large-font-size" style="font-weight:700">₹0</p>
+<!-- wp:group {"className":"ticket-card","style":{"border":{"radius":"12px"}},"backgroundColor":"base","layout":{"type":"default"}} -->
+<div class="wp-block-group ticket-card has-base-background-color has-background" style="border-radius:12px"><!-- wp:group {"className":"ticket-card__header","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group ticket-card__header" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:group {"className":"ticket-card__badges","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ticket-card__badges"><!-- wp:paragraph {"className":"ticket-card__type"} -->
+<p class="ticket-card__type">Conference</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:separator {"className":"ticket-card__perf"} -->
-<hr class="wp-block-separator has-alpha-channel-opacity ticket-card__perf"/>
-<!-- /wp:separator -->
+<!-- wp:paragraph {"className":"ticket-card__state"} -->
+<p class="ticket-card__state">On sale</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">General ticket</h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"ticket-card__body","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group ticket-card__body" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:paragraph -->
+<p>Entry for both days of the conference.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
-<li>Entry to both days</li>
+<li>All talks and keynotes</li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -52,39 +61,17 @@ One card per column. Add `ticket-card-featured` next to `ticket-card` in Additio
 <!-- wp:list-item -->
 <li>Event kit</li>
 <!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+<!-- /wp:list --></div>
+<!-- /wp:group -->
 
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://pune.wordcamp.org/2027/tickets/">Get ticket</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"className":"ticket-card ticket-card-featured","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"border":{"radius":"12px"}},"backgroundColor":"base","layout":{"type":"default"}} -->
-<div class="wp-block-group ticket-card ticket-card-featured has-base-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Workshop + conference</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"x-large","style":{"typography":{"fontWeight":"700"}}} -->
-<p class="has-x-large-font-size" style="font-weight:700">₹0</p>
+<!-- wp:group {"className":"ticket-card__footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"accent-5","layout":{"type":"default"}} -->
+<div class="wp-block-group ticket-card__footer has-accent-5-background-color has-background" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:paragraph {"className":"ticket-card__price"} -->
+<p class="ticket-card__price">₹0</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:separator {"className":"ticket-card__perf"} -->
-<hr class="wp-block-separator has-alpha-channel-opacity ticket-card__perf"/>
-<!-- /wp:separator -->
-
-<!-- wp:list -->
-<ul class="wp-block-list"><!-- wp:list-item -->
-<li>Everything in General</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li>Day 1 workshop seat</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+<!-- wp:paragraph {"className":"ticket-card__note"} -->
+<p class="ticket-card__note">GST included</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
@@ -92,9 +79,10 @@ One card per column. Add `ticket-card-featured` next to `ticket-card` in Additio
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
+<!-- /wp:group -->
 ```
+
+Keep the class names (`ticket-card__header`, `__badges`, `__type`, `__state`, `__body`, `__footer`, `__price`, `__note`). Edit the text, list and link; set the pill text to what fits ("Conference", "Workshop", "On sale", "Sold out"). To add a list item, press Enter at the end of the last one; the tick appears automatically.
 
 Don't put `--` in a class name in block markup: it breaks the block comment and the editor "recovers" the block, losing its padding and classes. That's why the modifier is `ticket-card-featured`, not `ticket-card--featured`.
 

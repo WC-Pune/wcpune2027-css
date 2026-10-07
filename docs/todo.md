@@ -5,6 +5,7 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 ## Done
 - [x] **Announcement strip** (`announce`), `scss/components/_announce.scss`
 - [x] **Ticket card** (`ticket-card`, `ticket-card-featured`), `scss/components/_ticket-card.scss`
+- [x] **404 page** (`error404-*`), `scss/pages/_error404.scss`. Template content is pasted in the Site Editor, not kept in `patterns.md`
 
 ## Components still to build
 - [ ] **Info card:** venue, travel and contact details (map link, address, accessibility notes)
@@ -19,7 +20,9 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 - [ ] Paste both patterns onto the private test page and check desktop and 390px (cards equal height, ticks, dashed line, button at the bottom, strip wrapping on phones)
 - [ ] Check the strip and cards after the next Remote CSS sync; confirm the sanitiser kept the `::before` ticks and the dashed border
 - [ ] Add the Components table (class, where it goes) to `editor-guide.md`
-- [ ] Save the finished patterns in the Site Editor so organizers can insert them
+- [ ] Save the **Announcement strip** and **Ticket card** as patterns in the Site Editor (⋮ → Create pattern, Synced off, named exactly as in `patterns.md`) so organizers insert them from the inserter
+- [ ] Re-check the 404 page on a phone (~390px): the illustration's text is small, the paragraph below repeats the message
+- [ ] Optional: export a smaller (~1600px) 404 image to load faster
 - [ ] Clear the orange background on Site Editor → Styles → Blocks → Buttons, then remove the `.wp-block-buttons` rule from `scss/base/_links-buttons-inputs.scss`
 
 ## Content and site (not CSS)
