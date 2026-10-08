@@ -9,17 +9,32 @@ Markup for the components in `scss/components/`. To use one:
 Colours use the theme swatches only. Change the swatch in the editor, never add a hex.
 
 ## Announcement strip (`announce`)
-Full width, one or two lines, optional buttons. Use the Accent 1 swatch (maroon) for the strip. Put it at the top of the homepage, under the header.
+Full width, one line. A small pill label ("New", "Tickets") sits ahead of the message, and the link gets an arrow automatically. Use the Accent 1 swatch (maroon) for the strip. Put it at the top of the homepage, under the header.
 
 ```html
 <!-- wp:group {"align":"full","className":"announce","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}},"backgroundColor":"accent-1","textColor":"base","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull announce has-base-color has-accent-1-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:paragraph -->
-<p>Tickets are now open. <a href="https://pune.wordcamp.org/2027/tickets/">Get yours</a>.</p>
+<div class="wp-block-group alignfull announce has-base-color has-accent-1-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"className":"announce__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+<div class="wp-block-group announce__row"><!-- wp:paragraph {"className":"announce__label"} -->
+<p class="announce__label">Tickets</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Early-bird closes 30 November. <a href="https://pune.wordcamp.org/2027/tickets/">Get yours</a></p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 ```
 
-Edit the sentence and link. For "what's open now", keep it to one fact per strip.
+Edit the label, the sentence and the link. Don't type the arrow, the CSS adds it. Lead with a date or deadline and keep it to one fact per strip. The label is optional: delete that paragraph (and the inner Row) for a plain strip.
+
+Copy to start from:
+
+| Phase | Label | Message | Link text |
+|---|---|---|---|
+| Tickets open | Tickets | Early-bird closes 30 November. | Get yours |
+| Call for speakers | Speakers | Call for speakers is open until 15 January. | Apply to speak |
+| Schedule live | Schedule | The full schedule is out. | See the schedule |
+| Sold out | Sold out | Tickets are gone. | Join the waitlist |
 
 ## Ticket card (`ticket-card`)
 One card per pattern, so editors can add as many as they need. Layout from the Deccan Queen on Rails ticket page: a header (type pill, state pill, name), a body (description and list), and a sand footer (price, note, button).

@@ -41,7 +41,7 @@ Insert these from the block inserter → **Patterns** instead of building them b
 
 | Pattern | Use it for |
 |---|---|
-| Announcement strip | one fact at the top of the homepage, such as "Tickets are now open" |
+| Announcement strip | one fact at the top of the homepage, such as "Early-bird closes 30 November". Edit the small label ("Tickets", "Speakers") and the sentence; the arrow after the link is added for you |
 | Ticket card | one card per ticket type; add `ticket-card-featured` for the recommended one |
 
 ## Common tasks

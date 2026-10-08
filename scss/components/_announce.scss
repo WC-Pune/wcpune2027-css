@@ -17,6 +17,48 @@
 	font-weight: 700;
 }
 
+/* Arrow after the link says "click". It nudges right on hover. */
+.announce a:where(:not(.wp-element-button))::after {
+	content: "\2192";
+	display: inline-block;
+	margin-inline-start: 0.25em;
+	transition: transform 0.15s ease;
+}
+
+.announce a:where(:not(.wp-element-button)):hover::after,
+.announce a:where(:not(.wp-element-button)):focus-visible::after {
+	transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.announce a:where(:not(.wp-element-button))::after {
+		transition: none;
+	}
+}
+
+/* Optional row (a Row group with class announce__row) puts the pill and the
+   message on one line, wrapping on phones. */
+.announce__row {
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem 0.75rem;
+}
+
+/* Small pill ahead of the message: "New", "Tickets", "Speakers". The swatches
+   flip the strip's colours, so it stays readable on Accent 1. */
+.announce__label {
+	display: inline-block;
+	padding: 0.15em 0.7em;
+	border-radius: 999px;
+	background-color: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--accent-1);
+	font-size: 0.75em;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	line-height: 1.5;
+	text-transform: uppercase;
+}
+
 /* A small button or two sit inline with the text, wrapping on phones. */
 .announce .wp-block-buttons {
 	margin: 0;
@@ -29,7 +71,8 @@
 		text-align: left;
 	}
 
-	.announce .wp-block-buttons {
+	.announce .wp-block-buttons,
+	.announce__row {
 		justify-content: flex-start;
 	}
 }
