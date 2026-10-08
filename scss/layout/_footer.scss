@@ -39,9 +39,9 @@ footer.wp-block-template-part .wp-block-site-tagline {
 
 /* Add the class past-wc-nav to the Past WordCamps menu. */
 footer.wp-block-template-part .past-wc-nav .wp-block-navigation__container {
-	display: grid;
-	grid-template-columns: repeat(4, max-content);
-	gap: 0.6rem;
+	display: flex;
+	flex-wrap: wrap; /* wraps to the column width instead of spilling into the next column */
+	gap: 0.5rem;
 }
 
 footer.wp-block-template-part .past-wc-nav .wp-block-navigation-item__content {
@@ -175,7 +175,13 @@ footer.wp-block-template-part .wp-block-search__button {
    !important beats the inline font size set by Jetpack. */
 footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements {
 	align-items: stretch;
+	flex-wrap: wrap; /* Subscribe drops below the field when the column is narrow */
 	gap: 10px;
+}
+
+footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements p {
+	flex: 1 1 9rem;
+	min-width: 0;
 }
 
 footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements input[type="email"],
