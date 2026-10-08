@@ -2,7 +2,7 @@
 
 Markup for the components in `scss/components/`. To use one:
 
-1. Open the private test page, switch the editor to **Code editor** (⋮ menu), paste the markup, then switch back to the visual editor.
+1. Open the password-protected test page, switch the editor to **Code editor** (⋮ menu), paste the markup, then switch back to the visual editor.
 2. Check how it looks (desktop and about 390px).
 3. To make it reusable: select the whole block → ⋮ → **Create pattern**, name it as below, and leave **Synced** off. Organizers then insert it from the inserter under Patterns.
 
@@ -102,3 +102,72 @@ Keep the class names (`ticket-card__header`, `__badges`, `__type`, `__state`, `_
 Don't put `--` in a class name in block markup: it breaks the block comment and the editor "recovers" the block, losing its padding and classes. That's why the modifier is `ticket-card-featured`, not `ticket-card--featured`.
 
 The prices, names and the `/tickets/` link are placeholders. Replace them before using a card on a public page.
+
+## Info card (`info-card`)
+Venue, travel and contact details as label and value rows, with an optional map button. One card per pattern, so editors can add as many as they need (Venue, Getting here, Contact).
+
+**To use it:** add a **Columns** block (2 or 3 columns), then insert this pattern into each column and edit the text. Change the heading to what the card covers.
+
+```html
+<!-- wp:group {"className":"info-card","style":{"border":{"radius":"12px"}},"backgroundColor":"base","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card has-base-background-color has-background" style="border-radius:12px"><!-- wp:group {"className":"info-card__header","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__header" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Venue</h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"info-card__body","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__body" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:group {"className":"info-card__row","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__row"><!-- wp:paragraph {"className":"info-card__label"} -->
+<p class="info-card__label">Address</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"info-card__value"} -->
+<p class="info-card__value">Venue name, street, Pune 411001</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"info-card__row","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__row"><!-- wp:paragraph {"className":"info-card__label"} -->
+<p class="info-card__label">Nearest station</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"info-card__value"} -->
+<p class="info-card__value">Pune Junction, about 15 minutes by auto</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"info-card__row","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__row"><!-- wp:paragraph {"className":"info-card__label"} -->
+<p class="info-card__label">Parking</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"info-card__value"} -->
+<p class="info-card__value">Limited on site; use public transport if you can</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"info-card__row","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__row"><!-- wp:paragraph {"className":"info-card__label"} -->
+<p class="info-card__label">Accessibility</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"info-card__value"} -->
+<p class="info-card__value">Step-free entrance and lift to all floors</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"info-card__footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"accent-5","layout":{"type":"default"}} -->
+<div class="wp-block-group info-card__footer has-accent-5-background-color has-background" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)"><!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.google.com/">Open in Maps</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+```
+
+Keep the class names (`info-card__header`, `__body`, `__row`, `__label`, `__value`, `__footer`). Edit the heading, labels, values and the button link. Duplicate a row (select the Row group → ⋮ → Duplicate) to add a detail; delete a row you don't need. For no map button, delete the footer Group. Make the address a link to the map by selecting the text and adding the link.
+
+Don't put `--` in a class name in block markup (see the ticket card note above). The address, station, parking and accessibility lines are placeholders. Replace them with the real venue details before using a card on a public page.

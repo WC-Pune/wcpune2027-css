@@ -1,0 +1,95 @@
+/* ==== 11. Info card ======================================================= */
+/* Venue, travel and contact details. Class `info-card` on a Group with no padding
+   of its own (usually inside a Columns block, one card per column). Colours,
+   padding, radius and the text are set in the editor. The CSS gives the top
+   accent bar, equal heights, and the label/value rows.
+
+   Inside the card, in order:
+     info-card__header  a heading (what the card is: "Venue", "Getting here")
+     info-card__body    one Group `info-card__row` per detail, each with a
+                        paragraph `info-card__label` and a paragraph
+                        `info-card__value`
+     info-card__footer  optional; accent 5 background, a Buttons block
+                        ("Open in Maps")
+   One card = one pattern. */
+.info-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	border: 1px solid var(--wp--preset--color--accent-4);
+	border-top: 4px solid var(--wp--preset--color--accent-1);
+}
+
+.info-card > * {
+	margin-block-start: 0;
+}
+
+/* Space after a row of cards. */
+.wp-block-columns:has(.info-card) {
+	margin-block-end: var(--wp--preset--spacing--60);
+}
+
+.info-card__header > * {
+	margin-block-start: 0;
+}
+
+.info-card__header :is(h2, h3, h4) {
+	margin: 0;
+}
+
+/* Body takes the spare height so the footers line up across cards. */
+.info-card__body {
+	flex: 1;
+}
+
+.info-card__row {
+	padding-block: 0.85rem;
+}
+
+.info-card__row:first-child {
+	padding-block-start: 0;
+}
+
+.info-card__row:last-child {
+	padding-block-end: 0;
+}
+
+.info-card__row + .info-card__row {
+	border-top: 1px dashed var(--wp--preset--color--accent-4);
+}
+
+.info-card__row > * {
+	margin-block-start: 0;
+}
+
+.info-card__label {
+	margin: 0 0 0.2rem;
+	color: var(--wp--preset--color--accent-1);
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	line-height: 1.4;
+	text-transform: uppercase;
+}
+
+.info-card__value {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.55;
+}
+
+/* Footer: tinted band with a full-width button. */
+.info-card__footer {
+	border-top: 1px solid var(--wp--preset--color--accent-4);
+}
+
+.info-card__footer > * {
+	margin-block-start: 0;
+}
+
+.info-card .wp-block-button,
+.info-card .wp-block-button__link {
+	width: 100%;
+	text-align: center;
+}

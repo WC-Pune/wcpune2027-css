@@ -10,6 +10,7 @@
  *   4. Homepage hero            8. Announcement strip
  *                               9. Ticket card
  *                              10. 404 page
+ *                              11. Info card
  */
 
 // Order matches the original stylesheet cascade — do not reorder.
@@ -23,3 +24,4 @@
 @use "components/announce";
 @use "components/ticket-card";
 @use "pages/error404";
+@use "components/info-card";

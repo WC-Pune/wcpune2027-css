@@ -177,7 +177,8 @@ scss/
 ├── pages/_error404.scss           # 404 page (scoped to body.error404)
 ├── layout/_footer.scss
 ├── components/_announce.scss
-└── components/_ticket-card.scss
+├── components/_ticket-card.scss
+└── components/_info-card.scss
 ```
 
 **Commands** (after the [Quick start](#quick-start) install):

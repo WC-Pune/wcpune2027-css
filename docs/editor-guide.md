@@ -31,7 +31,8 @@ Select the block, open **Advanced → Additional CSS class(es)**, and type the c
 |---|---|---|
 | `hero-wrap` | the homepage hero group | angled bottom edge, hover zoom on the photo, photo above the text on phones |
 | `nav-cta` | a header menu item | makes it a saffron button (full width in the phone menu); use it for Contact now and Tickets later |
-| `past-wc-nav` | the Past WordCamps menu in the footer | pill-shaped links in a grid |
+| `past-wc-nav` | the Past WordCamps menu in the footer | pill-shaped links that wrap to the column width |
+| `announce`, `announce__row`, `announce__label` | the announcement strip, its inner Row, and the small pill paragraph | already on the Announcement strip pattern; add them by hand only if you build the strip yourself |
 | `error404-image`, `error404-intro`, `error404-search`, `error404-buttons` | blocks in the 404 template | rounded illustration, centred text, search panel, full-width buttons on phones. Used only in the 404 template (Appearance → Editor → Templates → 404) |
 
 Don't invent other class names. They won't have styles.
@@ -43,6 +44,7 @@ Insert these from the block inserter → **Patterns** instead of building them b
 |---|---|
 | Announcement strip | one fact at the top of the homepage, such as "Early-bird closes 30 November". Edit the small label ("Tickets", "Speakers") and the sentence; the arrow after the link is added for you |
 | Ticket card | one card per ticket type; add `ticket-card-featured` for the recommended one |
+| Info card | venue, travel and contact details, one card per topic (Venue, Getting here, Contact). Edit the heading, the labels and values, and the button link |
 
 ## Common tasks
 **Add a menu item.** Site Editor → Navigation → add the link. Add `nav-cta` only for the one main button.
@@ -64,7 +66,7 @@ Insert these from the block inserter → **Patterns** instead of building them b
 - **Search results show a short description.** The template prints the full content, and the CSS trims it to three lines.
 
 ## Test page and test post
-Two **private** items for trying out styling. Only logged-in editors and developers can see them. Leave them private.
+Two items for trying out styling. The page is **password-protected** (ask a developer for the password) and the post is **private**, so only people with the password or a login can see them. Leave them that way.
 
 - Test page: https://pune.wordcamp.org/2027/test-page-for-testing-our-styling/
 - Test post: https://pune.wordcamp.org/2027/test-post-to-check-styling/
