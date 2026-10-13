@@ -3,11 +3,11 @@
 Keeps track of the components that aren't built yet, so none get lost. Move an item to **Done** when it has a partial in `scss/components/`, markup in [patterns.md](patterns.md), a section on the password-protected test page, a saved pattern in the Site Editor and a row in the [editor guide](editor-guide.md). Until then it stays under **Built, awaiting checks**.
 
 ## Done
-- [x] **Announcement strip** (`announce`), `scss/components/_announce.scss` (a 390px re-check is open under *Needs a real phone*)
 - [x] **Ticket card** (`ticket-card`, `ticket-card-featured`), `scss/components/_ticket-card.scss`
 - [x] **404 page** (`error404-*`), `scss/pages/_error404.scss`. Template content is pasted in the Site Editor, not kept in `patterns.md`
 
 ## Built, awaiting checks
+- [ ] **Announcement strip** (`announce`), `scss/components/_announce.scss`. Pattern is saved and was tested live; the 390px re-check after the label and arrow change is open (see *Needs a real phone*)
 - [ ] **Info card** (`info-card`), `scss/components/_info-card.scss`. Needs the test page paste and check, and to be saved as a pattern (see *Needs WordPress access*)
 - [ ] **Updates / blog cards**, `scss/pages/_blog.scss`. Needs the live check after the next Remote CSS sync (see *Needs WordPress access*)
 
@@ -17,9 +17,15 @@ Suggested order: sponsor panel (the volunteer call-to-action is a variant of it,
 - [ ] **Volunteer call-to-action:** variant of the sponsor panel
 - [ ] **Stat row:** attendees, speakers, workshops
 - [ ] **Why attend / workshop format:** short highlight blocks for the homepage
-- [ ] **Sponsor cards:** logo grid by tier (Gold, Silver, Community) for `/sponsors`. Tile CSS already exists in `_cards.scss`; waits on the page being published
-- [ ] **Person card / people grid:** one card for speakers, organizers and `/attendees` (photo, name, role, optional link), once those pages have content
+- [ ] **Session / schedule card:** time, title, speaker, room, track, optional description, for talks and workshops. Needs the content model (what the schedule data looks like) first
+- [ ] **Person card / people grid:** one card for speakers, organizers, volunteers and `/attendees` (photo, name, role, optional link). Decide first whether one card covers all four; build once those pages have content
+- [ ] **Sponsors archive:** publish and validate the sponsor page, then add tier labels (Gold, Silver, Community). Tile CSS already exists in `_cards.scss`, so this is mostly validation, not a new component
 - [ ] **Past event highlights:** image strip or gallery. Waits on photos from the content team
+
+Considered, and not yet planned (build only if the content needs it):
+- **FAQ / accordion** for venue, accessibility, tickets, refunds, travel and code of conduct. First confirm the WordPress block (Details or Accordion) is keyboard and screen-reader accessible before styling it
+- **Code of conduct / accessibility callout:** a compact highlight for key attendee information. Try an `announce` or `info-card` variant first
+- **Venue panel:** the Info card probably covers it. Build a separate component only if the layout needs a different look
 
 ## Checks
 Grouped by what you need to do them.
@@ -44,6 +50,19 @@ Grouped by what you need to do them.
 - [ ] Re-check the **404 page**: the illustration's text is small, the paragraph below repeats the message
 - [ ] Footer search and Subscribe (heights, 10px gap, placeholder size), the phone menu (divider under the last link, no focus box), the homepage hero and section spacing, search results cards
 - [ ] Footer density on a real phone
+
+## QA and maintenance
+Owner column: who has to do it. **Dev** = developers, **WP** = someone with WordPress access, **Content** = content team.
+- [ ] **Accessibility QA** (Dev): keyboard navigation, visible focus, heading order, link names, form labels, contrast, reduced motion and screen-reader behaviour. Do this before the next big announcement
+- [ ] **Browser QA** (Dev): Chrome, Safari and Firefox, at desktop, tablet and 390px
+- [ ] **Link and content QA** (Content): menu links, map links, ticket links, social links, empty search results and 404 links
+- [ ] **Sanitiser regression check** (Dev): after CSS changes, compare the served file with the build and confirm `:has()`, pseudo-elements, `content`, `@keyframes` and reduced-motion rules survived
+- [ ] **Pattern acceptance criteria** (Dev): before a pattern counts as done, test long headings, missing images, missing optional fields, long URLs and narrow screens. Add the list to `patterns.md`
+- [ ] **Alt text guidance** (Content): add a short section to the editor guide for sponsor logos, speaker photos, venue images and decorative images
+- [ ] **Performance check** (Dev + Content): image dimensions, compression and lazy loading; shrink the 404 illustration (see Checks)
+- [ ] **Dependency maintenance** (Dev): document when to run `npm outdated`, how to update Sass safely and how to regenerate `package-lock.json`
+- [ ] **Live-sync record** (WP): note the date of the last successful Remote CSS sync and the `ver=` number served, in this file or the README
+- [ ] **Ownership:** add an owner (Dev, WP or Content) to the open Checks that don't have one
 
 ## Code health and tooling
 Found in a review of the repo on 2026-10-13.
