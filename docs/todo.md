@@ -29,7 +29,7 @@ Considered, and not yet planned (build only if the content needs it):
 - **Venue panel:** the Info card probably covers it. Build a separate component only if the layout needs a different look
 
 ## Checks
-Grouped by what you need to do them.
+Pick the group that matches what you have to hand: the code, a WordPress login, or a real phone. Do an item, tick it, and move any follow-up to the right group.
 
 ### Dev only (CSS)
 - [ ] **Buttons background:** the live page still outputs the orange `.wp-block-buttons` background from the Site Editor, so keep the CSS rule until it is gone. After clearing it in the Site Editor (below), remove the `.wp-block-buttons` rule from `scss/base/_links-buttons-inputs.scss`. Do this first: it removes CSS
