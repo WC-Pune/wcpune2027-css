@@ -4,8 +4,8 @@
    the sponsor and search cards. Cards are scoped to .blog; the image fix also
    covers archives (.archive, e.g. category pages). */
 .blog .wp-block-post-template {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
 	gap: var(--wp--preset--spacing--40);
 	padding: 0;
 	list-style: none;
@@ -63,14 +63,14 @@
 	text-underline-offset: 0.2em;
 }
 
-/* Phones: thumbnail above the text. */
-@media (max-width: 781px) {
-	.blog .wp-block-post-template .wp-block-columns {
-		flex-direction: column;
-	}
+/* Image on top of the text at every width, so the cards work in a grid.
+   !important beats the 25% / 75% basis the template sets inline. */
+.blog .wp-block-post-template .wp-block-columns {
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+}
 
-	.blog .wp-block-post-template .wp-block-column {
-		flex-basis: auto !important;
-		width: 100%;
-	}
+.blog .wp-block-post-template .wp-block-column {
+	flex-basis: auto !important;
+	width: 100%;
 }

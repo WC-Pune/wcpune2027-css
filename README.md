@@ -179,7 +179,7 @@ scss/
 ├── components/_announce.scss
 ├── components/_ticket-card.scss
 ├── components/_info-card.scss
-└── pages/_blog.scss               # Updates post cards (body.blog) + uncropped post images on archives
+└── pages/_blog.scss               # Updates post card grid (body.blog) + uncropped post images on archives
 ```
 
 **Commands** (after the [Quick start](#quick-start) install):
