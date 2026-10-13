@@ -8,6 +8,15 @@ Markup for the components in `scss/components/`. To use one:
 
 Colours use the theme swatches only. Change the swatch in the editor, never add a hex.
 
+## Status
+| Pattern | Markup documented | Saved in Site Editor | Tested live |
+|---|:-:|:-:|:-:|
+| Announcement strip | Yes | Yes | Yes (arrow and pill re-check at 390px pending) |
+| Ticket card | Yes | Yes | Yes |
+| Info card | Yes | Pending | Pending |
+
+Keep this table in step with the Checks in [todo.md](todo.md).
+
 ## Announcement strip (`announce`)
 Full width, one line. A small pill label ("New", "Tickets") sits ahead of the message, and the link gets an arrow automatically. Use the Accent 1 swatch (maroon) for the strip. Put it at the top of the homepage, under the header.
 

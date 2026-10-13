@@ -9,9 +9,10 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 - [x] **404 page** (`error404-*`), `scss/pages/_error404.scss`. Template content is pasted in the Site Editor, not kept in `patterns.md`
 
 ## Components still to build
+- [ ] **Sponsor cards:** logo grid by tier (Gold, Silver, Community) for `/sponsors`
 - [ ] **Stat row:** attendees, speakers, workshops
 - [ ] **Sponsor call-to-action:** "become a sponsor" panel
-- [ ] **Attendees / people grid:** speakers and organizers, once those pages have content
+- [ ] **Person card / people grid:** one card for speakers, organizers and `/attendees` (photo, name, role, optional link), once those pages have content
 - [ ] **Volunteer call-to-action**
 - [ ] **Why attend / workshop format:** short highlight blocks for the homepage
 - [ ] **Past event highlights:** image strip or gallery
@@ -28,6 +29,17 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 - [ ] Re-check the 404 page on a phone (~390px): the illustration's text is small, the paragraph below repeats the message
 - [ ] Optional: export a smaller (~1600px) 404 image to load faster
 - [ ] Still pending: the live page still outputs the orange `.wp-block-buttons` background from Site Editor, so keep the CSS rule until it is gone. Clear the orange background on Site Editor → Styles → Blocks → Buttons, then remove the `.wp-block-buttons` rule from `scss/base/_links-buttons-inputs.scss`
+
+## Check by eye (moved from the README)
+- [ ] Footer search and Subscribe (heights, 10px gap, placeholder size), search results cards, the phone menu (divider under the last link, no focus box), the homepage hero and section spacing
+- [ ] **Sponsors page:** check the tile styling once the page is published (it returned 404 earlier)
+- [ ] **Hero padding** is a fluid `clamp` in CSS; the editor only offers fixed steps. Move it only if that is acceptable
+- [ ] **Site title link rule** (`.wp-block-site-title a`) may be redundant now the colour is set in the editor. Remove it if the title looks the same without it
+- [ ] **Footer top space** is the `60` spacing step (70px) on every page. Use `50` or `70` in `scss/layout/_footer.scss` if it looks off
+
+## Docs
+- [ ] Confirm in the Site Editor whether **Accent 3** is used for the header/hero background, then fix the Accent 3 row in the README and editor guide (currently worded as unconfirmed)
+- [ ] Add screenshots to the editor guide: Additional CSS class, inserting a pattern, creating an unsynced pattern, finding the test page, previewing mobile widths
 
 ## Content and site (not CSS)
 - [ ] Navigation: About, Venue and travel, Workshops, Speakers or organizers, Sponsors, Tickets

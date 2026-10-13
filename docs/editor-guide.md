@@ -15,7 +15,7 @@ For organizers who edit the site in WordPress. You don't need GitHub or any code
 | Contrast | body text, text on buttons |
 | Accent 1 (maroon) | brand, headings, links, footer |
 | Accent 2 (saffron) | buttons, link underlines |
-| Accent 3 | header and hero background |
+| Accent 3 | not used by the site's CSS; check **Styles** before changing it, as the header or hero background may use it (to confirm) |
 | Accent 4 | borders on sand |
 | Accent 5 | inputs and light panels |
 
@@ -48,16 +48,34 @@ Insert these from the block inserter → **Patterns** instead of building them b
 | Info card | venue, travel and contact details, one card per topic (Venue, Getting here, Contact). Edit the heading, the labels and values, and the button link |
 
 ## Common tasks
-**Add a menu item.** Site Editor → Navigation → add the link. Add `nav-cta` only for the one main button.
+Jump to: [change a colour](#change-a-site-colour) · [menu item](#add-a-menu-item) · [button](#add-a-button) · [news post](#add-a-news-post) · [ticket card](#add-a-ticket-card) · [info card](#add-an-info-card) · [test safely](#test-a-change-safely) · [report a bug](#report-a-visual-bug)
 
-**Add a button.** Add a Buttons block. Use **Fill** for the main action and **Outline** for the second one. Don't set a custom colour on the button, because the site sets button colours itself and overrides yours.
+### Change a site colour
+Site Editor → Styles → Colours → pick the swatch → change its hex. Everything using the swatch follows. Don't add a custom colour to a block.
 
-**Add a news post.** Posts → Add New. Add a featured image, a category and a short opening paragraph. Search results show it with a "News" label.
+### Add a menu item
+Site Editor → Navigation → add the link. Add `nav-cta` only for the one main button.
 
-**Check before publishing.**
-1. Preview on desktop and on a phone width.
-2. Check the header, and that every button is a rounded pill.
-3. Don't publish to test. Use **Visibility → Private** while you try things, then trash the draft.
+### Add a button
+Add a Buttons block. Use **Fill** for the main action and **Outline** for the second one. Don't set a custom colour on the button, because the site sets button colours itself and overrides yours.
+
+### Add a news post
+Posts → Add New. Add a featured image, a category and a short opening paragraph. Search results show it with a "News" label, and it appears as a card on the Updates page.
+
+### Add a ticket card
+Open the page → block inserter → **Patterns** → **Ticket card**. Edit the text, price and button link. Add `ticket-card-featured` in **Advanced → Additional CSS class(es)** on the card you want to recommend.
+
+### Add an info card
+Block inserter → **Patterns** → **Info card**. One card per topic (Venue, Getting here, Contact). Edit the heading, the label and value rows, and the button link. If the pattern isn't in the inserter yet, ask a developer (it is still pending in the Site Editor).
+
+### Test a change safely
+1. Try it on the password-protected [test page](#test-page-and-test-post), not on a live page.
+2. Preview on desktop and on a phone width (about 390px).
+3. Check the header, and that every button is a rounded pill.
+4. Don't publish to test. Use **Visibility → Private** while you try things, then trash the draft.
+
+### Report a visual bug
+See [If something breaks](#if-something-breaks).
 
 ## Things that look like bugs but aren't
 - **Header doesn't shrink on scroll.** It stays sticky and compact on purpose. The shrink effect can't be done in the site's CSS.
