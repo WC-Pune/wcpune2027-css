@@ -36,7 +36,6 @@ Pick the group that matches what you have to hand: the code, a WordPress login, 
 - [ ] **Site title link rule** (`.wp-block-site-title a`) may be redundant now the colour is set in the editor. Remove it if the title looks the same without it
 - [ ] **Footer top space** is the `60` spacing step (70px) on every page. Use `50` or `70` in `scss/layout/_footer.scss` if it looks off
 - [ ] **Hero padding** is a fluid `clamp` in CSS; the editor only offers fixed steps. Move it only if that is acceptable
-- [ ] **Stale pointer:** the header comment in `scss/main.scss` says "See README.md for the guidelines", but they moved to `docs/developer-guide.md`. Fix it and run `npm run build`, since the comment is copied into `wcpune2027.css`. Do it on a branch: the rebuilt file is what the live site syncs
 - [ ] **Keyboard focus on linked cards:** the cards whose click target is a link inside the card. Search stretches that link over the card with `::after`, so the outline can miss the card edge. Check the sponsor, search, ticket, info and Updates cards
 - [ ] Optional: export a smaller (~1600px) 404 image to load faster
 

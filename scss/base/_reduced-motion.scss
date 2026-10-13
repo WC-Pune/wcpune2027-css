@@ -1,0 +1,16 @@
+/* ==== 13. Reduced motion ================================================== */
+
+/* Last in the cascade on purpose. Visitors who ask for less motion get no
+   transitions at all (colour, border and opacity fades included), instead of
+   guarding each one. !important is needed to beat the selectors above. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		transition-delay: 0s !important;
+		animation-duration: 0.01ms !important;
+		animation-delay: 0s !important;
+		animation-iteration-count: 1 !important;
+	}
+}

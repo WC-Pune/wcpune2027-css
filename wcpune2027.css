@@ -2,8 +2,8 @@
 /*
  * WordCamp Pune 2027 — site CSS (Twenty Twenty-Five).
  * GENERATED from scss/ — edit the partials, then run `npm run build`.
- * See README.md for the guidelines: colours come from theme slots, nothing
- * editor-settable lives here.
+ * See docs/developer-guide.md for the guidelines: colours come from theme slots,
+ * nothing editor-settable lives here.
  *
  *   1. Links, buttons, inputs   5. Homepage sections
  *   2. Header                   6. Search results
@@ -13,6 +13,7 @@
  *                              10. 404 page
  *                              11. Info card
  *                              12. Blog index
+ *                              13. Reduced motion
  */
 /* ==== 1. Links, buttons, inputs =========================================== */
 a:where(:not(.wp-element-button)) {
@@ -1202,4 +1203,20 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
 .blog .wp-block-post-template .wp-block-column {
   flex-basis: auto !important;
   width: 100%;
+}
+
+/* ==== 13. Reduced motion ================================================== */
+/* Last in the cascade on purpose. Visitors who ask for less motion get no
+   transitions at all (colour, border and opacity fades included), instead of
+   guarding each one. !important is needed to beat the selectors above. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
 }

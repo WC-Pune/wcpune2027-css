@@ -63,8 +63,9 @@ adding a rule, check whether the editor can set it, and set it there.
 7. **`!important` only to beat WordPress.** WordPress marks block colour classes and the phone
    menu overlay `!important`. Use it only when you must override those, and add a comment saying why.
 8. **Keep text readable.** Check contrast: never saffron text on white or sand; saffron buttons
-   use charcoal text. Keep visible keyboard focus. Wrap motion in
-   `@media (prefers-reduced-motion: no-preference)`.
+   use charcoal text. Keep visible keyboard focus. Wrap movement (transforms) in
+   `@media (prefers-reduced-motion: no-preference)`; colour, border and opacity fades are switched off
+   for you by `scss/base/_reduced-motion.scss`.
 9. **Mobile first check.** Test at 782px, 600px and 480px or narrower, and logged in (the admin bar
    moves the sticky header). Look at the phone menu overlay every time you touch the header.
     Breakpoints in use: **782px** (the admin bar grows to 46px; used in `_header.scss`), **781px** (WordPress stacks columns; used in `_hero.scss` so the photo moves above the text as the columns stack), **600px** and **480px**. The 1px gap between 781 and 782 is intentional, so don't align them.
@@ -92,7 +93,8 @@ scss/
 ├── components/_announce.scss
 ├── components/_ticket-card.scss
 ├── components/_info-card.scss
-└── pages/_blog.scss               # Updates post card grid (body.blog) + uncropped post images on archives
+├── pages/_blog.scss               # Updates post card grid (body.blog) + uncropped post images on archives
+└── base/_reduced-motion.scss      # last: switches off every transition for visitors who ask for less motion
 ```
 
 **Commands** (after the [Quick start](../README.md#quick-start) install):
