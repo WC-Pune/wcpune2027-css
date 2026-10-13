@@ -8,7 +8,7 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 
 ## Built, awaiting checks
 - [ ] **Announcement strip** (`announce`), `scss/components/_announce.scss`. Pattern is saved and was tested live; the 390px re-check after the label and arrow change is open (see *Needs a real phone*)
-- [ ] **Info card** (`info-card`), `scss/components/_info-card.scss`. Needs the test page paste and check, and to be saved as a pattern (see *Needs WordPress access*)
+- [ ] **Info card** (`info-card`), `scss/components/_info-card.scss`. Saved as `WCP27 : Info Card`; still needs the test page paste and check (see *Needs WordPress access*)
 - [ ] **Updates / blog cards**, `scss/pages/_blog.scss`. Needs the live check after the next Remote CSS sync (see *Needs WordPress access*)
 
 ## Components still to build
@@ -43,7 +43,7 @@ Pick the group that matches what you have to hand: the code, a WordPress login, 
 - [ ] Clear the orange background on Site Editor → Styles → Blocks → Buttons (then the dev-only rule removal above)
 - [ ] Check the **Updates** post cards on the live page after the next Remote CSS sync: desktop and 390px (thumbnail above text on phones, hover border, long titles)
 - [ ] Paste the **Info card** onto the test page, sync, and check desktop and 390px (cards equal height, dashed row dividers, label and value, footer button)
-- [ ] Save the **Info card** as a pattern in the Site Editor (Synced off, named exactly as in `patterns.md`), then update the status table in `patterns.md`
+- [ ] Clean up the saved patterns in Site Editor → Patterns: delete the duplicate `WCP27 : Ticket Card`, and check **Synced** is off on all four (the inserter shows the synced icon on most). Then update the status table in `patterns.md`
 - [ ] **Sponsors page:** check the tile styling once the page is published (it returned 404 earlier)
 - [ ] Confirm whether **Accent 3** is used for the header/hero background, then fix the Accent 3 row in the README and editor guide (currently worded as unconfirmed)
 
@@ -55,7 +55,8 @@ Pick the group that matches what you have to hand: the code, a WordPress login, 
 
 ## Docs
 - [ ] Add a **pattern template** to `patterns.md` (headings: when to use, markup, swatches, mobile notes) so new components are documented the same way
-- [ ] Add screenshots to the editor guide: Additional CSS class, inserting a pattern, creating an unsynced pattern, finding the test page, previewing mobile widths
+- [ ] Retake `docs/images/Search-for-patterns-with-WCP27.jpg` after the pattern cleanup (it still shows the duplicate Ticket Card and synced icons)
+- [ ] Add the remaining screenshots to the editor guide: Additional CSS class, creating an unsynced pattern, finding the test page, previewing mobile widths
 
 ## Content and site (not CSS)
 For the content team.

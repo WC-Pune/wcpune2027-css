@@ -4,16 +4,19 @@ Markup for the components in `scss/components/`. To use one:
 
 1. Open the password-protected test page, switch the editor to **Code editor** (⋮ menu), paste the markup, then switch back to the visual editor.
 2. Check how it looks (desktop and about 390px).
-3. To make it reusable: select the whole block → ⋮ → **Create pattern**, name it as below, and leave **Synced** off. Organizers then insert it from the inserter under Patterns.
+3. To make it reusable: select the whole block → ⋮ → **Create pattern**, name it as in the table below, and leave **Synced** off. Organizers then insert it from the inserter under Patterns.
+
+**Naming:** every pattern name starts with `WCP27 : ` (the prefix, a space, a colon, a space), so organizers can type `wcp` in the inserter's Patterns search and see only ours.
 
 Colours use the theme swatches only. Change the swatch in the editor, never add a hex.
 
 ## Status
-| Pattern | Markup documented | Saved in Site Editor | Tested live |
+| Name in the Site Editor | Markup documented | Saved in Site Editor | Tested live |
 |---|:-:|:-:|:-:|
-| Announcement strip | Yes | Yes | Yes (arrow and pill re-check at 390px pending) |
-| Ticket card | Yes | Yes | Yes |
-| Info card | Yes | Pending | Pending |
+| `WCP27 : Announcement strip` | Yes | Yes | Yes (arrow and pill re-check at 390px pending) |
+| `WCP27 : Ticket Card` | Yes | Yes (a duplicate exists, to delete) | Yes |
+| `WCP27 : Ticket Card Featured` | Yes (the `ticket-card-featured` class) | Yes | To confirm |
+| `WCP27 : Info Card` | Yes | Yes (confirm Synced is off) | Pending |
 
 Keep this table in step with the Checks in [todo.md](todo.md).
 

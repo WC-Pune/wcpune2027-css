@@ -39,13 +39,15 @@ Select the block, open **Advanced → Additional CSS class(es)**, and type the c
 Don't invent other class names. They won't have styles.
 
 ## Ready-made patterns
-Insert these from the block inserter → **Patterns** instead of building them by hand. Edit the text, links and swatches; don't change the class names.
+Insert these from the block inserter → **Patterns** instead of building them by hand. Type `wcp` in the search box to list only ours; every name starts with `WCP27 : `. Edit the text, links and swatches; don't change the class names.
+
+![The block inserter's Patterns tab with "wcp" typed in the search box, listing the WCP27 patterns](images/Search-for-patterns-with-WCP27.jpg)
 
 | Pattern | Use it for |
 |---|---|
-| Announcement strip | one fact at the top of the homepage, such as "Early-bird closes 30 November". Edit the small label ("Tickets", "Speakers") and the sentence; the arrow after the link is added for you |
-| Ticket card | one card per ticket type; add `ticket-card-featured` for the recommended one |
-| Info card | venue, travel and contact details, one card per topic (Venue, Getting here, Contact). Edit the heading, the labels and values, and the button link |
+| WCP27 : Announcement strip | one fact at the top of the homepage, such as "Early-bird closes 30 November". Edit the small label ("Tickets", "Speakers") and the sentence; the arrow after the link is added for you |
+| Ticket Card, Ticket Card Featured | one card per ticket type; use the Featured version for the recommended one |
+| WCP27 : Info Card | venue, travel and contact details, one card per topic (Venue, Getting here, Contact). Edit the heading, the labels and values, and the button link |
 
 ## Common tasks
 Jump to: [change a colour](#change-a-site-colour) · [menu item](#add-a-menu-item) · [button](#add-a-button) · [news post](#add-a-news-post) · [ticket card](#add-a-ticket-card) · [info card](#add-an-info-card) · [test safely](#test-a-change-safely) · [report a bug](#report-a-visual-bug)
@@ -63,10 +65,10 @@ Add a Buttons block. Use **Fill** for the main action and **Outline** for the se
 Posts → Add New. Add a featured image, a category and a short opening paragraph. Search results show it with a "News" label, and it appears as a card on the Updates page.
 
 ### Add a ticket card
-Open the page → block inserter → **Patterns** → **Ticket card**. Edit the text, price and button link. Add `ticket-card-featured` in **Advanced → Additional CSS class(es)** on the card you want to recommend.
+Open the page → block inserter → **Patterns** → search `wcp` → **WCP27 : Ticket Card**. Edit the text, price and button link. Add `ticket-card-featured` in **Advanced → Additional CSS class(es)** on the card you want to recommend.
 
 ### Add an info card
-Block inserter → **Patterns** → **Info card**. One card per topic (Venue, Getting here, Contact). Edit the heading, the label and value rows, and the button link. If the pattern isn't in the inserter yet, ask a developer (it is still pending in the Site Editor).
+Block inserter → **Patterns** → search `wcp` → **WCP27 : Info Card**. One card per topic (Venue, Getting here, Contact). Edit the heading, the label and value rows, and the button link. If the pattern isn't in the inserter yet, ask a developer (it is still pending in the Site Editor).
 
 ### Test a change safely
 1. Try it on the password-protected [test page](#test-page-and-test-post), not on a live page.

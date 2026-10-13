@@ -123,7 +123,7 @@ Tick these in order. A component is done when every box is ticked (the same rule
 - [ ] Block markup and a row in the status table in [patterns.md](patterns.md)
 - [ ] Paste it onto the password-protected test page; check desktop and 390px
 - [ ] `npm run build` and `npm run check`, then sync and confirm the sanitiser kept `::before` and the other tricks you used
-- [ ] Save it as a pattern in the Site Editor (Synced off, named exactly as in `patterns.md`)
+- [ ] Save it as a pattern in the Site Editor (Synced off, named `WCP27 : <Name>` exactly as in `patterns.md`)
 - [ ] Add a row to the Ready-made patterns (and Classes) tables in the [editor guide](editor-guide.md)
 - [ ] Move it to Done in [todo.md](todo.md)
 
