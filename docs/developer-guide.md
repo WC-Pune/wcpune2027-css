@@ -66,6 +66,7 @@ adding a rule, check whether the editor can set it, and set it there.
    `@media (prefers-reduced-motion: no-preference)`.
 9. **Mobile first check.** Test at 782px, 600px and 480px or narrower, and logged in (the admin bar
    moves the sticky header). Look at the phone menu overlay every time you touch the header.
+    Breakpoints in use: **782px** (the admin bar grows to 46px; used in `_header.scss`), **781px** (WordPress stacks columns; used in `_hero.scss` so the photo moves above the text as the columns stack), **600px** and **480px**. The 1px gap between 781 and 782 is intentional, so don't align them.
 10. **Keep it small and sectioned.** Put new rules in the matching partial (see [SCSS setup](#scss-setup))
     and comment *why*, not what. Delete rules once the editor does the same job.
 11. **Don't hardcode content.** No page-specific text, IDs or URLs. Use block classes.
