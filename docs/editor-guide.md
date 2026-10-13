@@ -6,8 +6,8 @@ For organizers who edit the site in WordPress. You don't need GitHub or any code
 
 ## Colours
 - Use the **theme swatches** only, never a custom colour or a hex code.
-- Re-colouring the whole site happens in one place: **Site Editor → Styles → Colours**. Change the hex of a swatch there and everything using it follows.
-- Swatches in use:
+- **Don't change the site's colours or edit the swatches.** Colours are managed by the developers. If a colour looks wrong, tell a developer (see [If something breaks](#if-something-breaks)).
+- Swatches in use, for reference:
 
 | Swatch | Used for |
 |---|---|
@@ -15,7 +15,7 @@ For organizers who edit the site in WordPress. You don't need GitHub or any code
 | Contrast | body text, text on buttons |
 | Accent 1 (maroon) | brand, headings, links, footer |
 | Accent 2 (saffron) | buttons, link underlines |
-| Accent 3 | not used by the site's CSS; check **Styles** before changing it, as the header or hero background may use it (to confirm) |
+| Accent 3 | not used by the site's CSS; the header or hero background may use it (to confirm) |
 | Accent 4 | borders on sand |
 | Accent 5 | inputs and light panels |
 
@@ -26,6 +26,10 @@ For organizers who edit the site in WordPress. You don't need GitHub or any code
 
 ## Classes you can add
 Select the block, open **Advanced → Additional CSS class(es)**, and type the class.
+
+![The full editor: List View on the left with a Row selected, and the Block tab on the right with the Advanced panel open and a class typed in the Additional CSS class(es) field](images/Adding-Classes.jpg)
+
+*Open **List View** (top-left toolbar button) to see how the blocks are nested and pick the right one. Then open the **Block** tab on the right, scroll to **Advanced**, and type the class in **Additional CSS class(es)**. The class in this picture is only an example; use the classes in the table below. Leave the **Additional CSS** box underneath empty.*
 
 | Class | Put it on | What it does |
 |---|---|---|
@@ -46,17 +50,16 @@ Insert these from the block inserter → **Patterns** instead of building them b
 | Pattern | Use it for |
 |---|---|
 | WCP27 : Announcement strip | one fact at the top of the homepage, such as "Early-bird closes 30 November". Edit the small label ("Tickets", "Speakers") and the sentence; the arrow after the link is added for you |
-| Ticket Card, Ticket Card Featured | one card per ticket type; use the Featured version for the recommended one |
+| WCP27 : Ticket Card, WCP27 : Ticket Card Featured | one card per ticket type; use the Featured version for the recommended one |
 | WCP27 : Info Card | venue, travel and contact details, one card per topic (Venue, Getting here, Contact). Edit the heading, the labels and values, and the button link |
 
 ## Common tasks
-Jump to: [change a colour](#change-a-site-colour) · [menu item](#add-a-menu-item) · [button](#add-a-button) · [news post](#add-a-news-post) · [ticket card](#add-a-ticket-card) · [info card](#add-an-info-card) · [test safely](#test-a-change-safely) · [report a bug](#report-a-visual-bug)
-
-### Change a site colour
-Site Editor → Styles → Colours → pick the swatch → change its hex. Everything using the swatch follows. Don't add a custom colour to a block.
+Jump to: [menu item](#add-a-menu-item) · [button](#add-a-button) · [news post](#add-a-news-post) · [ticket card](#add-a-ticket-card) · [info card](#add-an-info-card) · [test safely](#test-a-change-safely) · [report a bug](#report-a-visual-bug)
 
 ### Add a menu item
-Site Editor → Navigation → add the link. Add `nav-cta` only for the one main button.
+Open the **Header** template part in the Site Editor, select the **Navigation** block, and in the **Block** tab on the right use the list of links (first tab) and click **+** to add the link. Add `nav-cta` only for the one main button.
+
+![The Header template part with the Navigation block selected; the Block tab lists Updates, Code of Conduct and Contact Us, with a + button under them](images/Adding%20items%20in%20navigation.png)
 
 ### Add a button
 Add a Buttons block. Use **Fill** for the main action and **Outline** for the second one. Don't set a custom colour on the button, because the site sets button colours itself and overrides yours.
@@ -105,7 +108,7 @@ Add new block types to them as you start using those blocks on the site. Don't p
 | You want to change | Where |
 |---|---|
 | Text, images, menus, page layout | the editor |
-| A colour, across the site | Site Editor → Styles → Colours |
+| A colour, across the site | ask a developer; organizers don't change colours |
 | Widths and spacing | Site Editor → Styles → Layout |
 | A hover effect, the header, the footer layout, a phone-only fix | ask a developer; it's in the CSS repo |
 
