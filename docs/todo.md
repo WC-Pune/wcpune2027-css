@@ -45,7 +45,21 @@ Grouped by what you need to do them.
 - [ ] Footer search and Subscribe (heights, 10px gap, placeholder size), the phone menu (divider under the last link, no focus box), the homepage hero and section spacing, search results cards
 - [ ] Footer density on a real phone
 
+## Code health and tooling
+Found in a review of the repo on 2026-10-13.
+- [ ] **Stale pointer:** the header comment in `scss/main.scss` says "See README.md for the guidelines", but they moved to `docs/developer-guide.md`. Fix it and run `npm run build`, since the comment is copied into `wcpune2027.css`
+- [ ] **CI check:** there is no `.github/`. Add a GitHub Action that runs `npm ci && npm run check` on pull requests, so a forgotten build can't be merged
+- [ ] **Guard script:** add an `npm run lint` that fails on `--name:` declarations and `@import` in `scss/` (the sanitiser deletes them), and on hex colours outside the footer's social-network colours. This turns two written rules into automatic checks
+- [ ] **Node version:** the docs say Node 18+, but `package.json` has no `engines` field and there is no `.nvmrc`. Add both
+- [ ] **Breakpoints:** the CSS uses 781px (`_hero.scss`) and 782px (`_header.scss`) for what looks like the same phone/tablet switch, plus 600px and 480px. Check whether the 1px difference is on purpose; if not, align them and note the breakpoints in the developer guide
+- [ ] **Keyboard focus:** `:focus-visible` is only styled in the header, footer, announce strip and base links/buttons. Check keyboard focus on the sponsor, search, ticket, info and Updates cards, and the 404 buttons
+- [ ] **Repeated card styling:** the card hover (border, shadow, lift) is written separately in `_cards.scss`, `_ticket-card.scss` and `_blog.scss`. When the next card component is built, share it through an SCSS mixin (SCSS mixins compile away, so the sanitiser doesn't matter)
+- [ ] **Empty `tools/` folder:** it is untracked and unused locally. Delete it, or add what was meant to go in it
+- [ ] Optional: print styles (hide the header and footer, show link URLs) if organizers will print the schedule
+
 ## Docs
+- [ ] Add a short **"how a component is built"** checklist to the developer guide: partial, `@use` line in `main.scss`, header comment number, markup in `patterns.md`, test page section, editor guide row. (Today it is only spread across `todo.md` and the README table)
+- [ ] Add a **pattern template** to `patterns.md` (headings: when to use, markup, swatches, mobile notes) so new components are documented the same way
 - [ ] Add screenshots to the editor guide: Additional CSS class, inserting a pattern, creating an unsynced pattern, finding the test page, previewing mobile widths
 
 ## Content and site (not CSS)
