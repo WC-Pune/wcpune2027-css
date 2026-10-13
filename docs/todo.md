@@ -55,7 +55,6 @@ Pick the group that matches what you have to hand: the code, a WordPress login, 
 - [ ] Footer density on a real phone
 
 ## Docs
-- [ ] Add a short **"how a component is built"** checklist to the developer guide: partial, `@use` line in `main.scss`, header comment number, markup in `patterns.md`, test page section, editor guide row. (Today it is only spread across `todo.md` and the README table)
 - [ ] Add a **pattern template** to `patterns.md` (headings: when to use, markup, swatches, mobile notes) so new components are documented the same way
 - [ ] Add screenshots to the editor guide: Additional CSS class, inserting a pattern, creating an unsynced pattern, finding the test page, previewing mobile widths
 

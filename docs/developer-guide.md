@@ -6,6 +6,7 @@ For anyone changing the SCSS. Setup and publishing are in the [README](../README
 - [Classes the CSS relies on](#classes-the-css-relies-on)
 - [Guidelines](#guidelines)
 - [SCSS setup](#scss-setup)
+- [Building a component](#building-a-component)
 - [Local development](#local-development-live-site--local-css)
 - [Troubleshooting](#troubleshooting)
 
@@ -110,6 +111,19 @@ scss/
   compile away, but a plain CSS `--custom-property: value;` or `@import` in a partial is stripped
   on the site.
 - The built file uses spaces for indentation, not tabs.
+
+## Building a component
+Tick these in order. A component is done when every box is ticked (the same rule as [todo.md](todo.md)).
+
+- [ ] Partial in `scss/components/` (or `scss/pages/` for a single page), using theme swatches and spacing presets only
+- [ ] `@use` line in `scss/main.scss`, placed where it should sit in the cascade
+- [ ] Add it to the numbered list in the `main.scss` header comment, with the next number
+- [ ] Block markup and a row in the status table in [patterns.md](patterns.md)
+- [ ] Paste it onto the password-protected test page; check desktop and 390px
+- [ ] `npm run build` and `npm run check`, then sync and confirm the sanitiser kept `::before` and the other tricks you used
+- [ ] Save it as a pattern in the Site Editor (Synced off, named exactly as in `patterns.md`)
+- [ ] Add a row to the Ready-made patterns (and Classes) tables in the [editor guide](editor-guide.md)
+- [ ] Move it to Done in [todo.md](todo.md)
 
 ## Local development (live site + local CSS)
 1. Run two terminals from the repo folder: `npm run watch` (recompiles the SCSS on every save) and
