@@ -34,6 +34,7 @@ Select the block, open **Advanced → Additional CSS class(es)**, and type the c
 | `past-wc-nav` | the Past WordCamps menu in the footer | pill-shaped links that wrap to the column width |
 | `announce`, `announce__row`, `announce__label` | the announcement strip, its inner Row, and the small pill paragraph | already on the Announcement strip pattern; add them by hand only if you build the strip yourself |
 | `error404-image`, `error404-intro`, `error404-search`, `error404-buttons` | blocks in the 404 template | rounded illustration, centred text, search panel, full-width buttons on phones. Used only in the 404 template (Appearance → Editor → Templates → 404) |
+| (none) | the Updates page | posts show as cards automatically; nothing to add. Applies only to the page set as the Posts page in Settings → Reading |
 
 Don't invent other class names. They won't have styles.
 

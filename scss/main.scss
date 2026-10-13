@@ -11,6 +11,7 @@
  *                               9. Ticket card
  *                              10. 404 page
  *                              11. Info card
+ *                              12. Blog index
  */
 
 // Order matches the original stylesheet cascade — do not reorder.
@@ -25,3 +26,4 @@
 @use "components/ticket-card";
 @use "pages/error404";
 @use "components/info-card";
+@use "pages/blog";

@@ -12,6 +12,7 @@
  *                               9. Ticket card
  *                              10. 404 page
  *                              11. Info card
+ *                              12. Blog index
  */
 /* ==== 1. Links, buttons, inputs =========================================== */
 a:where(:not(.wp-element-button)) {
@@ -1126,4 +1127,78 @@ footer.wp-block-template-part .wp-block-jetpack-subscriptions__form-elements inp
 .info-card .wp-block-button__link {
   width: 100%;
   text-align: center;
+}
+
+/* ==== 12. Blog index ====================================================== */
+/* Updates page (WordPress's body.blog). Each post becomes a card that matches
+   the sponsor and search cards. Cards are scoped to .blog; the image fix also
+   covers archives (.archive, e.g. category pages). */
+.blog .wp-block-post-template {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  padding: 0;
+  list-style: none;
+}
+
+.blog .wp-block-post-template > .wp-block-post {
+  margin: 0;
+  padding: var(--wp--preset--spacing--30);
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--accent-4);
+  border-radius: 12px;
+  background-color: var(--wp--preset--color--base);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.blog .wp-block-post-template > .wp-block-post:hover,
+.blog .wp-block-post-template > .wp-block-post:focus-within {
+  border-color: var(--wp--preset--color--accent-2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .blog .wp-block-post-template > .wp-block-post:hover {
+    transform: translateY(-3px);
+  }
+}
+/* Thumbnails keep their own proportions: the images carry text, so cropping
+   cuts words off. !important beats the 3:2 crop the archive template sets inline. */
+.blog .wp-block-post-template .wp-block-post-featured-image,
+.archive .wp-block-post-template .wp-block-post-featured-image {
+  margin: 0;
+}
+
+.blog .wp-block-post-template .wp-block-post-featured-image img,
+.archive .wp-block-post-template .wp-block-post-featured-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto !important;
+  border-radius: 8px;
+  object-fit: contain !important;
+}
+
+/* Title: maroon, underline only on hover. */
+.blog .wp-block-post-template .wp-block-post-title a {
+  color: var(--wp--preset--color--accent-1);
+  text-decoration: none;
+}
+
+.blog .wp-block-post-template .wp-block-post-title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--wp--preset--color--accent-2);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* Phones: thumbnail above the text. */
+@media (max-width: 781px) {
+  .blog .wp-block-post-template .wp-block-columns {
+    flex-direction: column;
+  }
+  .blog .wp-block-post-template .wp-block-column {
+    flex-basis: auto !important;
+    width: 100%;
+  }
 }

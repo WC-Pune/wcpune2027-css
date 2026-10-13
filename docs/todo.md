@@ -17,6 +17,7 @@ Keeps track of the components that aren't built yet, so none get lost. Move an i
 - [ ] **Past event highlights:** image strip or gallery
 
 ## Checks
+- [ ] Check the **Updates** post cards on the live page after the next Remote CSS sync: desktop and 390px (thumbnail above text on phones, hover border, long titles)
 - [ ] Paste the **Info card** onto the test page, sync, and check desktop and 390px (cards equal height, dashed row dividers, label and value, footer button)
 - [ ] Save the **Info card** as a pattern in the Site Editor (Synced off, named exactly as in `patterns.md`)
 - [ ] Re-check the **Announcement strip** after the label and arrow change (the arrow and pill survived the sanitiser; look at the strip at 390px)
