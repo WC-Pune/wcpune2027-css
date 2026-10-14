@@ -56,7 +56,7 @@ Pick the group that matches what you have to hand: the code, a WordPress login, 
 ## Docs
 - [ ] Add a **pattern template** to `patterns.md` (headings: when to use, markup, swatches, mobile notes) so new components are documented the same way
 - [ ] Retake `docs/images/Search-for-patterns-with-WCP27.jpg` after the pattern cleanup (it still shows the duplicate Ticket Card and synced icons)
-- [ ] Retake `docs/images/Adding-Classes.png` (and delete the duplicate `Adding-Classes.png`/`.jpg` copy) with a class from the table: it shows `hero-days`, which has no CSS
+- [ ] Retake `docs/images/Adding-Classes.jpg` with a class from the table: it shows `hero-days`, which has no CSS
 - [ ] Add the remaining screenshots to the editor guide: creating an unsynced pattern, finding the test page, previewing mobile widths
 
 ## Content and site (not CSS)
